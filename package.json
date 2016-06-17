@@ -1,0 +1,31 @@
+{
+  "name": "moviemaster",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhanglun/MovieMaster.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zhanglun/MovieMaster/issues"
+  },
+  "homepage": "https://github.com/zhanglun/MovieMaster#readme",
+  "dependencies": {
+    "fluent-ffmpeg": "^2.1.0",
+    "mediainfos": "0.0.1",
+    "nodemon": "^1.9.2"
+  },
+  "devDependencies": {
+    "mediainfos": "0.0.1",
+    "node-gyp": "^3.3.1"
+  }
+}
