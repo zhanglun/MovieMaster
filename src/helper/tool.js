@@ -21,17 +21,23 @@ function promisify(fn) {
   }
 }
 
-const readDirRecur = (root, callback) => {
-  return readdir(root).then(function (files) {
+const readDirRecur = (conf, callback) => {
+  var result = [];
+  return readdir(conf.root).then(function (files) {
     var secondartPath = '';
     files = files.map(function (filename) {
-      return stat(path.join(root, filename)).then(function (stats) {
+      return stat(path.join(conf.root, filename)).then(function (stats) {
         if (stats.isDirectory()) {
-          return readDirRecur(path.join(root, filename), callback);
+          return readDirRecur({
+            root: path.join(conf.root, filename),
+            extfilters: conf.extfilters,
+          }, callback);
         }
-
-        if (stats.isFile()) {
-          return path.join(root, filename);
+        console.log(stats.isFile() && conf.extfilters.indexOf(filename.split('.').pop() >= 0));
+        if (stats.isFile() && conf.extfilters.indexOf(filename.split('.').pop()) >= 0) {
+          // return callback(path.join(conf.root, filename));
+          // result.push(path.join(conf.root, filename));
+          return path.join(conf.root, filename);
         }
       })
 

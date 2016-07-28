@@ -11,19 +11,22 @@ const mediaFilterExt = ['rmvb', 'mp4', 'mkv', 'avi'];
 
 document.querySelector('#go').addEventListener('click', () => {
   GUI.openDirDialog({ title: '打开文件夹~~~' }, (dir) => {
-    tool.readDirRecur(dir, (file) => {
-      // console.warn(file);
+    tool.readDirRecur({
+      root:dir,
+      extfilters: mediaFilterExt,
+    }, (file) => {
+      console.warn(file);
     }).then((data)=> {
-      console.log(data);
+      while (data.length !== [].concat.apply([], data).length){
+        data = [].concat.apply([], data);
+      }
+      data = data.filter((item) => {
+        return item;
+      });
+      return data;
+    }).then((files) => {
+      
     });
-    // fs.readdir(dir, (err, files) => {
-    //   console.log(files);
-    //   files = files.filter(function (filename) {
-    //     return mediaFilterExt.includes(filename.split('.').pop());
-    //   }).map((filename) => {
-    //     return path.join(dir, filename);
-    //   });
-    //   console.log(files);
-    // })
+
   });
 }, false);
