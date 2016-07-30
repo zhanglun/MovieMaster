@@ -25,7 +25,7 @@ document.querySelector('#go').addEventListener('click', () => {
       });
       return data;
     }).then((files) => {
-      
+      document.body.innerHTML += files.join('\</br\>');
     });
 
   });

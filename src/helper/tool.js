@@ -33,7 +33,7 @@ const readDirRecur = (conf, callback) => {
             extfilters: conf.extfilters,
           }, callback);
         }
-        console.log(stats.isFile() && conf.extfilters.indexOf(filename.split('.').pop() >= 0));
+        console.log(stats.isFile() && conf.extfilters.indexOf(filename.split('.').pop()) >= 0);
         if (stats.isFile() && conf.extfilters.indexOf(filename.split('.').pop()) >= 0) {
           // return callback(path.join(conf.root, filename));
           // result.push(path.join(conf.root, filename));
