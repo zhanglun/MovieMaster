@@ -1,11 +1,16 @@
-const { Menu, MenuItem } = require('electron');
-console.log(Menu, MenuItem);
+const { Menu, ipcMain,  } = require('electron');
+const electron = require('electron');
+console.log(electron.ipcMain);
 const template = [
   {
     label: 'File',
     submenu: [
       {
-        role: 'open'
+        label: 'open',
+        click: function (menuItem, browserWindow) {
+          console.log(arguments);
+          browserWindow.webContents.send('open_file', 'a', 2, 'zhanglun');
+        },
       }
     ]
   },
@@ -152,4 +157,4 @@ if (process.platform === 'darwin') {
 }
 
 const menu = Menu.buildFromTemplate(template);
-Menu.setApplicationMenu(menu);
+module.exports = menu;
