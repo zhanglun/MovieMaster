@@ -5,11 +5,12 @@ const electron = require('electron');
 const ipcRenderer = electron.ipcRenderer;
 
 const GUI = require('./helper/gui');
+const IPC_CONST = require('./constant/ipc');
 const tool = require('./helper/tool');
 
 const mediaFilterExt = ['rmvb', 'mp4', 'mkv', 'avi'];
 
-ipcRenderer.on('open_file', () => {
+ipcRenderer.on(IPC_CONST.OPEN_DIRECTORY, () => {
   GUI.openDirDialog({ title: '打开文件夹~~~' }, (dir) => {
     tool.readDirRecur({
       root: dir,

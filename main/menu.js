@@ -1,4 +1,5 @@
-const { Menu, ipcMain,  } = require('electron');
+const CONST_IPC = require('../src/constant/ipc');
+const { Menu } = require('electron');
 const electron = require('electron');
 console.log(electron.ipcMain);
 const template = [
@@ -8,8 +9,7 @@ const template = [
       {
         label: 'open',
         click: function (menuItem, browserWindow) {
-          console.log(arguments);
-          browserWindow.webContents.send('open_file', 'a', 2, 'zhanglun');
+          browserWindow.webContents.send(CONST_IPC.OPEN_DIRECTORY, 'a', 2, 'zhanglun');
         },
       }
     ]
