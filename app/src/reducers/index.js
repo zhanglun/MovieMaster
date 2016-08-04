@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
-import files from './files';
+import files from './files.reducer';
 
 const rootReducers = combineReducers({
   files

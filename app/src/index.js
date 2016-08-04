@@ -5,6 +5,8 @@ import {Provider} from 'react-redux';
 import App from './containers/app';
 import AppReducers from './reducers';
 
+console.log(App);
+
 let store = createStore(AppReducers);
 let rootElement = document.getElementById('example');
 render(
