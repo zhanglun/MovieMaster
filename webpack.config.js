@@ -13,7 +13,7 @@ var BUILD_PATH = path.resolve(APP_PATH, 'dist');
 
 module.exports = {
   entry: {
-    app: SRC_PATH + '/app.js',
+    app: SRC_PATH + '/index.js',
   },
   output: {
     path: BUILD_PATH,

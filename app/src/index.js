@@ -1,13 +1,24 @@
-// This file is required by the index.html file and will
-// be executed in the renderer process for that window.
-// All of the Node.js APIs are available in this process.
-const electron = require('electron');
+import React from 'react';
+import {render} from 'react-dom';
+import {createStore} from 'redux';
+import {Provider} from 'react-redux';
+import App from './containers/app';
+import AppReducers from './reducers';
+
+let store = createStore(AppReducers);
+let rootElement = document.getElementById('example');
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  rootElement);
+
+import electron from 'electron';
+import GUI from './helper/gui';
+import IPC_CONST from '../constant/ipc';
+import tool from './helper/tool';
+
 const ipcRenderer = electron.ipcRenderer;
-
-const GUI = require('./helper/gui');
-const IPC_CONST = require('./constant/ipc');
-const tool = require('./helper/tool');
-
 const mediaFilterExt = ['rmvb', 'mp4', 'mkv', 'avi'];
 
 ipcRenderer.on(IPC_CONST.OPEN_DIRECTORY, () => {
