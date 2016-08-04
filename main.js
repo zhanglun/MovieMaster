@@ -1,19 +1,24 @@
-const electron = require('electron')
+const devClient = require('electron-connect').client;
+var customMenu = require('./main/menu');
+const electron = require('electron');
+const Menu = electron.Menu;
 // Module to control application life.
-const app = electron.app
+const app = electron.app;
 // Module to create native browser window.
-const BrowserWindow = electron.BrowserWindow
+const BrowserWindow = electron.BrowserWindow;
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 
-function createWindow () {
+function createWindow() {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 800, height: 600});
-
+  mainWindow = new BrowserWindow({ width: 1000, height: 800 });
+  Menu.setApplicationMenu(customMenu);
   // and load the index.html of the app.
   mainWindow.loadURL(`file://${__dirname}/src/index.html`);
+  // for gulp reload
+  devClient.create(mainWindow);
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
