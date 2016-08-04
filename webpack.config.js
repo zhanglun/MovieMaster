@@ -1,0 +1,80 @@
+var path = require('path');
+var webpack = require('webpack');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+// var CopyWebpackPlugin = require('copy-webpack-plugin');
+var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
+
+// 定义了一些文件夹的路径
+var ROOT_PATH = path.resolve(__dirname);
+var APP_PATH = path.resolve(ROOT_PATH, 'app');
+var SRC_PATH = path.resolve(APP_PATH, 'src');
+var BUILD_PATH = path.resolve(APP_PATH, 'dist');
+
+module.exports = {
+  entry: {
+    app: SRC_PATH + '/app.js',
+  },
+  output: {
+    path: BUILD_PATH,
+    filename: './[name].bundle.js'
+  },
+
+  resolve: {
+    resolve: {
+      extensions: ['', '.js', '.jsx']
+    },
+  },
+  module: {
+    loaders: [
+      {
+        test: /\.js|jsx$/,
+        exclude: /node_modules/,
+        loader: "babel",
+        query: {
+          presets: ['es2015', 'react'],
+        },
+        include: SRC_PATH,
+      }
+    ],
+  },
+  devServer: {
+    historyApiFallback: true,
+    hot: true,
+    inline: true,
+    progress: true,
+  },
+  externals: [
+    (function () {
+      var IGNORES = [
+        'electron', 'fs', 'child_process', 'bufferutil'
+      ];
+      return function (context, request, callback) {
+        if (IGNORES.indexOf(request) >= 0) {
+          return callback(null, "require('" + request + "')");
+        }
+        return callback();
+      };
+    })()
+  ],
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: '"development"',
+      }
+    }),
+    new ExtractTextPlugin('style.bundle.css'),
+    new HtmlWebpackPlugin({
+      template: SRC_PATH + '/index.html',
+      filename: 'index.html',
+    }),
+    // new CopyWebpackPlugin([{
+    //   from: SRC_PATH + '/vendor',
+    //   to: BUILD_PATH + '/vendor',
+    // }]),
+    new CommonsChunkPlugin({
+      name: ['react'],
+      minChunks: Infinity
+    }),
+  ],
+};

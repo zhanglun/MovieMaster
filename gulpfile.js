@@ -3,6 +3,6 @@ var electron = require('electron-connect').server.create();
 
 gulp.task('default', function () {
   electron.start();
-  gulp.watch(['./main.js', './main/**/*.js'], electron.restart);
-  gulp.watch(['./src/**/*.{html,js,css}'], electron.reload);
+  gulp.watch(['./app/src/main.js', './app/src/main/**/*.js'], electron.restart);
+  gulp.watch(['./app/src/**/*.{html,js,css}'], electron.reload);
 });
