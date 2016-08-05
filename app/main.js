@@ -1,11 +1,12 @@
-const devClient = require('electron-connect').client;
-var customMenu = require('./main/menu');
+import {client as devClient} from 'electron-connect';
+import {menu as customMenu} from './main/menu';
 import electron from 'electron';
 const Menu = electron.Menu;
 // Module to control application life.
 const app = electron.app;
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
+console.log(__dirname);
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -19,7 +20,6 @@ function createWindow() {
   mainWindow.loadURL(`file://${ __dirname }/renderer/index.html`);
   // for gulp reload
   devClient.create(mainWindow);
-console.log('created');
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
 

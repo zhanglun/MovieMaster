@@ -1,19 +1,31 @@
 'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.menu = undefined;
+
 var _ipc = require('../constant/ipc');
 
 var CONST_IPC = _interopRequireWildcard(_ipc);
 
+var _electron = require('electron');
+
+var _electron2 = _interopRequireDefault(_electron);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-var _require = require('electron');
+var Menu = _electron2.default.Menu;
+var remote = _electron2.default.remote;
 
-var Menu = _require.Menu;
-
-var electron = require('electron');
 var template = [{
   label: 'File',
   submenu: [{
+    label: 'Open File',
+    accelerator: process.platform === 'darwin' ? 'Alt+O' : 'Ctrl+O'
+  }, {
     label: 'Open Directory',
     accelerator: process.platform === 'darwin' ? 'Alt+Shift+O' : 'Ctrl+Shift+O',
     click: function click(menuItem, browserWindow) {
@@ -28,27 +40,6 @@ var template = [{
         browserWindow.close();
       }
     }
-  }]
-}, {
-  label: 'Edit',
-  submenu: [{
-    role: 'undo'
-  }, {
-    role: 'redo'
-  }, {
-    type: 'separator'
-  }, {
-    role: 'cut'
-  }, {
-    role: 'copy'
-  }, {
-    role: 'paste'
-  }, {
-    role: 'pasteandmatchstyle'
-  }, {
-    role: 'delete'
-  }, {
-    role: 'selectall'
   }]
 }, {
   label: 'View',
@@ -87,7 +78,7 @@ var template = [{
 }];
 
 if (process.platform === 'darwin') {
-  var name = require('electron').remote.app.getName();
+  var name = remote.app.getName();
   template.unshift({
     label: name,
     submenu: [{
@@ -132,4 +123,4 @@ if (process.platform === 'darwin') {
 }
 
 var menu = Menu.buildFromTemplate(template);
-module.exports = menu;
+exports.menu = menu;

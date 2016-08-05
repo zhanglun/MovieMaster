@@ -1,19 +1,21 @@
 'use strict';
 
+var _electronConnect = require('electron-connect');
+
+var _menu = require('./main/menu');
+
 var _electron = require('electron');
 
 var _electron2 = _interopRequireDefault(_electron);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var devClient = require('electron-connect').client;
-var customMenu = require('./main/menu');
-
 var Menu = _electron2.default.Menu;
 // Module to control application life.
 var app = _electron2.default.app;
 // Module to create native browser window.
 var BrowserWindow = _electron2.default.BrowserWindow;
+console.log(__dirname);
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -22,12 +24,11 @@ var mainWindow = void 0;
 function createWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow({ width: 1000, height: 800 });
-  Menu.setApplicationMenu(customMenu);
+  Menu.setApplicationMenu(_menu.menu);
   // and load the index.html of the app.
   mainWindow.loadURL('file://' + __dirname + '/renderer/index.html');
   // for gulp reload
-  devClient.create(mainWindow);
-  console.log('created');
+  _electronConnect.client.create(mainWindow);
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
 

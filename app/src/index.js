@@ -5,9 +5,8 @@ import {Provider} from 'react-redux';
 import App from './containers/app';
 import AppReducers from './reducers';
 
-console.log(App);
-
 let store = createStore(AppReducers);
+
 let rootElement = document.getElementById('example');
 render(
   <Provider store={store}>
@@ -15,15 +14,22 @@ render(
   </Provider>,
   rootElement);
 
+
+
+
+
+// 备用代码。打开文件夹的简单逻辑
+
+
 import electron from 'electron';
 import GUI from './helper/gui';
-import IPC_CONST from '../constant/ipc';
+import * as CONSTTYPE from '../constant/ipc';
 import tool from './helper/tool';
 
 const ipcRenderer = electron.ipcRenderer;
 const mediaFilterExt = ['rmvb', 'mp4', 'mkv', 'avi'];
 
-ipcRenderer.on(IPC_CONST.OPEN_DIRECTORY, () => {
+ipcRenderer.on(CONSTTYPE.OPEN_DIRECTORY, () => {
   GUI.openDirDialog({ title: '打开文件夹~~~' }, (dir) => {
     tool.readDirRecur({
       root: dir,
