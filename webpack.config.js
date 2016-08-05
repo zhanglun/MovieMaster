@@ -30,12 +30,15 @@ module.exports = {
     loaders: [
       {
         test: /\.js|jsx$/,
-        exclude: /node_modules/,
-        loader: "babel",
+        exclude: [
+          path.resolve(__dirname, "node_modules"),
+        ],
+        loader: "babel-loader",
         query: {
           presets: ['es2015', 'react'],
+          plugins: ['transform-runtime'],
         },
-        include: SRC_PATH,
+        include: [SRC_PATH, path.resolve(APP_PATH, 'constant')],
       }
     ],
   },
@@ -45,19 +48,31 @@ module.exports = {
     inline: true,
     progress: true,
   },
-  externals: [
-    (function () {
-      var IGNORES = [
-        'electron', 'fs', 'child_process', 'bufferutil'
-      ];
-      return function (context, request, callback) {
-        if (IGNORES.indexOf(request) >= 0) {
-          return callback(null, "require('" + request + "')");
-        }
-        return callback();
-      };
-    })()
-  ],
+  // externals: [
+  //   (function () {
+  //     var IGNORES = [
+  //       'electron', 'fs', 'child_process', 'bufferutil'
+  //     ];
+  //     return function (context, request, callback) {
+  //       if (IGNORES.indexOf(request) >= 0) {
+  //         return callback(null, "require('" + request + "')");
+  //       }
+  //       return callback();
+  //     };
+  //   })()
+  // ],
+  externals: {
+    'electron': 'require("electron")',
+    'net': 'require("net")',
+    'remote': 'require("remote")',
+    'shell': 'require("shell")',
+    'app': 'require("app")',
+    'ipc': 'require("ipc")',
+    'fs': 'require("fs")',
+    'buffer': 'require("buffer")',
+    'system': '{}',
+    'file': '{}'
+  },
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
