@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import Counter from '../components/counter.component';
+import Directory from '../containers/directory.container';
 import { connect } from 'react-redux';
 
-export default class App extends Component {
+class App extends Component {
   constructor (props) {
     super(props);
   }
   render () {
     const { dispatch } = this.props;
-    console.log(this.props);
     return (
-      <div>
+      <div className="app">
+        <Directory />
         <Counter value={this.props.counter}
                  onIncrement={() => dispatch({ type: 'INCREMENT' })}
                  onDecrement={() => dispatch({ type: 'DECREMENT' })}
@@ -21,7 +22,6 @@ export default class App extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     counter: state.counter
   }
