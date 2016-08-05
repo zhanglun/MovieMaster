@@ -18,6 +18,7 @@ webpackConfigDev.debug = true;
 // create a single instance of the compiler to allow caching
 var devCompiler = webpack(webpackConfigDev);
 
+// renderer process 的编译
 gulp.task('webpack:build-dev', function () {
   devCompiler.run(function (err, status) {
     if (err) {
@@ -29,25 +30,25 @@ gulp.task('webpack:build-dev', function () {
   });
 });
 
+// main process 的编译
 gulp.task('babel:electron-main', function () {
   return gulp.src([APP_PATH + '/main.js', APP_PATH + '/main/**/*.js'], {base: APP_PATH})
     .pipe(babel())
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task('watch:electron', function () {
+gulp.task('watch:electron-main', ['babel:electron-main'], function () {
   electron.start();
   console.log('---->electron starting');
   gulp.watch(['./app/main.js', './app/main/**/*.js'], ['babel:electron-main']);
-  gulp.watch(['./dist/**/*.{html,js,css}'], electron.reload);
   gulp.watch(['./dist/main.js', './dist/main/**/*.js'], electron.restart);
 });
 
-gulp.task('watch:webpack-dev', function () {
+gulp.task('watch:webpack-dev', ['webpack:build-dev'],  function () {
   console.log('---->react building');
   gulp.watch(['./app/src/**/*.{html,js,css}'], ['webpack:build-dev']);
+  gulp.watch(['./dist/renderer/**/*.{html,js,css}'], electron.reload);
 });
 
-gulp.task('watch', ['watch:webpack-dev', 'watch:electron']);
-gulp.task('dev', ['webpack:build-dev', 'babel:electron-main', 'watch']);
-gulp.task('default', ['dev']);
+gulp.task('watch', ['watch:webpack-dev', 'watch:electron-main']);
+gulp.task('dev', ['watch']);
