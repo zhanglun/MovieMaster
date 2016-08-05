@@ -9,14 +9,15 @@ var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 var ROOT_PATH = path.resolve(__dirname);
 var APP_PATH = path.resolve(ROOT_PATH, 'app');
 var SRC_PATH = path.resolve(APP_PATH, 'src');
-var BUILD_PATH = path.resolve(APP_PATH, 'dist');
+var BUILD_PATH = path.resolve(ROOT_PATH, 'dist');
+var RENDERER_PATH = path.resolve(BUILD_PATH, 'renderer');
 
 module.exports = {
   entry: {
-    app: SRC_PATH + '/index.js',
+    'app': SRC_PATH + '/index.js',
   },
   output: {
-    path: BUILD_PATH,
+    path: RENDERER_PATH,
     filename: './[name].bundle.js'
   },
 
@@ -66,7 +67,7 @@ module.exports = {
     new ExtractTextPlugin('style.bundle.css'),
     new HtmlWebpackPlugin({
       template: SRC_PATH + '/index.html',
-      filename: 'index.html',
+      filename: RENDERER_PATH + '/index.html',
     }),
     // new CopyWebpackPlugin([{
     //   from: SRC_PATH + '/vendor',
@@ -74,6 +75,7 @@ module.exports = {
     // }]),
     new CommonsChunkPlugin({
       name: ['react'],
+      // filename: 'react.bundle.js',
       minChunks: Infinity
     }),
   ],

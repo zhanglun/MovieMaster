@@ -1,8 +1,15 @@
+var path = require('path');
 var gulp = require('gulp');
+var babel = require("gulp-babel");
 var gutil = require('gulp-util');
 var webpack = require('webpack');
 var webpackConfig = require('./webpack.config.js');
 var electron = require('electron-connect').server.create();
+
+var ROOT_PATH = path.resolve(__dirname);
+var APP_PATH = path.resolve(ROOT_PATH, 'app');
+var SRC_PATH = path.resolve(APP_PATH, 'src');
+var BUILD_PATH = path.resolve(ROOT_PATH, 'dist');
 
 // 开发
 var webpackConfigDev = Object.create(webpackConfig);
@@ -22,11 +29,18 @@ gulp.task('webpack:build-dev', function () {
   });
 });
 
+gulp.task('babel:electron-main', function () {
+  return gulp.src([APP_PATH + '/main.js', APP_PATH + '/main/**/*.js'], {base: APP_PATH})
+    .pipe(babel())
+    .pipe(gulp.dest('dist'));
+});
+
 gulp.task('watch:electron', function () {
   electron.start();
   console.log('---->electron starting');
-  gulp.watch(['./app/src/main.js', './app/src/main/**/*.js'], electron.restart);
-  gulp.watch(['./app/dist/**/*.{html,js,css}'], electron.reload);
+  gulp.watch(['./app/main.js', './app/main/**/*.js'], ['babel:electron-main']);
+  gulp.watch(['./dist/**/*.{html,js,css}'], electron.reload);
+  gulp.watch(['./dist/main.js', './dist/main/**/*.js'], electron.restart);
 });
 
 gulp.task('watch:webpack-dev', function () {
@@ -35,5 +49,5 @@ gulp.task('watch:webpack-dev', function () {
 });
 
 gulp.task('watch', ['watch:webpack-dev', 'watch:electron']);
-gulp.task('dev', ['webpack:build-dev', 'watch']);
+gulp.task('dev', ['webpack:build-dev', 'babel:electron-main', 'watch']);
 gulp.task('default', ['dev']);

@@ -1,19 +1,25 @@
-const CONST_IPC = require('../constant/ipc');
-const { Menu } = require('electron');
-const electron = require('electron');
-const template = [{
+'use strict';
+
+var CONST_IPC = require('../constant/ipc');
+
+var _require = require('electron');
+
+var Menu = _require.Menu;
+
+var electron = require('electron');
+var template = [{
   label: 'File',
   submenu: [{
     label: 'Open Directory',
     accelerator: process.platform === 'darwin' ? 'Alt+Shift+O' : 'Ctrl+Shift+O',
-    click(menuItem, browserWindow) {
+    click: function click(menuItem, browserWindow) {
       browserWindow.webContents.send(CONST_IPC.OPEN_DIRECTORY, 'a', 2, 'zhanglun');
     }
   }, {
     type: 'separator'
   }, {
     label: 'Exit',
-    click(item, browserWindow) {
+    click: function click(item, browserWindow) {
       if (browserWindow) {
         browserWindow.close();
       }
@@ -45,13 +51,13 @@ const template = [{
   submenu: [{
     label: 'Reload',
     accelerator: 'CmdOrCtrl+R',
-    click(item, focusedWindow) {
+    click: function click(item, focusedWindow) {
       if (focusedWindow) focusedWindow.reload();
     }
   }, {
     label: 'Toggle Developer Tools',
     accelerator: process.platform === 'darwin' ? 'Alt+Command+I' : 'Ctrl+Shift+I',
-    click(item, focusedWindow) {
+    click: function click(item, focusedWindow) {
       if (focusedWindow) focusedWindow.webContents.toggleDevTools();
     }
   }, {
@@ -70,14 +76,14 @@ const template = [{
   role: 'help',
   submenu: [{
     label: 'Learn More',
-    click() {
+    click: function click() {
       require('electron').shell.openExternal('http://electron.atom.io');
     }
   }]
 }];
 
 if (process.platform === 'darwin') {
-  const name = require('electron').remote.app.getName();
+  var name = require('electron').remote.app.getName();
   template.unshift({
     label: name,
     submenu: [{
@@ -121,5 +127,5 @@ if (process.platform === 'darwin') {
   }];
 }
 
-const menu = Menu.buildFromTemplate(template);
+var menu = Menu.buildFromTemplate(template);
 module.exports = menu;

@@ -5,9 +5,9 @@
   "directories": {
     "test": "test"
   },
-  "main": "./app/main.js",
+  "main": "./dist/main.js",
   "scripts": {
-    "start dev": "electron ./app/main.js --debug",
+    "start dev": "electron ./dist/main.js --debug",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -42,6 +42,7 @@
     "eslint-plugin-html": "^1.5.1",
     "extract-text-webpack-plugin": "^1.0.1",
     "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
     "gulp-util": "^3.0.7",
     "html-webpack-plugin": "^2.22.0",
     "node-gyp": "^3.3.1",
