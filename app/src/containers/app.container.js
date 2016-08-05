@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Counter from '../components/counter.component';
+// import Counter from '../components/counter.component';
 import Directory from '../containers/directory.container';
 import { connect } from 'react-redux';
 
@@ -12,10 +12,6 @@ class App extends Component {
     return (
       <div className="app">
         <Directory />
-        <Counter value={this.props.counter}
-                 onIncrement={() => dispatch({ type: 'INCREMENT' })}
-                 onDecrement={() => dispatch({ type: 'DECREMENT' })}
-        />
       </div>
     );
   }

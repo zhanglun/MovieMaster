@@ -19,6 +19,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 var Menu = _electron2.default.Menu;
 var remote = _electron2.default.remote;
+console.log(_electron2.default.app);
 
 var template = [{
   label: 'File',
@@ -78,7 +79,7 @@ var template = [{
 }];
 
 if (process.platform === 'darwin') {
-  var name = remote.app.getName();
+  var name = _electron2.default.app.getName();
   template.unshift({
     label: name,
     submenu: [{

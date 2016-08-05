@@ -1,5 +1,5 @@
-import {client as devClient} from 'electron-connect';
-import {menu as customMenu} from './main/menu';
+import { client as devClient } from 'electron-connect';
+import { menu as customMenu } from './main/menu';
 import electron from 'electron';
 const Menu = electron.Menu;
 // Module to control application life.
@@ -12,7 +12,7 @@ console.log(__dirname);
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 
-function createWindow() {
+function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({ width: 1000, height: 800 });
   Menu.setApplicationMenu(customMenu);

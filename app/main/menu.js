@@ -2,6 +2,7 @@ import *  as CONST_IPC from '../constant/ipc';
 import electron from 'electron';
 const Menu = electron.Menu;
 const remote = electron.remote;
+console.log(electron.app);
 
 const template = [
   {
@@ -64,7 +65,7 @@ const template = [
   }];
 
 if (process.platform === 'darwin') {
-  const name = remote.app.getName();
+  const name = electron.app.getName();
   template.unshift({
     label: name,
     submenu: [{

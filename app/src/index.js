@@ -1,8 +1,8 @@
 import React from 'react';
-import {render} from 'react-dom';
-import {createStore} from 'redux';
-import {Provider} from 'react-redux';
-import App from './containers/app';
+import { render } from 'react-dom';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import App from './containers/app.container';
 import AppReducers from './reducers';
 
 let store = createStore(AppReducers);
@@ -13,9 +13,6 @@ render(
     <App />
   </Provider>,
   rootElement);
-
-
-
 
 
 // 备用代码。打开文件夹的简单逻辑

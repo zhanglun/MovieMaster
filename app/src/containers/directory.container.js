@@ -12,6 +12,7 @@ class Directory extends Component {
     return (
       <div className="sidebar">
         <h4>Directory</h4>
+        <button>添加</button>
         {props.directoryList.map((data) => {
           return <DirectoryItem key={data.id} data={data}/>
         })}

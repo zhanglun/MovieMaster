@@ -1,0 +1,1 @@
+export const LOAD_DIRECTORY = 'LOAD_DIRECTORY';
