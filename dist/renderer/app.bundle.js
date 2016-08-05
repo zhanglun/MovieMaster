@@ -1226,7 +1226,7 @@ webpackJsonp([0,1],[
 /* 204 */
 /***/ function(module, exports) {
 
-	eval("module.exports = {\r\n  'OPEN': 'OPEN',\r\n  'OPEN_DIRECTORY': 'OPEN_DIRECTORY',\r\n};//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9hcHAvY29uc3RhbnQvaXBjLmpzP2E1ODUiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7QUFDQTtBQUNBO0FBQ0EiLCJmaWxlIjoiMjA0LmpzIiwic291cmNlc0NvbnRlbnQiOlsibW9kdWxlLmV4cG9ydHMgPSB7XHJcbiAgJ09QRU4nOiAnT1BFTicsXHJcbiAgJ09QRU5fRElSRUNUT1JZJzogJ09QRU5fRElSRUNUT1JZJyxcclxufTtcblxuXG4vKioqKioqKioqKioqKioqKipcbiAqKiBXRUJQQUNLIEZPT1RFUlxuICoqIC4vYXBwL2NvbnN0YW50L2lwYy5qc1xuICoqIG1vZHVsZSBpZCA9IDIwNFxuICoqIG1vZHVsZSBjaHVua3MgPSAwXG4gKiovIl0sInNvdXJjZVJvb3QiOiIifQ==");
+	eval("const constant = {\r\n  'OPEN': 'OPEN',\r\n  'OPEN_DIRECTORY': 'OPEN_DIRECTORY',\r\n};\r\nmodule.exports = constant;\r\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9hcHAvY29uc3RhbnQvaXBjLmpzP2E1ODUiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQSIsImZpbGUiOiIyMDQuanMiLCJzb3VyY2VzQ29udGVudCI6WyJjb25zdCBjb25zdGFudCA9IHtcclxuICAnT1BFTic6ICdPUEVOJyxcclxuICAnT1BFTl9ESVJFQ1RPUlknOiAnT1BFTl9ESVJFQ1RPUlknLFxyXG59O1xyXG5tb2R1bGUuZXhwb3J0cyA9IGNvbnN0YW50O1xyXG5cblxuXG4vKioqKioqKioqKioqKioqKipcbiAqKiBXRUJQQUNLIEZPT1RFUlxuICoqIC4vYXBwL2NvbnN0YW50L2lwYy5qc1xuICoqIG1vZHVsZSBpZCA9IDIwNFxuICoqIG1vZHVsZSBjaHVua3MgPSAwXG4gKiovIl0sInNvdXJjZVJvb3QiOiIifQ==");
 
 /***/ },
 /* 205 */

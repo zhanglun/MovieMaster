@@ -1,4 +1,2 @@
-module.exports = {
-  'OPEN': 'OPEN',
-  'OPEN_DIRECTORY': 'OPEN_DIRECTORY',
-};
+export const OPEN = 'OPEN';
+export const OPEN_DIRECTORY = 'OPEN_DIRECTORY';

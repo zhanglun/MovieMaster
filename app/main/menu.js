@@ -1,4 +1,4 @@
-const CONST_IPC = require('../constant/ipc');
+import * as CONST_IPC from '../constant/ipc';
 const { Menu } = require('electron');
 const electron = require('electron');
 const template = [{

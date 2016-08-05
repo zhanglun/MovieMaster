@@ -1,6 +1,10 @@
 'use strict';
 
-var CONST_IPC = require('../constant/ipc');
+var _ipc = require('../constant/ipc');
+
+var CONST_IPC = _interopRequireWildcard(_ipc);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 var _require = require('electron');
 

@@ -7,7 +7,7 @@ var _electron2 = _interopRequireDefault(_electron);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var devClient = require('electron-connect').client;
-// var customMenu = require('./main/menu');
+var customMenu = require('./main/menu');
 
 var Menu = _electron2.default.Menu;
 // Module to control application life.
@@ -22,12 +22,12 @@ var mainWindow = void 0;
 function createWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow({ width: 1000, height: 800 });
-  // Menu.setApplicationMenu(customMenu);
+  Menu.setApplicationMenu(customMenu);
   // and load the index.html of the app.
   mainWindow.loadURL('file://' + __dirname + '/renderer/index.html');
   // for gulp reload
   devClient.create(mainWindow);
-
+  console.log('created');
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
 
