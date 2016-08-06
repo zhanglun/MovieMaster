@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 // import Counter from '../components/counter.component';
-import Directory from '../containers/directory.container';
+import DirectoryContainer from '../containers/directory.container';
+import MovieContainer from '../containers/movie.container';
 import { connect } from 'react-redux';
 
 class App extends Component {
@@ -8,10 +9,10 @@ class App extends Component {
     super(props);
   }
   render () {
-    const { dispatch } = this.props;
     return (
       <div className="app">
-        <Directory />
+        <DirectoryContainer />
+        <MovieContainer />
       </div>
     );
   }

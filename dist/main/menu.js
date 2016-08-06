@@ -19,7 +19,6 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 var Menu = _electron2.default.Menu;
 var remote = _electron2.default.remote;
-console.log(_electron2.default.app);
 
 var template = [{
   label: 'File',

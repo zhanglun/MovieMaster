@@ -15,7 +15,6 @@ var Menu = _electron2.default.Menu;
 var app = _electron2.default.app;
 // Module to create native browser window.
 var BrowserWindow = _electron2.default.BrowserWindow;
-console.log(__dirname);
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.

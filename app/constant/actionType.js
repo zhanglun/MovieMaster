@@ -1,1 +1,2 @@
 export const LOAD_DIRECTORY = 'LOAD_DIRECTORY';
+export const FETCH_MOVIES_INFO = 'FETCH_MOVIES_INFO';

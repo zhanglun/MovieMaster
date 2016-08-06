@@ -2,7 +2,6 @@ import *  as CONST_IPC from '../constant/ipc';
 import electron from 'electron';
 const Menu = electron.Menu;
 const remote = electron.remote;
-console.log(electron.app);
 
 const template = [
   {
