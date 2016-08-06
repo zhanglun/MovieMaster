@@ -7,21 +7,42 @@
   },
   "extends": "eslint:recommended",
   "parserOptions": {
-    "sourceType": "module"
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
   },
-  "plugins": ["html"],
+  "plugins": [
+    "html",
+    "react"
+  ],
   "rules": {
     "no-undef": 0,
     "linebreak-style": 0,
-    "indent": [2, 2, {"SwitchCase": 1}],
+    "indent": [
+      2,
+      2,
+      {
+        "SwitchCase": 1
+      }
+    ],
     "camelcase": 0,
     "max-len": 0,
     "no-unused-vars": 1,
-    "arrow-parens": [2, "always"],
-    "comma-dangle": [0, "always"],
+    "arrow-parens": [
+      2,
+      "always"
+    ],
+    "comma-dangle": [
+      0,
+      "always"
+    ],
     "require-jsdoc": 0,
     "quote-props": 0,
-    "object-curly-spacing": [0, "always"]
+    "object-curly-spacing": [
+      0,
+      "always"
+    ]
   },
   "globals": {
     "window": true,
