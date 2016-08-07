@@ -41,10 +41,10 @@ gulp.task('watch', ['babel:electron-main', 'webpack:build-dev'], function () {
   electron.start();
 
   gulp.watch(['./app/main.js', './app/main/**/*.js'], ['babel:electron-main']);
-  gulp.watch([APP_PATH + '/constant/*.js', './app/src/**/*.{html,js,css}'], ['webpack:build-dev']);
+  gulp.watch([APP_PATH + '/constant/*.js', './app/src/**/*.{html,js,less,css}'], ['webpack:build-dev']);
 
   gulp.watch(['./dist/main.js', './dist/main/**/*.js'], electron.restart);
-  gulp.watch(['./dist/renderer/*.{html,js,css}', './dist/renderer/**/*.{html,js,css}'], electron.reload);
+  gulp.watch(['./dist/renderer/*.{html,js,less,css}', './dist/renderer/**/*.{html,js,less,css}'], electron.reload);
 
 });
 

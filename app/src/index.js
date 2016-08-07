@@ -1,3 +1,4 @@
+import './public/less/base.less';
 import React from 'react';
 import { render } from 'react-dom';
 import { createStore } from 'redux';
@@ -10,7 +11,7 @@ import { fetchMoviesInfo } from './actions';
 let store = createStore(AppReducers);
 store.dispatch(fetchMoviesInfo());
 
-let rootElement = document.getElementById('example');
+let rootElement = document.getElementById('app');
 render(
   <Provider store={store}>
     <App />

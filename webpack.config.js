@@ -53,19 +53,6 @@ module.exports = {
     inline: true,
     progress: true,
   },
-  // externals: [
-  //   (function () {
-  //     var IGNORES = [
-  //       'electron', 'fs', 'child_process', 'bufferutil'
-  //     ];
-  //     return function (context, request, callback) {
-  //       if (IGNORES.indexOf(request) >= 0) {
-  //         return callback(null, "require('" + request + "')");
-  //       }
-  //       return callback();
-  //     };
-  //   })()
-  // ],
   externals: {
     'electron': 'require("electron")',
     'net': 'require("net")',

@@ -7,11 +7,17 @@ class MovieItem extends Component {
   }
 
   render () {
-    const {movie} = this.props;
+    const { movie } = this.props;
     return (
-      <div>
-        <p className="title">{movie.name}</p>
-        <img src={movie.poster} />
+      <div className="movie-card">
+        <div className="movie-card__poster">
+          <img className="movie-card__poster-img" src={movie.poster}/>
+        </div>
+        <div className="movie-card__info">
+          <div className="movie-card__title">{movie.name} &nbsp; {movie.origin_name}</div>
+          <div className="movie-card__info-text">又名: {movie.alias}</div>
+          <div className="movie-card__info-text">{movie.type}</div>
+        </div>
       </div>
     )
   }
