@@ -14,6 +14,7 @@ class Directory extends Component {
         {props.directoryList.map((data) => {
           return <DirectoryItem key={data.id} data={data}/>
         })}
+        <div>添加</div>
       </div>
     );
   }
