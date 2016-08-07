@@ -1,3 +1,4 @@
+import './index.less';
 import React, { Component } from 'react';
 
 class MovieItem extends Component {
@@ -9,7 +10,7 @@ class MovieItem extends Component {
     const {movie} = this.props;
     return (
       <div>
-        <p>{movie.name}</p>
+        <p className="title">{movie.name}</p>
         <img src={movie.poster} />
       </div>
     )

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import MovieItem from '../components/movieItem.component';
+import MovieItem from '../components/movieItem';
 
 class MovieContainer extends Component {
   constructor (props) {

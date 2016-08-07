@@ -39,6 +39,11 @@ module.exports = {
           plugins: ['transform-runtime'],
         },
         include: [SRC_PATH, path.resolve(APP_PATH, 'constant')],
+      },
+      {
+        test: /.less$/,
+        loader: 'style!css!less',
+        include: [SRC_PATH],
       }
     ],
   },
