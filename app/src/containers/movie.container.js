@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import MovieItem from '../components/movieItem';
+import MovieList from '../components/movieList';
 
 class MovieContainer extends Component {
   constructor (props) {
@@ -10,18 +10,14 @@ class MovieContainer extends Component {
   render () {
     const props = this.props;
     return (
-      <div>
-        {props.movies.map((movie) => {
-          return <MovieItem key={movie.name} movie={movie}></MovieItem>
-        })}
-      </div>
+      <MovieList movies={props.movies}></MovieList>
     )
   }
 }
 
 function mapStateToProps (state) {
   return {
-    movies: state.movie
+    movies: state.movies
   }
 }
 

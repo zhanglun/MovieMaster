@@ -10,9 +10,7 @@ class Directory extends Component {
   render () {
     const props = this.props;
     return (
-      <div className="sidebar">
-        <h4>Directory</h4>
-        <button>添加</button>
+      <div className="sidebar sidebar__folding">
         {props.directoryList.map((data) => {
           return <DirectoryItem key={data.id} data={data}/>
         })}

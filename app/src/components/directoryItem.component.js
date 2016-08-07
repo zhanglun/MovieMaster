@@ -7,7 +7,7 @@ class DirectoryItem extends Component {
 
   render () {
     return (
-      <div className="direcotry-item">
+      <div className="directory-item">
         Item -
         {this.props.data.name}
       </div>

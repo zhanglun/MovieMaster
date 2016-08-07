@@ -14,9 +14,7 @@ class MovieItem extends Component {
           <img className="movie-card__poster-img" src={movie.poster}/>
         </div>
         <div className="movie-card__info">
-          <div className="movie-card__title">{movie.name} &nbsp; {movie.origin_name}</div>
-          <div className="movie-card__info-text">又名: {movie.alias}</div>
-          <div className="movie-card__info-text">{movie.type}</div>
+          <div className="movie-card__title">{movie.name}</div>
         </div>
       </div>
     )

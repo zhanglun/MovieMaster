@@ -1,5 +1,30 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   background: #EDF1F6;
   font-family: 'Helvetica Neue', Tahoma, Arial, 'Microsoft Yahei', '\5B8B\4F53', '\9ED1\4F53', sans-serif;
   line-height: 1.5;
+}
+
+.sidebar {
+  width: 100px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background: #333;
+  &__folding {
+    width: 40px;
+  }
+}
+
+.directory-item {
+  color: #fff;
+}
+
+.main {
+  margin-left: 40px;
 }
