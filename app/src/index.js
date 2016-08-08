@@ -20,33 +20,26 @@ render(
 
 
 // 备用代码。打开文件夹的简单逻辑
-
-
-import electron from 'electron';
-import GUI from './helper/gui';
-import * as CONSTTYPE from '../constant/ipc';
-import tool from './helper/tool';
-
-const ipcRenderer = electron.ipcRenderer;
-const mediaFilterExt = ['rmvb', 'mp4', 'mkv', 'avi'];
-
-ipcRenderer.on(CONSTTYPE.OPEN_DIRECTORY, () => {
-  GUI.openDirDialog({ title: '打开文件夹~~~' }, (dir) => {
-    tool.readDirRecur({
-      root: dir,
-      extfilters: mediaFilterExt,
-    }, (file) => {
-      console.warn(file);
-    }).then((data)=> {
-      while (data.length !== [].concat.apply([], data).length) {
-        data = [].concat.apply([], data);
-      }
-      data = data.filter((item) => {
-        return item;
-      });
-      return data;
-    }).then((files) => {
-      document.body.innerHTML += files.join('\</br\>');
-    });
-  });
-});
+// ipcRenderer.on(CONSTTYPE.OPEN_DIRECTORY, () => {
+//   GUI.openDirDialog({ title: '打开文件夹~~~' }, (dir) => {
+//     tool.readDirRecur({
+//       root: dir,
+//       extfilters: mediaFilterExt,
+//     }, (file) => {
+//       console.warn(file);
+//     }).then((data)=> {
+//       while (data.length !== [].concat.apply([], data).length) {
+//         data = [].concat.apply([], data);
+//       }
+//       data = data.filter((item) => {
+//         return item;
+//       });
+//       return data;
+//     }).then((files) => {
+//       document.body.innerHTML += files.join('\</br\>');
+//       ffmpeg.ffprobe(files, function (err, metadata) {
+//         console.dir(metadata.format);
+//       });
+//     });
+//   });
+// });

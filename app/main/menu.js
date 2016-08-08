@@ -1,4 +1,5 @@
 import *  as CONST_IPC from '../constant/ipc';
+import * as analyseFilesWorker from './analyseFiles.worker';
 import electron from 'electron';
 const Menu = electron.Menu;
 const remote = electron.remote;
@@ -14,7 +15,8 @@ const template = [
         label: 'Open Directory',
         accelerator: process.platform === 'darwin' ? 'Alt+Shift+O' : 'Ctrl+Shift+O',
         click(menuItem, browserWindow) {
-          browserWindow.webContents.send(CONST_IPC.OPEN_DIRECTORY, 'a', 2, 'zhanglun');
+          analyseFilesWorker.analyse();
+          // browserWindow.webContents.send(CONST_IPC.OPEN_DIRECTORY, 'a', 2, 'zhanglun');
         }
       }, {
         type: 'separator'
@@ -109,4 +111,4 @@ if (process.platform === 'darwin') {
 }
 
 const menu = Menu.buildFromTemplate(template);
-export {menu};
+export { menu };

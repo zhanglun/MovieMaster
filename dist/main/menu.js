@@ -9,6 +9,10 @@ var _ipc = require('../constant/ipc');
 
 var CONST_IPC = _interopRequireWildcard(_ipc);
 
+var _analyseFiles = require('./analyseFiles.worker');
+
+var analyseFilesWorker = _interopRequireWildcard(_analyseFiles);
+
 var _electron = require('electron');
 
 var _electron2 = _interopRequireDefault(_electron);
@@ -29,7 +33,8 @@ var template = [{
     label: 'Open Directory',
     accelerator: process.platform === 'darwin' ? 'Alt+Shift+O' : 'Ctrl+Shift+O',
     click: function click(menuItem, browserWindow) {
-      browserWindow.webContents.send(CONST_IPC.OPEN_DIRECTORY, 'a', 2, 'zhanglun');
+      analyseFilesWorker.analyse();
+      // browserWindow.webContents.send(CONST_IPC.OPEN_DIRECTORY, 'a', 2, 'zhanglun');
     }
   }, {
     type: 'separator'

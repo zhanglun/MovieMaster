@@ -1,5 +1,6 @@
 import './index.less';
 
+//noinspection JSUnresolvedVariable
 import React, { Component } from 'react';
 
 class SideBar extends Component {

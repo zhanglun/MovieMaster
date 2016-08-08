@@ -22,14 +22,14 @@
   "homepage": "https://github.com/zhanglun/MovieMaster#readme",
   "dependencies": {
     "babel-preset-react": "^6.11.1",
+    "electron": "latest",
     "fluent-ffmpeg": "^2.1.0",
     "mediainfos": "0.0.1",
     "nodemon": "^1.9.2",
     "react": "^15.3.0",
     "react-dom": "^15.3.0",
     "react-redux": "^4.4.5",
-    "redux": "^3.5.2",
-    "electron": "latest"
+    "redux": "^3.5.2"
   },
   "devDependencies": {
     "babel-core": "^6.11.4",

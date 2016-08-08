@@ -4,6 +4,8 @@ var _electronConnect = require('electron-connect');
 
 var _menu = require('./main/menu');
 
+require('./main/analyseFiles.worker');
+
 var _electron = require('electron');
 
 var _electron2 = _interopRequireDefault(_electron);
@@ -22,13 +24,18 @@ var mainWindow = void 0;
 
 function createWindow() {
   // Create the browser window.
-  mainWindow = new BrowserWindow({ width: 1000, height: 800 });
+  mainWindow = new BrowserWindow({
+    width: 1000,
+    height: 800
+  });
+
   Menu.setApplicationMenu(_menu.menu);
+  // 不显示菜单栏
+  // mainWindow.setMenu(null);
   // and load the index.html of the app.
   mainWindow.loadURL('file://' + __dirname + '/renderer/index.html');
   // for gulp reload
   _electronConnect.client.create(mainWindow);
-  // Open the DevTools.
   mainWindow.webContents.openDevTools();
 
   // Emitted when the window is closed.

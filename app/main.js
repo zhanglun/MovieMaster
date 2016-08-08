@@ -1,5 +1,6 @@
 import { client as devClient } from 'electron-connect';
 import { menu as customMenu } from './main/menu';
+import './main/analyseFiles.worker';
 import electron from 'electron';
 const Menu = electron.Menu;
 // Module to control application life.
@@ -13,13 +14,18 @@ let mainWindow;
 
 function createWindow () {
   // Create the browser window.
-  mainWindow = new BrowserWindow({ width: 1000, height: 800 });
+  mainWindow = new BrowserWindow({
+    width: 1000,
+    height: 800
+  });
+
   Menu.setApplicationMenu(customMenu);
+  // 不显示菜单栏
+  // mainWindow.setMenu(null);
   // and load the index.html of the app.
   mainWindow.loadURL(`file://${ __dirname }/renderer/index.html`);
   // for gulp reload
   devClient.create(mainWindow);
-  // Open the DevTools.
   mainWindow.webContents.openDevTools();
 
   // Emitted when the window is closed.
@@ -55,3 +61,4 @@ app.on('activate', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+
