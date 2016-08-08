@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import DirectoryContainer from '../containers/directory.container';
+import SidebarContainer from '../containers/sidebar.container';
 import MovieContainer from '../containers/movie.container';
 import { connect } from 'react-redux';
 
@@ -10,7 +10,7 @@ class App extends Component {
   render () {
     return (
       <div className="app">
-        <DirectoryContainer />
+        <SidebarContainer />
         <div className="main">
           <MovieContainer />
         </div>

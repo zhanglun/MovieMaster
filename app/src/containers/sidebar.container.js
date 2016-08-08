@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import DirectoryItem from '../components/directoryItem.component';
+import Sidebar from '../components/sidebar';
 
-class Directory extends Component {
+class SidebarContainer extends Component {
   constructor (props) {
     super(props);
+  }
+
+  openFileDialog () {
+    // TODO: 打开文件系统
+    alert(11111);
   }
 
   render () {
     const props = this.props;
     return (
-      <div className="sidebar sidebar__folding">
-        {props.directoryList.map((data) => {
-          return <DirectoryItem key={data.id} data={data}/>
-        })}
-        <div>添加</div>
-      </div>
+      <Sidebar></Sidebar>
     );
   }
 }
@@ -26,4 +26,4 @@ const mapStateToProps = (state) => {
   }
 };
 
-export default connect(mapStateToProps)(Directory);
+export default connect(mapStateToProps)(SidebarContainer);
