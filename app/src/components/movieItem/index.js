@@ -2,11 +2,27 @@ import './index.less';
 import React, { Component } from 'react';
 
 class MovieItem extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
   }
 
-  render () {
+  maybeRenderAlias() {
+    let movie = this.props.movie;
+    if (movie.alias) {
+      return (
+        <div className="movie-card__info-item">
+          <span className="movie-card__info-head">
+          别名:
+          </span>
+          <span className="movie-card__info-content">
+            {movie.alias}
+          </span>
+        </div>
+      );
+    }
+  }
+
+  render() {
     const { movie } = this.props;
     return (
       <div className="movie-card">
@@ -31,14 +47,7 @@ class MovieItem extends Component {
               {movie.type}
             </span>
           </div>
-          <div className="movie-card__info-item">
-            <span className="movie-card__info-head">
-            别名:
-            </span>
-            <span className="movie-card__info-content">
-              {movie.alias}
-            </span>
-          </div>
+          {this.maybeRenderAlias()}
           <div className="movie-card__info-item">
             <span className="movie-card__info-head">
             简介:
