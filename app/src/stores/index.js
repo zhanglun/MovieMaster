@@ -1,4 +1,4 @@
 import { createStore } from 'redux';
-import { AppReducer } from '../reducers';
-const AppStore = createStore(AppReducer);
+import rootReducers from '../reducers';
+const AppStore = createStore(rootReducers);
 export default AppStore;

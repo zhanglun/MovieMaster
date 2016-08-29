@@ -3,11 +3,20 @@ import SidebarContainer from '../containers/sidebar.container';
 import MovieContainer from '../containers/movie.container';
 import { connect } from 'react-redux';
 
+import { fetchMoviesInfo } from '../actions';
+
 class App extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
   }
-  render () {
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+    console.log(this.props);
+    // dispatch(fetchMoviesInfo());
+  }
+
+  render() {
     return (
       <div className="app">
         <SidebarContainer />
@@ -21,7 +30,7 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    counter: state.counter
+    movies: state.movies
   }
 };
 

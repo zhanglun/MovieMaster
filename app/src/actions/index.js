@@ -1,13 +1,6 @@
 import * as type from '../../constant/actionType';
 
-export function loadDirectory (path) {
-  return {
-    type: type.LOAD_DIRECTORY,
-    path
-  }
-}
-
-export function fetchMoviesInfo () {
+export function fetchMoviesInfo() {
   let data = [{
     "name": "肖申克的救赎",
     "origin_name": "The Shawshank Redemption",
@@ -161,5 +154,19 @@ export function fetchMoviesInfo () {
   return {
     type: type.FETCH_MOVIES_INFO,
     data,
+  }
+}
+
+export function requestMoviesInfo(movies) {
+  return {
+    type: type.FETCH_MOVIES_REQUEST,
+    movies
+  }
+}
+
+export function receiveMoviesInfo(movies) {
+  return {
+    type: type.FETCH_MOVIES_SUCCESS,
+    movies
   }
 }
