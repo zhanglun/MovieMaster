@@ -15,7 +15,10 @@ export default function movie(state = {
         items: action.data
       });
     case type.FETCH_MOVIES_INFO:
-      return [].concat(action.data);
+      return Object.assign({}, state, {
+        isFetching: false,
+        items: state.items.concat(action.data)
+      });
     default:
       return state;
   }

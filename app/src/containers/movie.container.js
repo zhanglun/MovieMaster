@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import MovieList from '../components/movieList';
 
 class MovieContainer extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
   }
 
-  render () {
+  render() {
     const props = this.props;
     return (
       <MovieList movies={props.movies}></MovieList>
@@ -15,7 +15,7 @@ class MovieContainer extends Component {
   }
 }
 
-function mapStateToProps (state) {
+function mapStateToProps(state) {
   return {
     movies: state.movies
   }

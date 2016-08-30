@@ -9,7 +9,7 @@ class SidebarContainer extends Component {
 
   openFileDialog () {
     // TODO: 打开文件系统
-    alert(11111);
+    alert(22222);
   }
 
   render () {

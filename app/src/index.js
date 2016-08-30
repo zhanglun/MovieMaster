@@ -4,8 +4,9 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 
 import App from './containers/app.container';
-import store from './stores';
+import configureStore from './store/configureStore'
 
+const store = configureStore();
 
 let rootElement = document.getElementById('app');
 render(

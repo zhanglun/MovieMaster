@@ -22,21 +22,28 @@ class MovieItem extends Component {
     }
   }
 
+  getDirectorList(list) {
+    let result = list.map((i) => {
+      return i.name;
+    });
+    return result.join(',');
+  }
+
   render() {
     const { movie } = this.props;
     return (
       <div className="movie-card">
         <div className="movie-card__poster">
-          <img className="movie-card__poster-img" src={movie.poster}/>
+          <img className="movie-card__poster-img" src={movie.images.large}/>
         </div>
         <div className="movie-card__info">
-          <div className="movie-card__title">{movie.name} ({movie.region})</div>
+          <div className="movie-card__title">{movie.name} ({movie.original_title})</div>
           <div className="movie-card__info-item">
             <span className="movie-card__info-head">
               导演:
             </span>
             <span className="movie-card__info-content">
-              {movie.director}
+              {this.getDirectorList(movie.directors || [])}
             </span>
           </div>
           <div className="movie-card__info-item">
@@ -44,7 +51,7 @@ class MovieItem extends Component {
             类型:
             </span>
             <span className="movie-card__info-content">
-              {movie.type}
+              {movie.genres.join(', ')}
             </span>
           </div>
           {this.maybeRenderAlias()}
@@ -53,7 +60,7 @@ class MovieItem extends Component {
             简介:
             </span>
             <span className="movie-card__info-content">
-            {movie.synopsis.slice(0, 56) + '...'}
+            {/*{movie.synopsis.slice(0, 56) + '...'}*/}
             </span>
           </div>
         </div>
