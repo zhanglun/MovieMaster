@@ -37,7 +37,7 @@ class MovieItem extends Component {
           <img className="movie-card__poster-img" src={movie.images.large}/>
         </div>
         <div className="movie-card__info">
-          <div className="movie-card__title">{movie.name} ({movie.original_title})</div>
+          <div className="movie-card__title">{movie.title} ({movie.original_title})</div>
           <div className="movie-card__info-item">
             <span className="movie-card__info-head">
               导演:
