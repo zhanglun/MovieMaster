@@ -1,4 +1,7 @@
 import './public/less/base.less';
+import  'sweetalertcss';
+import swal from 'sweetalert';
+console.log(swal);
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';

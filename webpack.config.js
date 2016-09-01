@@ -12,6 +12,7 @@ var SRC_PATH = path.resolve(APP_PATH, 'src');
 var BUILD_PATH = path.resolve(ROOT_PATH, 'dist');
 var RENDERER_PATH = path.resolve(BUILD_PATH, 'renderer');
 
+
 module.exports = {
   entry: {
     'app': SRC_PATH + '/index.js',
@@ -22,9 +23,12 @@ module.exports = {
   },
 
   resolve: {
-    resolve: {
-      extensions: ['', '.js', '.jsx']
+    root: path.resolve(__dirname),
+    alias: {
+      sweetalert: 'node_modules/sweetalert/lib/sweetalert.js',
+      sweetalertcss: 'node_modules/sweetalert/dist/sweetalert.css',
     },
+    extensions: ['', '.js', '.jsx', '.css']
   },
   module: {
     loaders: [
@@ -44,6 +48,10 @@ module.exports = {
         test: /.less$/,
         loader: 'style!css!less',
         include: [SRC_PATH],
+      },
+      {
+        test: /.css$/,
+        loader: 'style!css',
       }
     ],
   },
@@ -71,7 +79,7 @@ module.exports = {
         NODE_ENV: '"development"',
       }
     }),
-    new ExtractTextPlugin('style.bundle.css'),
+    // new ExtractTextPlugin('style.bundle.css'),
     new HtmlWebpackPlugin({
       template: SRC_PATH + '/index.html',
       filename: RENDERER_PATH + '/index.html',
@@ -80,10 +88,10 @@ module.exports = {
     //   from: SRC_PATH + '/vendor',
     //   to: BUILD_PATH + '/vendor',
     // }]),
-    new CommonsChunkPlugin({
-      name: ['react'],
-      // filename: 'react.bundle.js',
-      minChunks: Infinity
-    }),
+    // new CommonsChunkPlugin({
+    //   name: ['react'],
+    //   // filename: 'react.bundle.js',
+    //   minChunks: Infinity
+    // }),
   ],
 };
