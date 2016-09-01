@@ -7,11 +7,6 @@ class SidebarContainer extends Component {
     super(props);
   }
 
-  openFileDialog () {
-    // TODO: 打开文件系统
-    alert(22222);
-  }
-
   render () {
     const props = this.props;
     return (

@@ -1,15 +1,13 @@
 import './index.less';
-
-//noinspection JSUnresolvedVariable
 import React, { Component } from 'react';
 
 class SideBar extends Component {
   constructor(props) {
     super(props);
-    this.showAddConfirm = this.showAddConfirm.bind(this);
+    this.showFolders = this.showFolders.bind(this);
   }
 
-  showAddConfirm() {
+  showFolders() {
     swal({
       title: "Sweet!", text: "Here's a custom image.",
     });
@@ -22,15 +20,12 @@ class SideBar extends Component {
         {/*return <DirectoryItem key={data.id} data={data}/>*/}
         {/*})}*/}
         <div>
-          <div className="sidebar-setting__item">
+          <div className="sidebar-setting__item" onClick={this.showFolders}>
             <span className="material-icons">folder</span>
           </div>
         </div>
         <div>
 
-          <div className="sidebar-setting__item" onClick={this.showAddConfirm}>
-            <span className="material-icons">add</span>
-          </div>
           <div className="sidebar-setting__item">
             <span className="material-icons">settings</span>
           </div>

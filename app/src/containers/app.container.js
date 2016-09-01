@@ -12,7 +12,7 @@ class App extends Component {
   }
 
   initData() {
-    console.log('init data');
+    // 备用代码。打开文件夹的简单逻辑
   }
 
   componentWillMount() {
@@ -21,6 +21,7 @@ class App extends Component {
 
   componentDidMount() {
     console.log('componentDidMount');
+    this.initData();
     const { dispatch } = this.props;
     dispatch(fetchMoviesInfo());
   }

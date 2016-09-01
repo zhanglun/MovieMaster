@@ -36,9 +36,9 @@ class MovieItem extends Component {
         <div className="movie-card__poster">
           <img className="movie-card__poster-img" src={movie.images.large}/>
         </div>
-        <div className="movie-card__info">
-          <div className="movie-card__title">{movie.title} ({movie.original_title})</div>
-          <div className="movie-card__info-item">
+{/*        <div className="movie-card__info">
+          <div className="movie-card__title">{movie.title}</div>*/}
+{/*          <div className="movie-card__info-item">
             <span className="movie-card__info-head">
               导演:
             </span>
@@ -60,10 +60,10 @@ class MovieItem extends Component {
             简介:
             </span>
             <span className="movie-card__info-content">
-            {/*{movie.synopsis.slice(0, 56) + '...'}*/}
+            /!*{movie.synopsis.slice(0, 56) + '...'}*!/
             </span>
-          </div>
-        </div>
+          </div>*/}
+        {/*</div>*/}
       </div>
     )
   }

@@ -27,6 +27,7 @@ module.exports = {
     alias: {
       sweetalert: 'node_modules/sweetalert/lib/sweetalert.js',
       sweetalertcss: 'node_modules/sweetalert/dist/sweetalert.css',
+      'constant/ipc': 'app/constant/ipc',
     },
     extensions: ['', '.js', '.jsx', '.css']
   },
