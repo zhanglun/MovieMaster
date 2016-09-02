@@ -5,11 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.analyse = analyse;
 
-var _gui = require('./gui.worker');
+var _electron = require('electron');
 
-var _gui2 = _interopRequireDefault(_gui);
-
-var _tool = require('../common/tool');
+var _tool = require('../../common/tool');
 
 var _tool2 = _interopRequireDefault(_tool);
 
@@ -17,8 +15,19 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var mediaFilterExt = ['rmvb', 'mp4', 'mkv', 'avi', 'mp3'];
 
+var openDirDialog = function openDirDialog(options, callback) {
+  options = Object.assign({
+    properties: ['openDirectory']
+  }, options);
+  _electron.dialog.showOpenDialog(options, function (path) {
+    if (path) {
+      callback(path[0]);
+    }
+  });
+};
+
 function analyse() {
-  _gui2.default.openDirDialog({ title: '打开文件夹~~~' }, function (dir) {
+  openDirDialog({ title: '打开文件夹~~~' }, function (dir) {
     _tool2.default.readDirRecur({
       root: dir,
       extfilters: mediaFilterExt
@@ -33,10 +42,9 @@ function analyse() {
       });
       return data;
     }).then(function (files) {
-      files.map(function (file) {
-        console.log('---->');
-        console.log(file);
-      });
+      // TODO: 通知到
+      eventBus.emit('test', files);
+      return files;
     });
   });
 }

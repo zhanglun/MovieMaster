@@ -1,6 +1,7 @@
 import { client as devClient } from 'electron-connect';
 import { menu as customMenu } from './main/menu';
-import './main/analyseFiles.worker';
+import './main/workers/analyseFiles.worker';
+import './main/workers/eventbus.worker';
 import electron from 'electron';
 const Menu = electron.Menu;
 // Module to control application life.

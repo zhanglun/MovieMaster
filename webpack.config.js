@@ -28,6 +28,7 @@ module.exports = {
       sweetalert: 'node_modules/sweetalert/lib/sweetalert.js',
       sweetalertcss: 'node_modules/sweetalert/dist/sweetalert.css',
       'constant/ipc': 'app/constant/ipc',
+      'common/tool': 'app/common/tool',
     },
     extensions: ['', '.js', '.jsx', '.css']
   },

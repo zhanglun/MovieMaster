@@ -4,7 +4,9 @@ var _electronConnect = require('electron-connect');
 
 var _menu = require('./main/menu');
 
-require('./main/analyseFiles.worker');
+require('./main/workers/analyseFiles.worker');
+
+require('./main/workers/eventbus.worker');
 
 var _electron = require('electron');
 
