@@ -4,7 +4,7 @@ global.eventBus = new EventEmitter();
 
 
 eventBus.on('test', (files)=> {
-  console.log(files);
+  console.log('======>');
   // to renderer process
   icpMain.send('files', {
     files: files,
