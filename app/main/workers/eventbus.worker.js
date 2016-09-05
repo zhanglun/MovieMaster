@@ -1,12 +1,12 @@
-import { icpMain } from 'electron';
+import { ipcMain } from 'electron';
 import { EventEmitter }from 'events';
-global.eventBus = new EventEmitter();
 
 
-eventBus.on('test', (files)=> {
-  console.log('======>');
-  // to renderer process
-  icpMain.send('files', {
-    files: files,
-  });
-});
+// eventBus.on('test', (files)=> {
+//   console.log('eventbus======>');
+//   console.log(mainWindow.webContents);
+//   // to renderer process
+//   mainWindow.webContents.send('files', {
+//     files: files,
+//   });
+// });

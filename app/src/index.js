@@ -8,6 +8,9 @@ import { Provider } from 'react-redux';
 import App from './containers/app.container';
 import configureStore from './store/configureStore'
 
+
+import {openDialog} from './helper/ipc';
+
 const store = configureStore();
 
 let rootElement = document.getElementById('app');
@@ -16,5 +19,7 @@ render(
     <App />
   </Provider>,
   rootElement);
+
+openDialog();
 
 

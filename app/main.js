@@ -3,6 +3,10 @@ import { menu as customMenu } from './main/menu';
 import './main/workers/analyseFiles.worker';
 import './main/workers/eventbus.worker';
 import electron from 'electron';
+
+import { EventEmitter }from 'events';
+global.eventBus = new EventEmitter();
+
 const Menu = electron.Menu;
 // Module to control application life.
 const app = electron.app;
@@ -42,10 +46,14 @@ function createWindow () {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', (a,b,c)=>{
-  console.log(a,b,c);
+app.on('ready', ()=> {
+
+  eventBus.on('test', function(data) {
+    console.log('ready eventbus ----->');
+    console.log(arguments);
+    mainWindow.webContents.send('files', data);
+  });
   createWindow();
-  console.log();
 });
 
 // Quit when all windows are closed.

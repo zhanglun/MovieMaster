@@ -1,7 +1,7 @@
 import * as CONSTTYPE from 'constant/ipc';
 import tool from 'common/tool';
 const remote = require('electron').remote;
-const icpRenderer = remote.icpRenderer;
+import { ipcRenderer } from 'electron';
 const dialog = remote.dialog;
 
 const openDir = (options, callback) => {
@@ -18,13 +18,17 @@ const openDir = (options, callback) => {
 
 export const openDialog = () => {
   const mediaFilterExt = ['rmvb', 'mp4', 'mkv', 'avi', 'mp3'];
-  icpRenderer.on(CONSTTYPE.OPEN_DIRECTORY, () => {
+
+  ipcRenderer.on('files', (e, data)=> {
+    console.log(data);
+  });
+
+  ipcRenderer.on(CONSTTYPE.OPEN_DIRECTORY, () => {
     openDir({ title: '打开文件夹~~~' }, (dir) => {
       tool.readDirRecur({
         root: dir,
         extfilters: mediaFilterExt,
       }, (file) => {
-        debugger;
         console.warn(file);
       }).then((data)=> {
         while (data.length !== [].concat.apply([], data).length) {
@@ -40,7 +44,3 @@ export const openDialog = () => {
     });
   });
 };
-
-icpRenderer.on('files', (data)=> {
-  console.log(data);
-});
