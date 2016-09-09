@@ -1,27 +1,26 @@
 'use strict';
 
-var _electronConnect = require('electron-connect');
-
-var _menu = require('./main/menu');
-
-require('./main/workers/analyseFiles.worker');
-
-require('./main/workers/eventbus.worker');
-
 var _electron = require('electron');
 
 var _electron2 = _interopRequireDefault(_electron);
 
+var _electronConnect = require('electron-connect');
+
+var _menu = require('./main/menu');
+
 var _events = require('events');
+
+require('./main/workers/analyseFiles.worker');
+
+var _eventbus = require('./main/workers/eventbus.worker');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 global.eventBus = new _events.EventEmitter();
 
+
 var Menu = _electron2.default.Menu;
-// Module to control application life.
 var app = _electron2.default.app;
-// Module to create native browser window.
 var BrowserWindow = _electron2.default.BrowserWindow;
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -58,13 +57,8 @@ function createWindow() {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', function () {
-
-  eventBus.on('test', function (data) {
-    console.log('ready eventbus ----->');
-    console.log(arguments);
-    mainWindow.webContents.send('files', data);
-  });
   createWindow();
+  (0, _eventbus.initEventBus)(mainWindow);
 });
 
 // Quit when all windows are closed.

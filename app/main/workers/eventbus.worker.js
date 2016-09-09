@@ -1,12 +1,10 @@
 import { ipcMain } from 'electron';
-import { EventEmitter }from 'events';
 
+function initEventBus(mainwindow) {
+  let mainWindow = mainwindow;
+  eventBus.on('loadLocalFiles', function (data) {
+    mainWindow.webContents.send('files', data);
+  });
+}
 
-// eventBus.on('test', (files)=> {
-//   console.log('eventbus======>');
-//   console.log(mainWindow.webContents);
-//   // to renderer process
-//   mainWindow.webContents.send('files', {
-//     files: files,
-//   });
-// });
+export { initEventBus };

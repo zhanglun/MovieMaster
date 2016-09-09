@@ -1,23 +1,20 @@
+import electron from 'electron';
 import { client as devClient } from 'electron-connect';
 import { menu as customMenu } from './main/menu';
-import './main/workers/analyseFiles.worker';
-import './main/workers/eventbus.worker';
-import electron from 'electron';
-
 import { EventEmitter }from 'events';
 global.eventBus = new EventEmitter();
+import './main/workers/analyseFiles.worker';
+import { initEventBus } from './main/workers/eventbus.worker';
 
 const Menu = electron.Menu;
-// Module to control application life.
 const app = electron.app;
-// Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 
-function createWindow () {
+function createWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 1000,
@@ -47,13 +44,8 @@ function createWindow () {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', ()=> {
-
-  eventBus.on('test', function(data) {
-    console.log('ready eventbus ----->');
-    console.log(arguments);
-    mainWindow.webContents.send('files', data);
-  });
   createWindow();
+  initEventBus(mainWindow);
 });
 
 // Quit when all windows are closed.

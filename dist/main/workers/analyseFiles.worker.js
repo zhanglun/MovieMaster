@@ -42,10 +42,7 @@ function analyse() {
       });
       return data;
     }).then(function (files) {
-      // TODO: 通知到
-      eventBus.emit('test', { files: files });
-      console.log('analyseF');
-      console.log(files);
+      eventBus.emit('loadLocalFiles', { files: files });
       return files;
     });
   });

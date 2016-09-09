@@ -151,21 +151,25 @@ export function fetchMoviesInfo() {
       "release_date": 2015,
       "synopsis": "“我”（竹内结子饰）是一名生活在京都的作家，我的作品主要面向成年读者，作品风格从少女轻小说到恐怖故事均有涉猎。半年前我应邀为某怪谈杂志撰写恐怖故事，期间曾向读者募集真实的恐怖故事和体验。虽则如此，我本人对灵异事件却抱着.."
     },];
-  return (dispatch, getState) => {
-    fetch('http://localhost:5000/api/v1.0/movies')
-      .then((response)=> {
-        return response.json();
-      })
-      .then((data) => {
-        dispatch(receiveMoviesInfo(data))
-      });
-  };
+  /*  return (dispatch, getState) => {
+   fetch('http://localhost:5000/api/v1.0/movies')
+   .then((response)=> {
+   return response.json();
+   })
+   .then((data) => {
+   dispatch(receiveMoviesInfo(data))
+   });
+   };*/
+  return {
+    type: type.FETCH_MOVIES_INFO,
+    data: []
+  }
 }
 
 export function requestMoviesInfo(movies) {
   return {
     type: type.FETCH_MOVIES_REQUEST,
-    movies
+    data: []
   }
 }
 
