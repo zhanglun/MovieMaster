@@ -2,7 +2,7 @@
 var YEAR_REGEX = /(19|20)\d{2}/g;
 
 let stripIllegalCharacters = function (movieTitle, replacementString) {
-  return movieTitle.replace(/,|\[|\]|【|】|\.|_|\/|\+|\-|(\d+x\d+)|end/gi, replacementString);
+  return movieTitle.replace(/,|\[|\]|【|】|\.|_|\/|\+|\-|(\d+x\d+)|end|@/gi, replacementString);
 };
 
 let removeYearFromTitile = (title, replacestring) => {
@@ -59,7 +59,7 @@ let removeCountryNamesFromTitle = function (movieTitle) {
  * @returns {XML|*|void|string}
  */
 let removeSiteURL = function (title) {
-  return title.replace(/bbsd\.wofei\.net/ig, '');
+  return title.replace(/bbsd\.wofei\.net|www\.dream\.cn/ig, '');
 };
 
 /**
@@ -77,12 +77,12 @@ export const cleanTitle = (title) => {
   let cleanTitle = title;
 
   cleanTitle = removeSuffix(cleanTitle);
+  cleanTitle = removeSiteURL(cleanTitle);
   cleanTitle = stripIllegalCharacters(cleanTitle, ' ');
   cleanTitle = removeYearFromTitile(cleanTitle);
   cleanTitle = removeReleaseGroupNamesFromTitle(cleanTitle);
   cleanTitle = removeAudioTypesFromTitle(cleanTitle);
   cleanTitle = removeMovieTypeFromTitle(cleanTitle);
-  cleanTitle = removeSiteURL(cleanTitle);
   cleanTitle = removeCountryNamesFromTitle(cleanTitle);
 
   // 获取年份
