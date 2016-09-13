@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SidebarContainer from '../containers/sidebar.container';
 import MovieContainer from '../containers/movie.container';
+import MainTopComponent from '../components/maintop';
 import { connect } from 'react-redux';
 
 import { fetchMoviesInfo } from '../actions';
@@ -36,6 +37,7 @@ class App extends Component {
       <div className="app">
         <SidebarContainer />
         <div className="main">
+          <MainTopComponent />
           <MovieContainer />
         </div>
       </div>

@@ -1,23 +1,30 @@
 
 .sidebar {
-  width: 100px;
-  padding: 5px 0;
+  width: 240px;
   background: #333;
   color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  &__folding {
-    width: 40px;
-  }
   &-setting__item {
-    margin: 5px 0;
     text-align: center;
     cursor: pointer;
+    flex: 1;
   }
-}
-
-.directory-item {
-  color: #fff;
+  &-header {
+    height: 50px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+  }
+  &-body {
+    border-top: 1px solid #4c4c4c;
+    border-bottom: 1px solid #4c4c4c;
+    flex: 1 0 auto;
+  }
+  &-footer {
+    height: 40px;
+    box-sizing: border-box;
+  }
 }
 
