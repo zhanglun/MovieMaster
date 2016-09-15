@@ -3,6 +3,7 @@
   width: 240px;
   background: #333;
   color: #fff;
+  font-size: 14px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -10,12 +11,21 @@
     text-align: center;
     cursor: pointer;
     flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-left: 1px solid #4c4c4c;
+    .material-icons {
+      font-size: 18px;
+      margin-right: 6px;
+    }
   }
   &-header {
     height: 50px;
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
+    font-size: 14px;
   }
   &-body {
     border-top: 1px solid #4c4c4c;
@@ -25,6 +35,24 @@
   &-footer {
     height: 40px;
     box-sizing: border-box;
+  }
+}
+
+.side-menu {
+  &__title {
+    padding: 14px  16px 6px;
+    font-size: 20px;
+    color: #8c8c8c;
+  }
+  &__item {
+    height: 34px;
+    display: flex;
+    align-items: center;
+    padding-left: 14px;
+    .material-icons {
+      font-size: 20px;
+      margin-right: 6px;
+    }
   }
 }
 
