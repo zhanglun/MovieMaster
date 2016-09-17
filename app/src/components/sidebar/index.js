@@ -31,13 +31,13 @@ class SideBar extends Component {
               全部
             </div>
             {/*<div className="side-menu__item">*/}
-              <Link to='/movie' className="side-menu__item" activeClassName={'side-menu__item--active'}>
+              <Link to='/movie' className="side-menu__item" activeClassName="side-menu__item--active">
                 <span className="material-icons">movie</span>
                 电影
               </Link>
             {/*</div>*/}
             {/*<div className="side-menu__item">*/}
-              <Link to='/episode' className="side-menu__item" activeClassName={'side-menu__item--active'}>
+              <Link to='/episode' className="side-menu__item" activeClassName="side-menu__item--active">
                 <span className="material-icons">movie</span>剧集
               </Link>
             {/*</div>*/}
