@@ -1,5 +1,6 @@
 import './index.less';
 import React, { Component } from 'react';
+import { Router, Route, Link } from 'react-router';
 
 class SideBar extends Component {
   constructor (props) {
@@ -29,14 +30,17 @@ class SideBar extends Component {
               <span className="material-icons">movie</span>
               全部
             </div>
-            <div className="side-menu__item">
-              <span className="material-icons">movie</span>
-              电影
-            </div>
-            <div className="side-menu__item">
-              <span className="material-icons">movie</span>
-              剧集
-            </div>
+            {/*<div className="side-menu__item">*/}
+              <Link to='/movie' className="side-menu__item" activeClassName={'side-menu__item--active'}>
+                <span className="material-icons">movie</span>
+                电影
+              </Link>
+            {/*</div>*/}
+            {/*<div className="side-menu__item">*/}
+              <Link to='/episode' className="side-menu__item" activeClassName={'side-menu__item--active'}>
+                <span className="material-icons">movie</span>剧集
+              </Link>
+            {/*</div>*/}
           </div>
         </div>
         <div className="sidebar-footer">

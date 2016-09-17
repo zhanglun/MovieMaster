@@ -39,7 +39,8 @@ class App extends Component {
         <div className="main">
           <MainTopComponent />
           <div className="main-body">
-            <MovieContainer />
+            {/*<MovieContainer />*/}
+            {this.props.children}
           </div>
         </div>
       </div>
