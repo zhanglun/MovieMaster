@@ -2,7 +2,7 @@ import * as type from '../../constant/actionType';
 
 export function fetchMoviesInfo () {
   return (dispatch, getState) => {
-    window.fetch('http://localhost:8888/api/v1.0/movies')
+    window.fetch('http://localhost:5000/api/v1.0/movies')
       .then((response)=> {
         return response.json();
       })
