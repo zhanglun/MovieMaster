@@ -21,4 +21,6 @@ const mapStateToProps = (state) => {
   }
 };
 
-export default connect(mapStateToProps)(SidebarContainer);
+export default connect(mapStateToProps, null, null, {
+  pure: false
+})(SidebarContainer);
