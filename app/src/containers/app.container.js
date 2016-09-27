@@ -17,25 +17,23 @@ class App extends Component {
   }
 
   componentWillMount () {
-    console.log('componentWillMount()');
   }
 
   componentDidMount () {
-    console.log('componentDidMount');
     this.initData();
-    const { dispatch } = this.props;
-    dispatch(fetchMoviesInfo());
+    // const { dispatch } = this.props;
+    // dispatch(fetchMoviesInfo());
   }
 
   componentWillReceiveProps (nextprops) {
-    console.log(nextprops);
+    // console.log(nextprops);
   }
 
 
   render () {
     return (
       <div className="app">
-        <SidebarContainer />
+        {/*<SidebarContainer />*/}
         <div className="main">
           <MainTopComponent />
           <div className="main-body">

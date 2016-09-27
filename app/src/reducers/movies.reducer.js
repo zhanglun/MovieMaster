@@ -2,7 +2,8 @@ import * as type from '../../constant/actionType';
 
 export default function movie(state = {
   isFetching: false,
-  items: []
+  items: [],
+  searchResult: [],
 }, action) {
   switch (action.type) {
     case type.FETCH_MOVIES_REQUEST:
@@ -18,6 +19,11 @@ export default function movie(state = {
       return Object.assign({}, state, {
         isFetching: false,
         items: state.items.concat(action.data)
+      });
+    case type.SEARCH_MOVIES_SUCCESS:
+      return Object.assign({}, state, {
+        isFetching: false,
+        searchResult: action.data,
       });
     default:
       return state;

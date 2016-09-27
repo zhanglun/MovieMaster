@@ -1,18 +1,42 @@
 import './index.less';
-
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { requestSearchMovie } from '../../actions';
 
 class SearchBox extends Component {
-  constructor(props){
+  constructor (props) {
     super(props);
+    this.state = {
+      value: 'hello!'
+    };
   }
-  render() {
+
+  search (event) {
+    let { dispatch } = this.props;
+    console.log(this.props);
+    if (event.keyCode == 13) {
+      let keyword = event.target.value;
+      console.log('keyword: ', keyword);
+      dispatch(requestSearchMovie(keyword));
+    }
+  }
+
+  render () {
+    let { props } = this.props;
+    console.log(props);
     return (
       <div className="searchbox">
-        <input type="text" placeholder="电影名称搜索" className="searchbox-input"/>
+        <input type="text" placeholder="电影名称搜索" className="searchbox-input"
+               onKeyUp={this.search.bind(this)}/>
       </div>
     )
   }
 }
 
-export default SearchBox;
+function mapStateToProps(state) {
+  return {
+    movies: state.movies
+  }
+}
+
+export default connect(mapStateToProps)(SearchBox);
