@@ -1,4 +1,5 @@
 import { dialog } from 'electron';
+const ffmpeg = require('fluent-ffmpeg');
 import tool from './tool';
 
 const mediaFilterExt = ['rmvb', 'mp4', 'mkv', 'avi', 'mp3'];
@@ -19,8 +20,6 @@ export function analyse() {
     tool.readDirRecur({
       root: dir,
       extfilters: mediaFilterExt,
-    }, (file) => {
-      console.log('redDirRecur---------->');
     }).then((data)=> {
       while (data.length !== [].concat.apply([], data).length) {
         data = [].concat.apply([], data);
@@ -28,10 +27,21 @@ export function analyse() {
       data = data.filter((item) => {
         return item;
       });
-      return data;
-    }).then((files) => {
-      // files 一个数组 元素是每个文件的完整路径
-      eventBus.emit('loadLocalFiles', {paths: files});
+
+      var metadataPromiseList = data.map((path) => {
+        return new Promise(function (reslove, reject) {
+          ffmpeg.ffprobe(path, function (err, metadata) {
+            if (!err) {
+              reslove(metadata.format);
+            } else {
+              reject(err);
+            }
+          });
+        });
+      });
+      return Promise.all(metadataPromiseList);
+    }).then((metadatas) => {
+      eventBus.emit('loadLocalFiles', { metadata: metadatas });
       return files;
     });
   });

@@ -2,7 +2,7 @@ var fs = require('fs');
 var path = require('path');
 var readdir = promisify(fs.readdir);
 var stat = promisify(fs.stat);
-var readFile = promisify(fs.readFile);
+// var readFile = promisify(fs.readFile);
 
 // 简单实现一个promisify
 function promisify(fn) {
@@ -33,8 +33,6 @@ const readDirRecur = (conf, callback) => {
           }, callback);
         }
         if (stats.isFile() && conf.extfilters.indexOf(filename.split('.').pop()) >= 0) {
-          // return callback(path.join(conf.root, filename));
-          // result.push(path.join(conf.root, filename));
           return path.join(conf.root, filename);
         }
       })

@@ -13,6 +13,9 @@ var _tool2 = _interopRequireDefault(_tool);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var ffmpeg = require('fluent-ffmpeg');
+
+
 var mediaFilterExt = ['rmvb', 'mp4', 'mkv', 'avi', 'mp3'];
 
 var openDirDialog = function openDirDialog(options, callback) {
@@ -31,8 +34,6 @@ function analyse() {
     _tool2.default.readDirRecur({
       root: dir,
       extfilters: mediaFilterExt
-    }, function (file) {
-      console.log('redDirRecur---------->');
     }).then(function (data) {
       while (data.length !== [].concat.apply([], data).length) {
         data = [].concat.apply([], data);
@@ -40,10 +41,21 @@ function analyse() {
       data = data.filter(function (item) {
         return item;
       });
-      return data;
-    }).then(function (files) {
-      // files 一个数组 元素是每个文件的完整路径
-      eventBus.emit('loadLocalFiles', { paths: files });
+
+      var metadataPromiseList = data.map(function (path) {
+        return new Promise(function (reslove, reject) {
+          ffmpeg.ffprobe(path, function (err, metadata) {
+            if (!err) {
+              reslove(metadata.format);
+            } else {
+              reject(err);
+            }
+          });
+        });
+      });
+      return Promise.all(metadataPromiseList);
+    }).then(function (metadatas) {
+      eventBus.emit('loadLocalFiles', { metadata: metadatas });
       return files;
     });
   });

@@ -42,14 +42,14 @@ gulp.task('babel:electron-main', function () {
 gulp.task('watch', ['babel:electron-main', 'webpack:build-dev'], function () {
 
   electron.start();
-  gulp.watch(['./dist/main.js', './dist/backend/**/*.js'], electron.restart);
+  gulp.watch(['./dist/main.js'], electron.restart);
   gulp.watch(['./dist/client/*.{html,js,less,css}', './dist/client/**/*.{html,js,less,css}'], electron.reload);
 });
 
 gulp.task('watch:build', function(){
   gulp.watch([CLIENT_PATH + '/**/*.{html,js,less,css}'], ['webpack:build-dev']);
   gulp.watch([APP_PATH + '/main.js', BACKEND_PATH + '/**/*.js'], ['babel:electron-main']);
-})
+});
 
 
 gulp.task('dev', ['watch:build', 'watch']);
