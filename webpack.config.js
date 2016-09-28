@@ -8,9 +8,9 @@ var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 // 定义了一些文件夹的路径
 var ROOT_PATH = path.resolve(__dirname);
 var APP_PATH = path.resolve(ROOT_PATH, 'app');
-var SRC_PATH = path.resolve(APP_PATH, 'src');
+var SRC_PATH = path.resolve(APP_PATH, 'client');
 var BUILD_PATH = path.resolve(ROOT_PATH, 'dist');
-var RENDERER_PATH = path.resolve(BUILD_PATH, 'renderer');
+var RENDERER_PATH = path.resolve(BUILD_PATH, 'client');
 
 
 module.exports = {
@@ -27,8 +27,6 @@ module.exports = {
     alias: {
       sweetalert: 'node_modules/sweetalert/lib/sweetalert.js',
       sweetalertcss: 'node_modules/sweetalert/dist/sweetalert.css',
-      'constant/ipc': 'app/constant/ipc',
-      'common/tool': 'app/common/tool',
     },
     extensions: ['', '.js', '.jsx', '.css']
   },
@@ -44,7 +42,7 @@ module.exports = {
           presets: ['es2015', 'react'],
           plugins: ['transform-runtime'],
         },
-        include: [SRC_PATH, path.resolve(APP_PATH, 'constant')],
+        include: [APP_PATH],
       },
       {
         test: /.less$/,

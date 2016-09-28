@@ -8,6 +8,9 @@ var electron = require('electron-connect').server.create();
 
 var ROOT_PATH = path.resolve(__dirname);
 var APP_PATH = path.resolve(ROOT_PATH, 'app');
+var BACKEND_PATH = path.resolve(APP_PATH, 'backend');
+var CLIENT_PATH = path.resolve(APP_PATH, 'client');
+
 
 // 开发
 var webpackConfigDev = Object.create(webpackConfig);
@@ -30,7 +33,7 @@ gulp.task('webpack:build-dev', function () {
 
 // main process 的编译
 gulp.task('babel:electron-main', function () {
-  return gulp.src([APP_PATH + '/main.js', APP_PATH + '/main/**/*.js', APP_PATH + '/{common,constant}/*.js'], { base: APP_PATH })
+  return gulp.src([APP_PATH + '/main.js', BACKEND_PATH + '/**/*.js'], { base: APP_PATH })
     .pipe(babel())
     .pipe(gulp.dest('dist'));
 });
@@ -39,14 +42,14 @@ gulp.task('babel:electron-main', function () {
 gulp.task('watch', ['babel:electron-main', 'webpack:build-dev'], function () {
 
   electron.start();
-
-  gulp.watch(['./app/main.js', './app/main/**/*.js'], ['babel:electron-main']);
-  gulp.watch([APP_PATH + '/constant/*.js', './app/src/**/*.{html,js,less,css}'], ['webpack:build-dev']);
-
-  gulp.watch(['./dist/main.js', './dist/main/**/*.js'], electron.restart);
-  gulp.watch(['./dist/renderer/*.{html,js,less,css}', './dist/renderer/**/*.{html,js,less,css}'], electron.reload);
-
+  gulp.watch(['./dist/main.js', './dist/backend/**/*.js'], electron.restart);
+  gulp.watch(['./dist/client/*.{html,js,less,css}', './dist/client/**/*.{html,js,less,css}'], electron.reload);
 });
 
+gulp.task('watch:build', function(){
+  gulp.watch([CLIENT_PATH + '/**/*.{html,js,less,css}'], ['webpack:build-dev']);
+  gulp.watch([APP_PATH + '/main.js', BACKEND_PATH + '/**/*.js'], ['babel:electron-main']);
+})
 
-gulp.task('dev', ['watch']);
+
+gulp.task('dev', ['watch:build', 'watch']);

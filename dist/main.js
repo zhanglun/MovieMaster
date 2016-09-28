@@ -6,13 +6,13 @@ var _electron2 = _interopRequireDefault(_electron);
 
 var _electronConnect = require('electron-connect');
 
-var _menu = require('./main/menu');
+var _menu = require('./backend/menu');
 
 var _events = require('events');
 
-require('./main/workers/analyseFiles.worker');
+require('./backend/workers/analyseFiles.worker');
 
-var _eventbus = require('./main/workers/eventbus.worker');
+var _eventbus = require('./backend/workers/eventbus.worker');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -38,7 +38,7 @@ function createWindow() {
   // 不显示菜单栏
   // mainWindow.setMenu(null);
   // and load the index.html of the app.
-  mainWindow.loadURL('file://' + __dirname + '/renderer/index.html');
+  mainWindow.loadURL('file://' + __dirname + '/client/index.html');
   // for gulp reload
   _electronConnect.client.create(mainWindow);
   mainWindow.webContents.openDevTools();

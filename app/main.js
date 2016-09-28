@@ -1,10 +1,10 @@
 import electron from 'electron';
 import { client as devClient } from 'electron-connect';
-import { menu as customMenu } from './main/menu';
+import { menu as customMenu } from './backend/menu';
 import { EventEmitter }from 'events';
 global.eventBus = new EventEmitter();
-import './main/workers/analyseFiles.worker';
-import { initEventBus } from './main/workers/eventbus.worker';
+import './backend/workers/analyseFiles.worker';
+import { initEventBus } from './backend/workers/eventbus.worker';
 
 const Menu = electron.Menu;
 const app = electron.app;
@@ -25,7 +25,7 @@ function createWindow() {
   // 不显示菜单栏
   // mainWindow.setMenu(null);
   // and load the index.html of the app.
-  mainWindow.loadURL(`file://${ __dirname }/renderer/index.html`);
+  mainWindow.loadURL(`file://${ __dirname }/client/index.html`);
   // for gulp reload
   devClient.create(mainWindow);
   mainWindow.webContents.openDevTools();
