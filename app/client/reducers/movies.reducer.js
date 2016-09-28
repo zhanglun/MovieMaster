@@ -13,7 +13,7 @@ export default function movie(state = {
     case type.FETCH_MOVIES_SUCCESS:
       return Object.assign({}, state, {
         isFetching: false,
-        items: action.data
+        items: state.items.concat(action.data)
       });
     case type.FETCH_MOVIES_INFO:
       return Object.assign({}, state, {

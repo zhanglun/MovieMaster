@@ -1,7 +1,7 @@
 import * as IPCTYPE from '../constant/ipcType';
 import { cleanTitle } from './cleanTitle';
 import { formatDuration, formatFileSize } from './metadataHandler';
-import { fetchMoviesInfo } from '../actions';
+import { fetchMoviesInfo, receiveMoviesInfo } from '../actions';
 const electron = require('electron');
 const remote = electron.remote;
 const dialog = remote.dialog;
@@ -30,7 +30,7 @@ let monitorFiles = (store) => {
       return Object.assign({}, { path: item.filename, duration: duration, size: size }, cleanTitle(filename));
     });
     console.log('-----------<>', files);
-    store.dispatch(fetchMoviesInfo(files));
+    store.dispatch(receiveMoviesInfo(files));
   });
 };
 

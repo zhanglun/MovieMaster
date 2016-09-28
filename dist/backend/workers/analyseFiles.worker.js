@@ -46,6 +46,7 @@ function analyse() {
         return new Promise(function (reslove, reject) {
           ffmpeg.ffprobe(path, function (err, metadata) {
             if (!err) {
+              eventBus.emit('loadLocalFiles', { metadata: [metadata.format] });
               reslove(metadata.format);
             } else {
               reject(err);
@@ -53,10 +54,9 @@ function analyse() {
           });
         });
       });
-      return Promise.all(metadataPromiseList);
-    }).then(function (metadatas) {
-      eventBus.emit('loadLocalFiles', { metadata: metadatas });
-      return files;
+      return Promise.race(metadataPromiseList);
+    }).then(function (metadata) {
+      return metadata;
     });
   });
 }

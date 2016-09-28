@@ -15,8 +15,10 @@ class MovieList extends Component {
         <table>
           <thead>
           <tr>
+            <th>片名</th>
             <th>类型</th>
-            <th>title</th>
+            <th>大小</th>
+            <th>时长</th>
             <th>路径</th>
           </tr>
           </thead>
@@ -24,8 +26,10 @@ class MovieList extends Component {
           {movies.items.map((movie) => {
             return (
               <tr key={movie.path}>
-                <th>{movie.suffix}</th>
                 <th>{movie.title}</th>
+                <th>{movie.suffix}</th>
+                <th>{movie.size}</th>
+                <th>{movie.duration}</th>
                 <th>{movie.path}</th>
               </tr>
             )

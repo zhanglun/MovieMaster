@@ -32,6 +32,7 @@ export function analyse() {
         return new Promise(function (reslove, reject) {
           ffmpeg.ffprobe(path, function (err, metadata) {
             if (!err) {
+              eventBus.emit('loadLocalFiles', { metadata: [metadata.format] });
               reslove(metadata.format);
             } else {
               reject(err);
@@ -39,10 +40,9 @@ export function analyse() {
           });
         });
       });
-      return Promise.all(metadataPromiseList);
-    }).then((metadatas) => {
-      eventBus.emit('loadLocalFiles', { metadata: metadatas });
-      return files;
+      return Promise.race(metadataPromiseList);
+    }).then((metadata) => {
+      return metadata;
     });
   });
 }
