@@ -1,5 +1,9 @@
 'use strict';
 
+var _fs = require('fs');
+
+var _fs2 = _interopRequireDefault(_fs);
+
 var _electron = require('electron');
 
 var _electron2 = _interopRequireDefault(_electron);
@@ -16,12 +20,17 @@ var _eventbus = require('./backend/workers/eventbus.worker');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-global.eventBus = new _events.EventEmitter();
-
-
+var dataDir = __dirname + '/movieinfo';
 var Menu = _electron2.default.Menu;
 var app = _electron2.default.app;
 var BrowserWindow = _electron2.default.BrowserWindow;
+
+if (!_fs2.default.existsSync(dataDir)) {
+  _fs2.default.mkdirSync(dataDir);
+}
+
+app.datapath = dataDir;
+global.eventBus = new _events.EventEmitter();
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.

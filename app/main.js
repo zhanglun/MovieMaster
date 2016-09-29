@@ -1,14 +1,23 @@
+import fs from 'fs';
 import electron from 'electron';
 import { client as devClient } from 'electron-connect';
 import { menu as customMenu } from './backend/menu';
 import { EventEmitter }from 'events';
-global.eventBus = new EventEmitter();
 import './backend/workers/analyseFiles.worker';
 import { initEventBus } from './backend/workers/eventbus.worker';
 
+
+const dataDir = __dirname + '/movieinfo';
 const Menu = electron.Menu;
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
+
+if (!fs.existsSync(dataDir)) {
+  fs.mkdirSync(dataDir);
+}
+
+app.datapath = dataDir;
+global.eventBus = new EventEmitter();
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
