@@ -18,6 +18,8 @@ require('./backend/workers/analyseFiles.worker');
 
 var _eventbus = require('./backend/workers/eventbus.worker');
 
+var _ipcType = require('./backend/constant/ipcType');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var dataDir = __dirname + '/movieinfo';
@@ -59,6 +61,11 @@ function createWindow() {
     // when you should delete the corresponding element.
     mainWindow = null;
   });
+  mainWindow.on('‘ready-to-show', function () {
+    // mainWindow.webContents.send(INIT_APP, {
+    //   data: 123123123
+    // })
+  });
   return mainWindow;
 }
 
@@ -70,6 +77,7 @@ app.on('ready', function () {
   (0, _eventbus.initEventBus)(mainWindow);
 });
 
+app.on('browser-window-created', function () {});
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
   // On OS X it is common for applications and their menu bar

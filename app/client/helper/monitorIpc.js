@@ -21,6 +21,23 @@ const openDir = (options, callback) => {
 
 
 let monitorFiles = (store) => {
+
+  // init
+
+  ipcRenderer.send(IPCTYPE.INIT_APP, {data: 'test'});
+
+  ipcRenderer.on('INIT_DATA', (e, data)=> {
+    let metadata = data.data;
+    let files = metadata.map((item) => {
+      var filename = item.filename.replace(/\\/ig, '/').split("/").pop();
+      var duration = formatDuration(item.duration || 0);
+      var size = formatFileSize(item.size || 0);
+      return Object.assign({}, { path: item.filename, duration: duration, size: size }, cleanTitle(filename));
+    });
+    console.log(files);
+    store.dispatch(receiveMoviesInfo(files));
+  });
+
   ipcRenderer.on(IPCTYPE.SEND_FILE_METADATA, (e, data)=> {
     let metadata = data.metadata;
     let files = metadata.map((item) => {
@@ -29,9 +46,15 @@ let monitorFiles = (store) => {
       var size = formatFileSize(item.size || 0);
       return Object.assign({}, { path: item.filename, duration: duration, size: size }, cleanTitle(filename));
     });
-    console.log('-----------<>', files);
+    console.log(files);
     store.dispatch(receiveMoviesInfo(files));
   });
+
+  ipcRenderer.on(IPCTYPE.INIT_APP, (e, data) => {
+    console.log(data);
+  });
+
+
 };
 
 export const monitorIpc = (store)=> {

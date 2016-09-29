@@ -5,7 +5,7 @@ import { menu as customMenu } from './backend/menu';
 import { EventEmitter }from 'events';
 import './backend/workers/analyseFiles.worker';
 import { initEventBus } from './backend/workers/eventbus.worker';
-
+import { INIT_APP } from './backend/constant/ipcType'
 
 const dataDir = __dirname + '/movieinfo';
 const Menu = electron.Menu;
@@ -46,6 +46,11 @@ function createWindow() {
     // when you should delete the corresponding element.
     mainWindow = null;
   });
+  mainWindow.on('‘ready-to-show', () => {
+    // mainWindow.webContents.send(INIT_APP, {
+    //   data: 123123123
+    // })
+  });
   return mainWindow;
 }
 
@@ -57,6 +62,8 @@ app.on('ready', ()=> {
   initEventBus(mainWindow);
 });
 
+app.on('browser-window-created', function() {
+});
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
   // On OS X it is common for applications and their menu bar
