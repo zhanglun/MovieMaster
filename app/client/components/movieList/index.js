@@ -12,7 +12,7 @@ class MovieList extends Component {
     const { movies } = this.props;
     return (
       <div className="movies--list">
-        <table>
+        <table className="table--striped">
           <thead>
           <tr>
             <th>片名</th>
@@ -26,11 +26,11 @@ class MovieList extends Component {
           {movies.items.map((movie) => {
             return (
               <tr key={movie.path}>
-                <td>{movie.title}</td>
+                <td><div className="movieinfo-item__title">{movie.title}</div></td>
                 <td>{movie.suffix}</td>
-                <td>{movie.size}</td>
+                <td><div className="movieinfo-item__size">{movie.size}</div></td>
                 <td>{movie.duration}</td>
-                <td>{movie.path}</td>
+                <td><div className="movieinfo-item__path">{movie.path}</div></td>
               </tr>
             )
           })}
