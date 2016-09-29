@@ -45,10 +45,8 @@ function initEventBus(mainwindow) {
   });
 
   ipcMain.on(IPCTYPE.INIT_APP, (event) => {
-
     getMovieInfoFromLocal()
       .then(function(data) {
-        console.log(data);
         event.sender.send('INIT_DATA', {data:data})
       });
   })

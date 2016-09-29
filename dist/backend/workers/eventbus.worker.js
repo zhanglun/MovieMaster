@@ -62,9 +62,7 @@ function initEventBus(mainwindow) {
   });
 
   _electron.ipcMain.on(IPCTYPE.INIT_APP, function (event) {
-
     getMovieInfoFromLocal().then(function (data) {
-      console.log(data);
       event.sender.send('INIT_DATA', { data: data });
     });
   });

@@ -1,7 +1,14 @@
+import { cleanTitle } from './cleanTitle';
+
+/**
+ * 格式化文件时间
+ * @param duration
+ * @returns {string}
+ */
 export const formatDuration = (duration) => {
-  var h = Math.floor(duration / 3600);
-  var m = Math.floor(duration / 60) % 60;
-  var s = Math.floor(duration % 60);
+  let h = Math.floor(duration / 3600);
+  let m = Math.floor(duration / 60) % 60;
+  let s = Math.floor(duration % 60);
 
   h = h < 10 ? "0" + h : h;
   m = m < 10 ? "0" + m : m;
@@ -10,10 +17,34 @@ export const formatDuration = (duration) => {
   return h + ':' + m + ':' + s;
 };
 
-
+/**
+ * 格式化文件大小
+ * @param bytes
+ * @returns {string}
+ */
 export const formatFileSize = (bytes) => {
-  if (bytes < 1024) return bytes + " Bytes";
-  else if (bytes < 1048576) return (bytes / 1024).toFixed(3) + " KB";
-  else if (bytes < 1073741824) return (bytes / 1048576).toFixed(3) + " MB";
-  else return (bytes / 1073741824).toFixed(3) + " GB";
+  if (bytes < 1024) {
+    return bytes + " Bytes";
+  } else if (bytes < 1048576) {
+    return (bytes / 1024).toFixed(3) + " KB";
+  } else if (bytes < 1073741824) {
+    return (bytes / 1048576).toFixed(3) + " MB";
+  } else {
+    return (bytes / 1073741824).toFixed(3) + " GB";
+  }
+};
+
+
+/**
+ * 格式化文件格式 完整方法
+ * @param data
+ * @returns {*}
+ */
+export const formatFileList = (data) => {
+  return data.map((item) => {
+    let filename = item.filename.replace(/\\/ig, '/').split("/").pop();
+    let duration = formatDuration(item.duration || 0);
+    let size = formatFileSize(item.size || 0);
+    return Object.assign({}, { path: item.filename, duration: duration, size: size }, cleanTitle(filename));
+  });
 };

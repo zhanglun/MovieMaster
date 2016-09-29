@@ -26,11 +26,11 @@ class MovieList extends Component {
           {movies.items.map((movie) => {
             return (
               <tr key={movie.path}>
-                <th>{movie.title}</th>
-                <th>{movie.suffix}</th>
-                <th>{movie.size}</th>
-                <th>{movie.duration}</th>
-                <th>{movie.path}</th>
+                <td>{movie.title}</td>
+                <td>{movie.suffix}</td>
+                <td>{movie.size}</td>
+                <td>{movie.duration}</td>
+                <td>{movie.path}</td>
               </tr>
             )
           })}
