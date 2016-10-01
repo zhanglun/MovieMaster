@@ -1,5 +1,6 @@
 import './index.less';
 import React, { Component } from 'react';
+import {browserHistory} from 'react-router';
 import { connect } from 'react-redux';
 import { requestSearchMovie } from '../../actions';
 
@@ -16,13 +17,13 @@ class SearchBox extends Component {
     if (event.keyCode == 13) {
       let keyword = event.target.value;
       console.log('keyword: ', keyword);
+      browserHistory.push('/aaa');
       dispatch(requestSearchMovie(keyword));
     }
   }
 
   render () {
     let { props } = this.props;
-    console.log(props);
     return (
       <div className="searchbox">
         <input type="text" placeholder="电影名称搜索" className="searchbox-input"
