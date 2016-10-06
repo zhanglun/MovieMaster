@@ -1,8 +1,13 @@
 import './index.less';
+import * as IPCTYPE from '../../constant/ipcType'
+import electron from 'electron';
 import React, { Component } from 'react';
-import {browserHistory} from 'react-router';
 import { connect } from 'react-redux';
 import { requestSearchMovie } from '../../actions';
+
+const remote = electron.remote;
+const ipcRenderer = electron.ipcRenderer;
+
 
 class SearchBox extends Component {
   constructor (props) {
@@ -17,8 +22,10 @@ class SearchBox extends Component {
     if (event.keyCode == 13) {
       let keyword = event.target.value;
       console.log('keyword: ', keyword);
-      browserHistory.push('/aaa');
       dispatch(requestSearchMovie(keyword));
+
+      window.open('https://www.baidu.com');
+      ipcRenderer.send('opensubwindow', { type: 'search' });
     }
   }
 
@@ -33,7 +40,7 @@ class SearchBox extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps (state) {
   return {
     movies: state.movies
   }

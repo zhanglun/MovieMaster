@@ -6,4 +6,9 @@ React + Redux
 
 electron 底层代码处理数据,然后 ipc 通知给前端
 
+[https://github.com/chentsulin/electron-react-boilerplate](https://github.com/chentsulin/electron-react-boilerplate)
+
+
 #### License [CC0 (Public Domain)](LICENSE.md)
+
+

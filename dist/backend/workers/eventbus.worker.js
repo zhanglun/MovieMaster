@@ -66,6 +66,15 @@ function initEventBus(mainwindow) {
       event.sender.send('INIT_DATA', { data: data });
     });
   });
+
+  _electron.ipcMain.on('opensubwindow', function (event, data) {
+    var _require = require('electron');
+
+    var BrowserWindow = _require.BrowserWindow;
+
+    var win = new BrowserWindow({ width: 800, height: 600, frame: false });
+    win.show();
+  });
 }
 
 exports.initEventBus = initEventBus;
