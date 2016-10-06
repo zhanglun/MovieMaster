@@ -23,7 +23,7 @@ global.eventBus = new EventEmitter();
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 
-function createWindow() {
+function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 1000,
@@ -52,6 +52,7 @@ function createWindow() {
     //   data: 123123123
     // })
   });
+  global.TopWindow = mainWindow;
   return mainWindow;
 }
 
@@ -63,7 +64,7 @@ app.on('ready', ()=> {
   initEventBus(mainWindow);
 });
 
-app.on('browser-window-created', function() {
+app.on('browser-window-created', function () {
 });
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {

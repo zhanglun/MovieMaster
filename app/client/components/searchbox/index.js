@@ -23,9 +23,23 @@ class SearchBox extends Component {
       let keyword = event.target.value;
       console.log('keyword: ', keyword);
       dispatch(requestSearchMovie(keyword));
-
-      window.open('https://www.baidu.com');
-      ipcRenderer.send('opensubwindow', { type: 'search' });
+      // ipcRenderer.send('opensubwindow', { type: 'search' });
+      global.searchWindow ? global.searchWindow.close() : null;
+      const { BrowserWindow } = require('electron').remote;
+      let searchWindow = new BrowserWindow({
+        width: 800,
+        height: 600,
+        // frame: false,
+        parent: global.TopWindow,
+        modal: true,
+        show: false
+      });
+      searchWindow.loadURL('https://github.com');
+      searchWindow.show();
+      searchWindow.on('closed', (e)=> {
+        global.searchWindow = null;
+      });
+      global.searchWindow = searchWindow;
     }
   }
 

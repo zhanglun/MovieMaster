@@ -66,6 +66,7 @@ function createWindow() {
     //   data: 123123123
     // })
   });
+  global.TopWindow = mainWindow;
   return mainWindow;
 }
 

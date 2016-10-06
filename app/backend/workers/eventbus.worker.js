@@ -54,8 +54,8 @@ function initEventBus(mainwindow) {
   ipcMain.on('opensubwindow', (event, data) => {
     const { BrowserWindow } = require('electron');
     let win = new BrowserWindow({ width: 800, height: 600, frame: false });
-    win.show()
-  })
+    win.show();
+  });
 
 }
 
