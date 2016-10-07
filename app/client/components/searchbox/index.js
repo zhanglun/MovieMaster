@@ -1,5 +1,5 @@
 import './index.less';
-import * as IPCTYPE from '../../constant/ipcType'
+// import * as IPCTYPE from '../../constant/ipcType';
 import electron from 'electron';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
