@@ -33,11 +33,10 @@ class App extends Component {
   render () {
     return (
       <div className="app">
-        {/*<SidebarContainer />*/}
+        <SidebarContainer />
         <div className="main">
           <MainTopComponent />
           <div className="main-body">
-            <MovieContainer />
             {this.props.children}
           </div>
         </div>

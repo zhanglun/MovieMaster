@@ -7,10 +7,13 @@ class MainTop extends Component {
   constructor(props) {
     super(props);
   }
-
+  historyGoBack() {
+    window.history.back();
+  }
   render() {
     return (
       <div className="main-topbar">
+        <span onClick={this.historyGoBack.bind(this)}>返回</span>
         <SearchBoxComponent />
       </div>
     )

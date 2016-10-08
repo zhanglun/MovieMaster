@@ -32,7 +32,6 @@ class MovieItem extends Component {
 
   render () {
     const { movie } = this.props;
-    console.log(movie);
     return (
       <div className="movie-item--list">
         {/*<div className="movie-card__poster">*/}

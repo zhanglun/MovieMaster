@@ -2,7 +2,7 @@ import './public/less/base.less';
 import  'sweetalertcss';
 // import swal from 'sweetalert';
 import React from 'react';
-import { Router, Route, Link, hashHistory } from 'react-router';
+import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 
@@ -24,18 +24,15 @@ monitorIpc(store);
 let rootElement = document.getElementById('app');
 render(
   <Provider store={store}>
-    {/*<App />*/}
     <Router history={hashHistory}>
       <Route path="/" component={App}>
+        <IndexRoute component={MovieContainer}/>
         <Route path="movie" component={MovieContainer}/>
         <Route path="episode" component={MovieContainer}/>
-        <Route path="search" component={SearchResultContainer}/>
         <Route path="detail/:id" component={MovieDetail}/>
+        <Route path="search" component={SearchResultContainer}/>
       </Route>
     </Router>
   </Provider>,
   rootElement);
-
-
-
 

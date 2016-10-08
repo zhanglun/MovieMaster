@@ -1,5 +1,5 @@
 import './index.less';
-
+//noinspection JSUnresolvedVariable
 import React, { Component } from 'react';
 import MovieItem from '../movieItem';
 
