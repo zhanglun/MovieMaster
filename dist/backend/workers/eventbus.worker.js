@@ -19,10 +19,6 @@ var _ipcType = require('../constant/ipcType');
 
 var IPCTYPE = _interopRequireWildcard(_ipcType);
 
-var _search = require('../windows/search');
-
-var searchWindow = _interopRequireWildcard(_search);
-
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -72,13 +68,13 @@ function initEventBus(mainwindow) {
   });
 
   _electron.ipcMain.on('opensubwindow', function (event, data) {
-    switch (data.type) {
-      case 'search':
-        searchWindow.init(data);
-        break;
-      default:
-        break;
-    }
+    // switch(data.type) {
+    //   case 'search':
+    //     searchWindow.init(data);
+    //     break;
+    //   default:
+    //     break;
+    // }
   });
 }
 

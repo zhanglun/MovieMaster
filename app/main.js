@@ -18,7 +18,6 @@ if (!fs.existsSync(dataDir)) {
 
 app.datapath = dataDir;
 global.eventBus = new EventEmitter();
-global.appDir = __dirname;
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
