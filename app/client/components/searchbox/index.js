@@ -1,13 +1,11 @@
 import './index.less';
-// import * as IPCTYPE from '../../constant/ipcType';
 import electron from 'electron';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { hashHistory } from 'react-router'
 import { requestSearchMovie } from '../../actions';
 
-const remote = electron.remote;
 const ipcRenderer = electron.ipcRenderer;
-
 
 class SearchBox extends Component {
   constructor (props) {
@@ -21,26 +19,13 @@ class SearchBox extends Component {
     let { dispatch } = this.props;
     if (event.keyCode == 13) {
       let keyword = event.target.value;
-      console.log('keyword: ', keyword);
       dispatch(requestSearchMovie(keyword));
-      // ipcRenderer.send('opensubwindow', { type: 'search' });
-      global.searchWindow ? global.searchWindow.close() : null;
-      const { BrowserWindow } = require('electron').remote;
-      let searchWindow = new BrowserWindow({
-        width: 800,
-        height: 600,
-        // frame: false,
-        parent: global.TopWindow,
-        modal: true,
-        show: false
-      });
-      searchWindow.loadURL('https://github.com');
-      searchWindow.show();
-      searchWindow.on('closed', (e)=> {
-        global.searchWindow = null;
-      });
-      global.searchWindow = searchWindow;
+      hashHistory.push('/search?q=' + keyword);
+      // ipcRenderer.send('opensubwindow', { type: 'search', data: {keywords: keyword} });
+    }else if(event.target.value == ''){
+      hashHistory.push('/movie');
     }
+
   }
 
   render () {

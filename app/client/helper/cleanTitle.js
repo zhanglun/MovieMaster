@@ -5,6 +5,13 @@ let stripIllegalCharacters = function (movieTitle, replacementString) {
   return movieTitle.replace(/,|\[|\]|【|】|\.|_|\/|\+|\-|(\d+x\d+)|\bend|@/gi, replacementString);
 };
 
+
+/**
+ * 年份
+ * @param title
+ * @param replacestring
+ * @returns {*}
+ */
 let removeYearFromTitile = (title, replacestring) => {
   return title.replace(YEAR_REGEX, '').replace(/\(|\)/g, '');
 };
@@ -16,7 +23,7 @@ let removeYearFromTitile = (title, replacestring) => {
  */
 let removeReleaseGroupNamesFromTitle = function (movieTitle) {
   return movieTitle.replace(
-    /FxM|aAF|arc|AAC|MLR|AFO|TBFA|WB|JYK|ARAXIAL|UNiVERSAL|ETRG|ToZoon|PFa|SiRiUS|Rets|BestDivX|DIMENSION|CTU|ORENJI|LOL|juggs|NeDiVx|ESPiSE|MiLLENiUM|iMMORTALS|QiM|QuidaM|COCAiN|DOMiNO|JBW|LRC|WPi|NTi|SiNK|HLS|HNR|iKA|LPD|DMT|DvF|IMBT|LMG|DiAMOND|DoNE|D0PE|NEPTUNE|TC|SAPHiRE|PUKKA|FiCO|PAL|aXXo|VoMiT|ViTE|ALLiANCE|mVs|XanaX|FLAiTE|PREVAiL|CAMERA|VH-PROD|BrG|replica|FZERO|YIFY|MarGe|T4P3|MIRCrew|BOKUTOX|NAHOM|BLUWORLD|C0P|TRL|人人影视制作|cmct|CnSCG|wofei|dts|chd|THORA|SPARKS/gi,
+    /FxM|aAF|arc|AAC|MLR|AFO|TBFA|WB|JYK|ARAXIAL|UNiVERSAL|ETRG|ToZoon|PFa|SiRiUS|Rets|BestDivX|DIMENSION|CTU|ORENJI|LOL|juggs|NeDiVx|ESPiSE|MiLLENiUM|iMMORTALS|QiM|QuidaM|COCAiN|DOMiNO|JBW|LRC|WPi|NTi|SiNK|HLS|HNR|iKA|LPD|DMT|DvF|IMBT|LMG|DiAMOND|DoNE|D0PE|NEPTUNE|TC|SAPHiRE|PUKKA|FiCO|PAL|aXXo|VoMiT|ViTE|ALLiANCE|mVs|XanaX|FLAiTE|PREVAiL|CAMERA|VH-PROD|BrG|replica|FZERO|YIFY|MarGe|T4P3|MIRCrew|BOKUTOX|NAHOM|BLUWORLD|C0P|TRL|人人影视制作|cmct|CnSCG|wofei|dts|chd|THORA|SPARKS|hdchina/gi,
     "");
 };
 
@@ -38,7 +45,7 @@ let removeAudioTypesFromTitle = function (movieTitle) {
  */
 let removeMovieTypeFromTitle = function (movieTitle) {
   return movieTitle.replace(
-    /dvdrip|multi9|xxx|x264|x265|web|hr|hdtv|rip|vhs|HC|embeded|embedded|ac3|dd5 1|m sub|x264|dvd5|dvd9|multi sub|non|h264|x264| sub|subs|ntsc|ingebakken|torrent|torrentz|bluray|brrip|sample|xvid|cam|camrip|wp|workprint|telecine|ppv|ppvrip|scr|screener|dvdscr|bdscr|ddc|R5|telesync|pdvd|1080p|BDRIP|hq|sd|720p|hdrip|hd-/gi,
+    /dvdrip|multi9|xxx|x264|x265|web|dl|hr|hdtv|rip|vhs|HC|embeded|embedded|ac3|dd5 1|m sub|x264|dvd5|dvd9|multi sub|non|h264|x264| sub|subs|ntsc|ingebakken|torrent|torrentz|bluray|brrip|sample|xvid|cam|camrip|wp|workprint|telecine|ppv|ppvrip|scr|screener|limited|dvdscr|bdscr|ddc|R5|telesync|pdvd|1080p|BDRIP|hq|sd|720p|hdrip|hd-|\d+版/gi,
     "");
 };
 
@@ -59,7 +66,7 @@ let removeCountryNamesFromTitle = function (movieTitle) {
  * @returns {XML|*|void|string}
  */
 let removeSiteURL = function (title) {
-  return title.replace(/bbsd\.wofei\.net|www\.dream\.cn/ig, '');
+  return title.replace(/bbs(\.wofei\.net|\.cnscg\.com)|www\.dream\.cn|rarbg/ig, '');
 };
 
 /**
@@ -93,3 +100,5 @@ export const cleanTitle = (title) => {
   return { title: cleanTitle.trim(), year: year, suffix: suffix };
 
 };
+
+

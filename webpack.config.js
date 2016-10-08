@@ -16,6 +16,7 @@ var RENDERER_PATH = path.resolve(BUILD_PATH, 'client');
 module.exports = {
   entry: {
     'app': SRC_PATH + '/index.js',
+    'search': SRC_PATH + '/search.js',
   },
   output: {
     path: RENDERER_PATH,
@@ -81,8 +82,14 @@ module.exports = {
     }),
     // new ExtractTextPlugin('style.bundle.css'),
     new HtmlWebpackPlugin({
+      inject: false,
       template: SRC_PATH + '/index.html',
       filename: RENDERER_PATH + '/index.html',
+    }),
+    new HtmlWebpackPlugin({
+      inject: false,
+      template: SRC_PATH + '/search.html',
+      filename: RENDERER_PATH + '/search.html',
     }),
     // new CopyWebpackPlugin([{
     //   from: SRC_PATH + '/vendor',

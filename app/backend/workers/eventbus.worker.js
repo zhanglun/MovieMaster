@@ -1,7 +1,8 @@
 import path from 'path';
 import fs from 'fs';
 import {app,  ipcMain } from 'electron';
-import * as IPCTYPE from '../constant/ipcType'
+import * as IPCTYPE from '../constant/ipcType';
+import * as searchWindow from '../windows/search';
 
 const getMovieInfoFromLocal = () => {
   let rootPath = path.resolve(app.datapath);
@@ -52,9 +53,13 @@ function initEventBus(mainwindow) {
   });
 
   ipcMain.on('opensubwindow', (event, data) => {
-    const { BrowserWindow } = require('electron');
-    let win = new BrowserWindow({ width: 800, height: 600, frame: false });
-    win.show();
+    switch(data.type) {
+      case 'search':
+        searchWindow.init(data);
+        break;
+      default:
+        break;
+    }
   });
 
 }

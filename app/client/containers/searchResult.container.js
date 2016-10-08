@@ -17,8 +17,9 @@ class SearchResultContainer extends Component {
 
 function mapStateToProps(state) {
   return {
-    movies: state.movies,
+    movies: state.movies.searchResult,
+    isFetching: state.movies.isFetching
   }
 }
 
-export default connect(mapStateToProps(SearchResultContainer))
+export default connect(mapStateToProps)(SearchResultContainer);

@@ -17,7 +17,8 @@ class MovieContainer extends Component {
 
 function mapStateToProps(state) {
   return {
-    movies: state.movies
+    movies: state.movies.items,
+    isFetching: state.movies.isFetching
   }
 }
 

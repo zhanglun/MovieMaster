@@ -47,12 +47,9 @@ class MovieList extends Component {
           {/*})}*/}
           {/*</tbody>*/}
         {/*</table>*/}
-        {movies.items.map((movie) => {
-        return <MovieItem key={movie.path} movie={movie}></MovieItem>
+        {movies.map((movie) => {
+        return <MovieItem key={movie.title} movie={movie}></MovieItem>
         })}
-        {/*{movies.searchResult.map((movie) => {*/}
-        {/*return <MovieItem key={movie.id} movie={movie}></MovieItem>*/}
-        {/*})}*/}
       </div>
     )
   }
