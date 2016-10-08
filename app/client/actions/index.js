@@ -42,12 +42,13 @@ export function requestSearchMovie (keyword) {
 
 export function requestSearchMovieInDouban (keyword) {
   return (dispatch, getState) => {
-    window.fetch('http://api.douban.com/v2/movie/search?q' + keyword)
+    window.fetch('http://api.douban.com/v2/movie/search?q=' + keyword)
       .then((response) => {
         return response.json();
       })
       .then((data) => {
-        dispatch(receiveSearchMovie(data));
+        console.log(data);
+        dispatch(receiveSearchMovie(data.subjects));
       })
   }
 }

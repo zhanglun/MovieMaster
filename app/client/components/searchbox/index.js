@@ -2,7 +2,7 @@ import './index.less';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { hashHistory } from 'react-router'
-import { requestSearchMovie } from '../../actions';
+import { requestSearchMovie, requestSearchMovieInDouban } from '../../actions';
 
 class SearchBox extends Component {
   constructor (props) {
@@ -21,7 +21,7 @@ class SearchBox extends Component {
     let { dispatch } = this.props;
     if (event.keyCode == 13) {
       let keyword = encodeURIComponent(event.target.value);
-      dispatch(requestSearchMovie(keyword));
+      dispatch(requestSearchMovieInDouban(keyword));
       hashHistory.push('/search?q=' + keyword);
     }else if(event.target.value == ''){
       hashHistory.push('/movie');
