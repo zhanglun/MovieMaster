@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import SidebarContainer from '../containers/sidebar.container';
 import MainTopComponent from '../components/maintop';
 import { connect } from 'react-redux';
 

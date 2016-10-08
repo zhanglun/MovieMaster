@@ -1,19 +1,26 @@
 import './index.less';
 import React, { Component } from 'react';
-
+import { hashHistory } from 'react-router';
 import SearchBoxComponent from '../searchbox';
 
 class MainTop extends Component {
   constructor(props) {
     super(props);
   }
-  historyGoBack() {
-    window.history.back();
+  historyBack() {
+    hashHistory.goBack();
+  }
+  historyForward() {
+    hashHistory.goForward();
   }
   render() {
+    console.log(hashHistory);
     return (
       <div className="main-topbar">
-        <span onClick={this.historyGoBack.bind(this)}>返回</span>
+        <div className="history-toolbar">
+          <div className="history-toolbar__item" onClick={this.historyBack.bind(this)}><span className="material-icons">chevron_left</span></div>
+          <div className="history-toolbar__item" onClick={this.historyForward.bind(this)}><span className="material-icons">chevron_right</span></div>
+        </div>
         <SearchBoxComponent />
       </div>
     )
