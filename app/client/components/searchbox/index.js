@@ -20,7 +20,7 @@ class SearchBox extends Component {
   search (event) {
     let { dispatch } = this.props;
     if (event.keyCode == 13) {
-      let keyword = event.target.value;
+      let keyword = encodeURIComponent(event.target.value);
       dispatch(requestSearchMovie(keyword));
       hashHistory.push('/search?q=' + keyword);
     }else if(event.target.value == ''){

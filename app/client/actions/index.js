@@ -28,9 +28,21 @@ export function receiveMoviesInfo (movies) {
   }
 }
 
-export function requestSearchMovie(keyword) {
+export function requestSearchMovie (keyword) {
   return (dispatch, getState) => {
     window.fetch('http://localhost:4444/api/v1.0/search/movies?q=title:' + keyword)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        dispatch(receiveSearchMovie(data));
+      })
+  }
+}
+
+export function requestSearchMovieInDouban (keyword) {
+  return (dispatch, getState) => {
+    window.fetch('http://api.douban.com/v2/movie/search?q' + keyword)
       .then((response) => {
         return response.json();
       })
