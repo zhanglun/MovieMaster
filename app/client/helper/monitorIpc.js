@@ -1,6 +1,6 @@
 import * as IPCTYPE from '../constant/ipcType';
-import { cleanTitle } from './cleanTitle';
-import { formatDuration, formatFileSize, formatFileList } from './metadataHandler';
+import { cleanTitle } from '../../common/cleanTitle';
+import { formatDuration, formatFileSize, formatFileList } from '../../common/metadataHandler';
 import { fetchMoviesInfo, receiveMoviesInfo } from '../actions';
 const electron = require('electron');
 const remote = electron.remote;
@@ -24,7 +24,7 @@ let monitorFiles = (store) => {
 
   // init
 
-  ipcRenderer.send(IPCTYPE.INIT_APP, {data: 'test'});
+  // ipcRenderer.send(IPCTYPE.INIT_APP, {data: 'test'});
 
   ipcRenderer.on('INIT_DATA', (e, data)=> {
     let files = formatFileList(data.data);

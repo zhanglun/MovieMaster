@@ -4,6 +4,7 @@ export default function movie(state = {
   isFetching: false,
   items: [],
   searchResult: [],
+  detail: {},
 }, action) {
   switch (action.type) {
     case type.FETCH_MOVIES_REQUEST:
