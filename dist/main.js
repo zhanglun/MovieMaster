@@ -22,16 +22,10 @@ var _ipcType = require('./backend/constant/ipcType');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var dataDir = __dirname + '/movieinfo';
 var Menu = _electron2.default.Menu;
 var app = _electron2.default.app;
 var BrowserWindow = _electron2.default.BrowserWindow;
 
-if (!_fs2.default.existsSync(dataDir)) {
-  _fs2.default.mkdirSync(dataDir);
-}
-
-app.datapath = dataDir;
 global.eventBus = new _events.EventEmitter();
 
 // Keep a global reference of the window object, if you don't, the window will

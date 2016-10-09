@@ -3,7 +3,7 @@ import path from 'path';
 import ffmpeg from 'fluent-ffmpeg';
 import { dialog } from 'electron';
 
-import db from './db';
+import db from '../../common/db';
 import { formatFileList } from '../../common/metadataHandler';
 const mediaFilterExt = ['rmvb', 'mp4', 'mkv', 'avi', 'mp3'];
 

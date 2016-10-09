@@ -19,7 +19,7 @@ var _fluentFfmpeg2 = _interopRequireDefault(_fluentFfmpeg);
 
 var _electron = require('electron');
 
-var _db = require('./db');
+var _db = require('../../common/db');
 
 var _db2 = _interopRequireDefault(_db);
 

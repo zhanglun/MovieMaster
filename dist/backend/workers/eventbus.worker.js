@@ -23,7 +23,7 @@ var _ipcType = require('../constant/ipcType');
 
 var IPCTYPE = _interopRequireWildcard(_ipcType);
 
-var _db = require('./db');
+var _db = require('../../common/db');
 
 var _db2 = _interopRequireDefault(_db);
 

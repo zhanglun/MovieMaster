@@ -3,7 +3,7 @@ import path from 'path';
 import Datastore  from 'nedb';
 import { app, ipcMain } from 'electron';
 import * as IPCTYPE from '../constant/ipcType';
-import db from './db';
+import db from '../../common/db';
 
 function initEventBus (mainwindow) {
   let mainWindow = mainwindow;

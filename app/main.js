@@ -7,16 +7,10 @@ import './backend/workers/analyseFiles.worker';
 import { initEventBus } from './backend/workers/eventbus.worker';
 import { INIT_APP } from './backend/constant/ipcType'
 
-const dataDir = __dirname + '/movieinfo';
 const Menu = electron.Menu;
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 
-if (!fs.existsSync(dataDir)) {
-  fs.mkdirSync(dataDir);
-}
-
-app.datapath = dataDir;
 global.eventBus = new EventEmitter();
 
 // Keep a global reference of the window object, if you don't, the window will
