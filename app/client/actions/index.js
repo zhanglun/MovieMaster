@@ -1,4 +1,9 @@
+import Datastore from 'nedb';
+import config from '../../config';
 import * as type from '../constant/actionType';
+
+const db = new Datastore({ filename: config.dataPath, autoload: true });
+
 
 export function fetchMoviesInfo (files) {
   return (dispatch, getState) => {
@@ -48,6 +53,9 @@ export function requestSearchMovieInDouban (keyword) {
       })
       .then((data) => {
         console.log(data);
+        db.find({}, function(err, result){
+          console.log(result);
+        });
         dispatch(receiveSearchMovie(data.subjects));
       })
   }

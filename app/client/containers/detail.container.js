@@ -11,7 +11,6 @@ class MovieDetail extends Component {
   componentDidMount () {
     let { dispatch, params, location} = this.props;
     let keyword = params.id;
-    console.log(this.props);
     dispatch(requestSearchMovieInDouban(keyword));
   }
 

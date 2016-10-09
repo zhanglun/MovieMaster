@@ -5,8 +5,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.analyse = analyse;
 
-var _electron = require('electron');
-
 var _fs = require('fs');
 
 var _fs2 = _interopRequireDefault(_fs);
@@ -19,15 +17,16 @@ var _fluentFfmpeg = require('fluent-ffmpeg');
 
 var _fluentFfmpeg2 = _interopRequireDefault(_fluentFfmpeg);
 
-var _nedb = require('nedb');
+var _electron = require('electron');
 
-var _nedb2 = _interopRequireDefault(_nedb);
+var _db = require('./db');
+
+var _db2 = _interopRequireDefault(_db);
 
 var _metadataHandler = require('../../common/metadataHandler');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var db = new _nedb2.default({ filename: '.../../data.json', autoload: true });
 var mediaFilterExt = ['rmvb', 'mp4', 'mkv', 'avi', 'mp3'];
 
 var readdir = promisify(_fs2.default.readdir);
@@ -101,8 +100,7 @@ function analyse() {
       var metadataPromiseList = data.map(function (path) {
         if (path) {
           return new Promise(function (reslove, reject) {
-            console.log(path);
-            db.find({
+            _db2.default.find({
               path: path
             }, function (err, result) {
               // result 是一个数组
@@ -124,21 +122,14 @@ function analyse() {
                       formatedMeta.path = formatedMeta.filename;
                       formatedMeta.filename = formatedMeta.path.replace(/\\/ig, '/').split("/").pop();
                       formatedMeta = (0, _metadataHandler.formatFileList)([formatedMeta]);
-                      db.insert(formatedMeta, function (err, result) {
+                      _db2.default.insert(formatedMeta, function (err, result) {
                         reslove(result[0]);
-                        eventBus.emit('loadLocalFiles', { metadata: [formatedMeta] });
+                        eventBus.emit('loadLocalFiles', { metadata: formatedMeta });
                       });
                     })();
                   } else {
                     reject(err);
                   }
-                  // if (!err) {
-                  // FileDB.put(path.replace(/\\/ig, '/').split("/").pop(), metadata.format).then(function () {             eventBus.emit('loadLocalFiles', { metadata: [metadata.format] });
-                  //         });
-                  //         reslove(metadata.format);
-                  //       } else {
-                  //         reject(err);
-                  //       }
                 });
               }
             });

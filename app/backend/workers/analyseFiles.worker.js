@@ -1,12 +1,10 @@
-import { dialog } from 'electron';
 import fs from 'fs';
 import path from 'path';
 import ffmpeg from 'fluent-ffmpeg';
-import Datastore  from 'nedb';
-import { formatFileList } from '../../common/metadataHandler';
-import { app } from 'electron';
+import { dialog } from 'electron';
 
-const db = new Datastore({filename: '.../../data.json', autoload: true});
+import db from './db';
+import { formatFileList } from '../../common/metadataHandler';
 const mediaFilterExt = ['rmvb', 'mp4', 'mkv', 'avi', 'mp3'];
 
 let readdir = promisify(fs.readdir);
@@ -15,7 +13,7 @@ let stat = promisify(fs.stat);
 /**
  * 简单实现一个promisify
  */
-function promisify(fn) {
+function promisify (fn) {
   return function () {
     var args = arguments;
     return new Promise(function (resolve, reject) {
@@ -70,7 +68,7 @@ const openDirDialog = (options, callback) => {
   });
 };
 
-export function analyse() {
+export function analyse () {
   openDirDialog({ title: '打开文件夹' }, (dir) => {
     readDirRecur({
       root: dir,
@@ -80,9 +78,8 @@ export function analyse() {
         data = [].concat.apply([], data);
       }
       let metadataPromiseList = data.map((path) => {
-        if(path) {
+        if (path) {
           return new Promise(function (reslove, reject) {
-            console.log(path);
             db.find({
               path: path
             }, function (err, result) {
@@ -106,18 +103,11 @@ export function analyse() {
                     formatedMeta = formatFileList([formatedMeta]);
                     db.insert(formatedMeta, function (err, result) {
                       reslove(result[0]);
-                      eventBus.emit('loadLocalFiles', { metadata: [formatedMeta] });
+                      eventBus.emit('loadLocalFiles', { metadata: formatedMeta });
                     });
                   } else {
                     reject(err)
                   }
-                  // if (!err) {
-                  // FileDB.put(path.replace(/\\/ig, '/').split("/").pop(), metadata.format).then(function () {             eventBus.emit('loadLocalFiles', { metadata: [metadata.format] });
-                  //         });
-                  //         reslove(metadata.format);
-                  //       } else {
-                  //         reject(err);
-                  //       }
                 });
               }
             });

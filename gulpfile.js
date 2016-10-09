@@ -33,7 +33,7 @@ gulp.task('webpack:build-dev', function () {
 
 // main process 的编译
 gulp.task('babel:electron-main', function () {
-  return gulp.src([APP_PATH + '/main.js', BACKEND_PATH + '/**/*.{json,js}', APP_PATH + '/common/**/*.js'], { base: APP_PATH })
+  return gulp.src([APP_PATH + '/main.js', APP_PATH + '/config.js', BACKEND_PATH + '/**/*.{json,js}', APP_PATH + '/common/**/*.js'], { base: APP_PATH })
     .pipe(babel())
     .pipe(gulp.dest('dist'));
 });
