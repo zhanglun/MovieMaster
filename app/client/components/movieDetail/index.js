@@ -7,11 +7,11 @@ class MovieDetail extends Component {
     super(props)
   }
 
-  componentDidMount () {
-    let { dispatch } = this.props;
+  componentWillMount () {
+    let { location } = this.props;
     let keyword = this.props.params.id;
-    console.log(keyword);
-    dispatch(requestSearchMovieInDouban(keyword));
+    console.log(this.props);
+    // dispatch(requestSearchMovieInDouban(keyword));
   }
 
   render () {

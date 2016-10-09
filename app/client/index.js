@@ -8,8 +8,8 @@ import { Provider } from 'react-redux';
 
 import App from './containers/app.container';
 import MovieContainer from './containers/movie.container';
-import MovieDetail from './components/movieDetail';
-import SearchResultContainer from './containers/searchResult.container';
+import Detail from './containers/detail.container';
+// import SearchResultContainer from './containers/searchResult.container';
 
 import { monitorIpc } from './helper/monitoripc';
 
@@ -28,9 +28,9 @@ render(
       <Route path="/" component={App}>
         <IndexRoute component={MovieContainer}/>
         <Route path="movie" component={MovieContainer}/>
-        <Route path="episode" component={MovieContainer}/>
-        <Route path="detail/:id" component={MovieDetail}/>
-        <Route path="search" component={SearchResultContainer}/>
+        {/*<Route path="episode" component={MovieContainer}/>*/}
+        <Route path="detail/:id" component={Detail}/>
+        {/*<Route path="search" component={SearchResultContainer}/>*/}
       </Route>
     </Router>
   </Provider>,

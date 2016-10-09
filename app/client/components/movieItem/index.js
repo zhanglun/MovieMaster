@@ -39,10 +39,9 @@ class MovieItem extends Component {
         {/*</div>*/}
         <div className="movie-card__info">
           <div className="movie-card__title">
-            <Link to={'/detail/' + movie.title} className="movie-card__title-link">
+            <Link to={{pathname: '/detail/' + movie.title+ movie.year, query: movie}} className="movie-card__title-link" >
               {movie.title}
             </Link>
-            {/*<a className="movie-card__title-link" href={movie.alt}>{movie.title}</a>*/}
           </div>
           {/*          <div className="movie-card__info-item">
            <span className="movie-card__info-head">
