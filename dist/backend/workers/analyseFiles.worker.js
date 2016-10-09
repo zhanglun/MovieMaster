@@ -19,12 +19,15 @@ var _fluentFfmpeg = require('fluent-ffmpeg');
 
 var _fluentFfmpeg2 = _interopRequireDefault(_fluentFfmpeg);
 
-var _data = require('./data');
+var _nedb = require('nedb');
 
-var _data2 = _interopRequireDefault(_data);
+var _nedb2 = _interopRequireDefault(_nedb);
+
+var _metadataHandler = require('../../common/metadataHandler');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var db = new _nedb2.default({ filename: '.../../data.json', autoload: true });
 var mediaFilterExt = ['rmvb', 'mp4', 'mkv', 'avi', 'mp3'];
 
 var readdir = promisify(_fs2.default.readdir);
@@ -96,26 +99,51 @@ function analyse() {
         data = [].concat.apply([], data);
       }
       var metadataPromiseList = data.map(function (path) {
-        return new Promise(function (reslove, reject) {
-          var filename = path.replace(/\\/ig, '/').split("/").pop();
-          _data2.default.get(filename).then(function (infodata) {
-            if (infodata) {
-              eventBus.emit('loadLocalFiles', { metadata: [infodata] });
-              reslove(infodata);
-            } else {
-              _fluentFfmpeg2.default.ffprobe(path, function (err, metadata) {
-                if (!err) {
-                  _data2.default.put(path.replace(/\\/ig, '/').split("/").pop(), metadata.format).then(function () {
-                    eventBus.emit('loadLocalFiles', { metadata: [metadata.format] });
-                  });
-                  reslove(metadata.format);
-                } else {
-                  reject(err);
-                }
-              });
-            }
+        if (path) {
+          return new Promise(function (reslove, reject) {
+            console.log(path);
+            db.find({
+              path: path
+            }, function (err, result) {
+              // result 是一个数组
+              if (result.length) {
+                eventBus.emit('loadLocalFiles', { metadata: result });
+                reslove(result);
+              } else {
+                _fluentFfmpeg2.default.ffprobe(path, function (err, metadata) {
+                  if (!err) {
+                    (function () {
+                      var formatedMeta = metadata.format;
+
+                      delete formatedMeta.nb_streams;
+                      delete formatedMeta.nb_programs;
+                      delete formatedMeta.probe_score;
+                      delete formatedMeta.format_name;
+                      delete formatedMeta.format_long_name;
+
+                      formatedMeta.path = formatedMeta.filename;
+                      formatedMeta.filename = formatedMeta.path.replace(/\\/ig, '/').split("/").pop();
+                      formatedMeta = (0, _metadataHandler.formatFileList)([formatedMeta]);
+                      db.insert(formatedMeta, function (err, result) {
+                        reslove(result[0]);
+                        eventBus.emit('loadLocalFiles', { metadata: [formatedMeta] });
+                      });
+                    })();
+                  } else {
+                    reject(err);
+                  }
+                  // if (!err) {
+                  // FileDB.put(path.replace(/\\/ig, '/').split("/").pop(), metadata.format).then(function () {             eventBus.emit('loadLocalFiles', { metadata: [metadata.format] });
+                  //         });
+                  //         reslove(metadata.format);
+                  //       } else {
+                  //         reject(err);
+                  //       }
+                });
+              }
+            });
           });
-        });
+        }
       });
       return Promise.race(metadataPromiseList);
     }).then(function (metadata) {

@@ -34,7 +34,6 @@ var template = [{
     accelerator: process.platform === 'darwin' ? 'Alt+Shift+O' : 'Ctrl+Shift+O',
     click: function click(menuItem, browserWindow) {
       analyseFilesWorker.analyse();
-      // browserWindow.webContents.send(CONST_IPC.OPEN_DIRECTORY, 'a', 2, 'zhanglun');
     }
   }, {
     type: 'separator'
