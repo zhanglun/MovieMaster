@@ -3,8 +3,8 @@ import electron from 'electron';
 import { client as devClient } from 'electron-connect';
 import { menu as customMenu } from './backend/menu';
 import { EventEmitter }from 'events';
-import './backend/workers/analyseFiles.worker';
-import { initEventBus } from './backend/workers/eventbus.worker';
+import './backend/analyseFiles.worker';
+import { initEventBus } from './backend/eventbus.worker';
 import { INIT_APP } from './backend/constant/ipcType'
 
 const Menu = electron.Menu;

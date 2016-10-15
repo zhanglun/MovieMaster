@@ -1,5 +1,5 @@
 import *  as CONST_IPC from './constant/ipc';
-import * as analyseFilesWorker from './workers/analyseFiles.worker';
+import * as analyseFilesWorker from './analyseFiles.worker';
 import electron from 'electron';
 const Menu = electron.Menu;
 const remote = electron.remote;

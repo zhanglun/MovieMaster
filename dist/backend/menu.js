@@ -9,7 +9,7 @@ var _ipc = require('./constant/ipc');
 
 var CONST_IPC = _interopRequireWildcard(_ipc);
 
-var _analyseFiles = require('./workers/analyseFiles.worker');
+var _analyseFiles = require('./analyseFiles.worker');
 
 var analyseFilesWorker = _interopRequireWildcard(_analyseFiles);
 

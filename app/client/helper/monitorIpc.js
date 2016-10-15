@@ -24,7 +24,7 @@ let monitorFiles = (store) => {
 
   // init
 
-  ipcRenderer.send(IPCTYPE.INIT_APP, {data: 'test'});
+  ipcRenderer.send(IPCTYPE.INIT_APP, { data: 'test' });
 
   ipcRenderer.on('INIT_DATA', (e, data)=> {
     let files = formatFileList(data.data);
@@ -42,4 +42,8 @@ let monitorFiles = (store) => {
 
 export const monitorIpc = (store)=> {
   monitorFiles(store);
+};
+
+export const createWindow = (data) => {
+  ipcRenderer.send('opensubwindow', data);
 };

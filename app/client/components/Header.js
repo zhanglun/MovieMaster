@@ -54,7 +54,7 @@ class MainTop extends Component {
           <AppBar title="appbar" onLeftIconButtonTouchTap={this.toggleLeftDrawer.bind(this)}>
             {this.renderHistoryToolbar()}
           </AppBar>
-          <Toolbar>
+          {/*<Toolbar>*/}
             {/*<ToolbarGroup firstChild={true}>*/}
               {/*<DropDownMenu value={this.state.value} onChange={this.handleChange}>*/}
                 {/*<MenuItem value={1} primaryText="All Broadcasts"/>*/}
@@ -66,18 +66,18 @@ class MainTop extends Component {
                 {/*<MenuItem value={7} primaryText="Active Text"/>*/}
               {/*</DropDownMenu>*/}
             {/*</ToolbarGroup>*/}
-            <ToolbarGroup>
-              <div className="history-toolbar">
-                <div className="history-toolbar__item" onClick={this.historyBack.bind(this)}>
-                  <FontIcon className="material-icons">chevron_left</FontIcon>
-                </div>
-                <div className="history-toolbar__item" onClick={this.historyForward.bind(this)}>
-                  <FontIcon className="material-icons">chevron_right</FontIcon>
-                </div>
-              </div>
-              <ToolbarSeparator />
-            </ToolbarGroup>
-          </Toolbar>
+            {/*<ToolbarGroup>*/}
+              {/*<div className="history-toolbar">*/}
+                {/*<div className="history-toolbar__item" onClick={this.historyBack.bind(this)}>*/}
+                  {/*<FontIcon className="material-icons">chevron_left</FontIcon>*/}
+                {/*</div>*/}
+                {/*<div className="history-toolbar__item" onClick={this.historyForward.bind(this)}>*/}
+                  {/*<FontIcon className="material-icons">chevron_right</FontIcon>*/}
+                {/*</div>*/}
+              {/*</div>*/}
+              {/*<ToolbarSeparator />*/}
+            {/*</ToolbarGroup>*/}
+          {/*</Toolbar>*/}
           <Drawer open={this.state.openLeftDrawer} docked={false}>
             <MenuItem>Menu Item</MenuItem>
             <MenuItem>Menu Item 2</MenuItem>

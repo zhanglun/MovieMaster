@@ -14,9 +14,9 @@ var _menu = require('./backend/menu');
 
 var _events = require('events');
 
-require('./backend/workers/analyseFiles.worker');
+require('./backend/analyseFiles.worker');
 
-var _eventbus = require('./backend/workers/eventbus.worker');
+var _eventbus = require('./backend/eventbus.worker');
 
 var _ipcType = require('./backend/constant/ipcType');
 
