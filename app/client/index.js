@@ -1,20 +1,19 @@
-import './public/less/base.less';
-import  'sweetalertcss';
-// import swal from 'sweetalert';
+import './public/less/style.less';
 import React from 'react';
-import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
+import { Router, Route, IndexRoute, hashHistory } from 'react-router';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 
-import App from './containers/app.container';
-import MovieContainer from './containers/movie.container';
-import Detail from './containers/detail.container';
-// import SearchResultContainer from './containers/searchResult.container';
+import App from './containers/App';
+import MovieContainer from './containers/Movies';
+import Detail from './containers/Detail';
 
 import { monitorIpc } from './helper/monitoripc';
 
 import configureStore from './store/configureStore'
 
+injectTapEventPlugin();
 
 const store = configureStore();
 
@@ -28,9 +27,7 @@ render(
       <Route path="/" component={App}>
         <IndexRoute component={MovieContainer}/>
         <Route path="movie" component={MovieContainer}/>
-        {/*<Route path="episode" component={MovieContainer}/>*/}
         <Route path="detail/:id" component={Detail}/>
-        {/*<Route path="search" component={SearchResultContainer}/>*/}
       </Route>
     </Router>
   </Provider>,

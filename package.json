@@ -24,6 +24,7 @@
     "babel-preset-react": "^6.11.1",
     "electron": "latest",
     "fluent-ffmpeg": "^2.1.0",
+    "material-ui": "^0.16.0",
     "nedb": "^1.8.0",
     "nodemon": "^1.9.2",
     "react": "^15.3.1",
@@ -31,6 +32,7 @@
     "react-logger": "^1.1.0",
     "react-redux": "^4.4.5",
     "react-router": "^2.8.1",
+    "react-tap-event-plugin": "^1.0.0",
     "react-thunk": "^1.0.0",
     "redux": "^3.6.0",
     "sweetalert": "^1.1.3"

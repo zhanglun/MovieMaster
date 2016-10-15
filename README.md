@@ -4,10 +4,13 @@
 
 React + Redux
 
-electron 底层代码处理数据,然后 ipc 通知给前端
+###TODO
 
-[https://github.com/chentsulin/electron-react-boilerplate](https://github.com/chentsulin/electron-react-boilerplate)
+#### v1.0.0
 
+- [] 加载目录文件,保存数据到本地
+- [] 顶部appbar
+- [] 影片信息列表呈现
 
 #### License [CC0 (Public Domain)](LICENSE.md)
 
