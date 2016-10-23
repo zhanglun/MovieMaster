@@ -1,4 +1,5 @@
 import fs from 'fs';
+import path from 'path';
 import electron from 'electron';
 import { client as devClient } from 'electron-connect';
 import { menu as customMenu } from './backend/menu';
@@ -13,7 +14,6 @@ const BrowserWindow = electron.BrowserWindow;
 
 global.eventBus = new EventEmitter();
 
-// Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 
@@ -24,10 +24,11 @@ function createWindow () {
     height: 800,
     // frame: false,
   });
-
+  console.log(path.resolve(__dirname, 'react-dev-tool'));
+  BrowserWindow.addDevToolsExtension(path.resolve(__dirname, 'react-dev-tool'));
   Menu.setApplicationMenu(customMenu);
   // 不显示菜单栏
-  // mainWindow.setMenu(null);
+  mainWindow.setMenu(null);
   // and load the index.html of the app.
   mainWindow.loadURL(`file://${ __dirname }/client/index.html`);
   // for gulp reload
@@ -54,8 +55,9 @@ function createWindow () {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', ()=> {
-  createWindow();
+  let mainWindow = createWindow();
   initEventBus(mainWindow);
+
 });
 
 app.on('browser-window-created', function () {
@@ -64,9 +66,9 @@ app.on('browser-window-created', function () {
 app.on('window-all-closed', () => {
   // On OS X it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
-  if (process.platform !== 'darwin') {
+  // if (process.platform !== 'darwin') {
     app.quit();
-  }
+  // }
 });
 
 app.on('activate', () => {

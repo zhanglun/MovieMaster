@@ -4,6 +4,10 @@ var _fs = require('fs');
 
 var _fs2 = _interopRequireDefault(_fs);
 
+var _path = require('path');
+
+var _path2 = _interopRequireDefault(_path);
+
 var _electron = require('electron');
 
 var _electron2 = _interopRequireDefault(_electron);
@@ -28,7 +32,6 @@ var BrowserWindow = _electron2.default.BrowserWindow;
 
 global.eventBus = new _events.EventEmitter();
 
-// Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 var mainWindow = void 0;
 
@@ -38,10 +41,11 @@ function createWindow() {
     width: 1000,
     height: 800
   });
-
+  console.log(_path2.default.resolve(__dirname, 'react-dev-tool'));
+  BrowserWindow.addDevToolsExtension(_path2.default.resolve(__dirname, 'react-dev-tool'));
   Menu.setApplicationMenu(_menu.menu);
   // 不显示菜单栏
-  // mainWindow.setMenu(null);
+  mainWindow.setMenu(null);
   // and load the index.html of the app.
   mainWindow.loadURL('file://' + __dirname + '/client/index.html');
   // for gulp reload
@@ -68,7 +72,7 @@ function createWindow() {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', function () {
-  createWindow();
+  var mainWindow = createWindow();
   (0, _eventbus.initEventBus)(mainWindow);
 });
 
@@ -77,9 +81,9 @@ app.on('browser-window-created', function () {});
 app.on('window-all-closed', function () {
   // On OS X it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
+  // if (process.platform !== 'darwin') {
+  app.quit();
+  // }
 });
 
 app.on('activate', function () {
