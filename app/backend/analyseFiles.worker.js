@@ -78,14 +78,14 @@ export function analyse () {
         data = [].concat.apply([], data);
       }
       data = data.filter((path) => {
+        if (!path) {
+          return false;
+        }
         // 过滤无用视频文件
         let filename = getFileName(path);
-        if (filename.indexOf('RARBG.com.avi') > -1) {
-          return false;
-        } else {
-          return true;
-        }
+        return filename.indexOf('RARBG.com.avi') <= -1;
       });
+      console.log(data);
       let metadataPromiseList = data.map((path) => {
 
         if (path) {

@@ -44,7 +44,7 @@
   min-width: 144px;
   height: 36px;
   margin-left: 180px;
-  border-radius: 2px;
+  border-radius: 3px;
   display: -webkit-flex;
   display: flex;
   -webkit-flex: 1;
@@ -65,4 +65,32 @@
       color: #fff;
     }
   }
+}
+
+.action-bar-box {
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+  background: #fff;
+  height: 48px;
+  width: 100%;
+  display: flex;
+  &__item {
+    padding: 0 14px;
+    color: #737373;
+    line-height: 48px;
+    cursor: pointer;
+    -webkit-font-smoothing: antialiased;
+    &--active {
+      color: #333;
+      font-weight: 500;
+    }
+  }
+}
+
+.action-bar-spacer {
+  background: #d6d6d6;
+  display: inline-block;
+  height: 64%;
+  margin: 9px 5px;
+  padding: 0;
+  width: 1px;
 }
