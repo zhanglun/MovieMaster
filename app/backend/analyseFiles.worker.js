@@ -4,7 +4,7 @@ import ffmpeg from 'fluent-ffmpeg';
 import { dialog } from 'electron';
 
 import db from '../common/db';
-import { formatFileList } from '../common/metadataHandler';
+import { formatFileList, getFileName } from '../common/metadataHandler';
 const mediaFilterExt = ['rmvb', 'mp4', 'mkv', 'avi', 'mp3'];
 
 let readdir = promisify(fs.readdir);
@@ -77,7 +77,17 @@ export function analyse () {
       while (data.length !== [].concat.apply([], data).length) {
         data = [].concat.apply([], data);
       }
+      data = data.filter((path) => {
+        // 过滤无用视频文件
+        let filename = getFileName(path);
+        if (filename.indexOf('RARBG.com.avi') > -1) {
+          return false;
+        } else {
+          return true;
+        }
+      });
       let metadataPromiseList = data.map((path) => {
+
         if (path) {
           return new Promise(function (reslove, reject) {
             db.find({
@@ -99,7 +109,7 @@ export function analyse () {
                     delete formatedMeta.format_long_name;
 
                     formatedMeta.path = formatedMeta.filename;
-                    formatedMeta.filename = formatedMeta.path.replace(/\\/ig, '/').split("/").pop();
+                    formatedMeta.filename = getFileName(formatedMeta.path);
                     formatedMeta = formatFileList([formatedMeta]);
                     db.insert(formatedMeta, function (err, result) {
                       reslove(result[0]);

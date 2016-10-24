@@ -15,7 +15,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle } from 'material-ui/Toolbar';
 
 class MainTop extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
     this.state = {
       openLeftDrawer: false,
@@ -23,30 +23,25 @@ class MainTop extends Component {
     };
   }
 
-  historyBack() {
+/*  historyBack () {
     console.log(hashHistory);
     hashHistory.goBack();
   }
 
-  historyForward() {
+  historyForward () {
     console.log(hashHistory);
     hashHistory.goForward();
-  }
+  }*/
 
-  renderHistoryToolbar() {
-    console.log(this);
-  }
-
-  toggleLeftDrawer() {
-    console.log('---->');
+  toggleLeftDrawer () {
     this.setState({ openLeftDrawer: !this.state.openLeftDrawer });
   }
 
-  handleClose() {
+  handleClose () {
     this.setState({ openLeftDrawer: false });
   }
 
-  render() {
+  render () {
     const muiTheme = getMuiTheme({
       palette: {
         accent1Color: deepOrange500,
@@ -55,34 +50,16 @@ class MainTop extends Component {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <div className="main-topbar">
-          <AppBar title="appbar" onLeftIconButtonTouchTap={this.toggleLeftDrawer.bind(this)}>
-            {this.renderHistoryToolbar()}
-          </AppBar>
-          {/*<Toolbar>*/}
-          {/*<ToolbarGroup firstChild={true}>*/}
-          {/*<DropDownMenu value={this.state.value} onChange={this.handleChange}>*/}
-          {/*<MenuItem value={1} primaryText="All Broadcasts"/>*/}
-          {/*<MenuItem value={2} primaryText="All Voice"/>*/}
-          {/*<MenuItem value={3} primaryText="All Text"/>*/}
-          {/*<MenuItem value={4} primaryText="Complete Voice"/>*/}
-          {/*<MenuItem value={5} primaryText="Complete Text"/>*/}
-          {/*<MenuItem value={6} primaryText="Active Voice"/>*/}
-          {/*<MenuItem value={7} primaryText="Active Text"/>*/}
-          {/*</DropDownMenu>*/}
-          {/*</ToolbarGroup>*/}
-          {/*<ToolbarGroup>*/}
-          {/*<div className="history-toolbar">*/}
-          {/*<div className="history-toolbar__item" onClick={this.historyBack.bind(this)}>*/}
-          {/*<FontIcon className="material-icons">chevron_left</FontIcon>*/}
-          {/*</div>*/}
-          {/*<div className="history-toolbar__item" onClick={this.historyForward.bind(this)}>*/}
-          {/*<FontIcon className="material-icons">chevron_right</FontIcon>*/}
-          {/*</div>*/}
-          {/*</div>*/}
-          {/*<ToolbarSeparator />*/}
-          {/*</ToolbarGroup>*/}
-          {/*</Toolbar>*/}
-          <Drawer open={this.state.openLeftDrawer} docked={false} onRequestChange={this.handleClose.bind(this)}>
+          <div className="appbar">
+            <div className="appbar-drawerbtn">
+              <IconButton iconClassName="material-icons" onClick={this.toggleLeftDrawer.bind(this)}>menu</IconButton>
+            </div>
+            <div className="search-box">
+              <input type="text" className="search-box__input" placeholder="Search"/>
+            </div>
+          </div>
+          <Drawer open={this.state.openLeftDrawer} docked={false}
+                  onRequestChange={this.handleClose.bind(this)}>
             <MenuItem onTouchTap={this.handleClose.bind(this)}>Menu Item</MenuItem>
             <MenuItem onTouchTap={this.handleClose.bind(this)}>Menu Item 2</MenuItem>
           </Drawer>

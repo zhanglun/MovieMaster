@@ -4,11 +4,11 @@ import FlatButton from 'material-ui/FlatButton';
 
 
 class MovieItem extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
   }
 
-  maybeRenderAlias() {
+  maybeRenderAlias () {
     let movie = this.props.movie;
     if (movie.alias) {
       return (
@@ -24,30 +24,22 @@ class MovieItem extends Component {
     }
   }
 
-  editThis() {
+  editThis () {
     alert('edit this ');
   }
 
-  render() {
+  render () {
     const { movie } = this.props;
     return (
       <div className="movie-card">
         <Card>
-          <CardMedia>
-            <img src="http://fpoimg.com/300x300?text=暂无图片"/>
-          </CardMedia>
-          {/*<CardTitle title={movie.title}/>*/}
-          <div className="movie-card__title">{movie.title}</div>
-          <CardActions>
-            <FlatButton label="Action1"/>
-            <FlatButton label="Action2"/>
-          </CardActions>
-          <CardText expandable={true}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-            Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-            Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
-          </CardText>
+          <div className="movie-card__poster">
+            <img className="movie-card__poster-images"
+                 src="http://fpoimg.com/160x245?text=No Images"/>
+          </div>
+          <div className="movie-card__info">
+            <div className="movie-card__title">{movie.title}</div>
+          </div>
         </Card>
       </div>
     )

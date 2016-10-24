@@ -1,20 +1,14 @@
 .movie-card {
-  width: 24%;
+  width: 180px;
   padding: 4px;
-  display: inline-flex;
+  display: inline-block;
   margin-bottom: 4px;
   &__info {
-    &-item {
-      font-size: 13px;
-      display: flex;
-    }
-    &-head {
-      width: 34px;
-      flex: 0 0 auto;
-    }
+    padding: 8px 10px 8px;
   }
   &__title {
-    font-size: 13px;
+    font-size: 1.4rem;
+    .text-overflow();
     &-link {
       color: #37a;
       text-decoration: none;
@@ -22,9 +16,9 @@
   }
   &__poster {
     font-size: 0;
-    &-img {
+    &-images {
       width: 180px;
-      height: 270px;
+      height: 245px;
     }
   }
 }

@@ -49,3 +49,12 @@ export const formatFileList = (data) => {
     return Object.assign(item, { filename: item.filename, duration: duration, size: size }, cleanTitle(filename));
   });
 };
+
+/**
+ * 截取文件名
+ * @param path
+ * @returns {T}
+ */
+export const getFileName = (path) => {
+ return path.replace(/\\/ig, '/').split("/").pop();
+};
