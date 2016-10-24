@@ -9,7 +9,7 @@ class MovieList extends Component {
   render () {
     const { movies } = this.props;
     return (
-      <div className="movies--list">
+      <div className="movie-list">
         {movies.map((movie) => {
           return <MovieItem key={movie.path} movie={movie}></MovieItem>
         })}
