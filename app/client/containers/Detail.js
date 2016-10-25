@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { requestSearchMovieInDouban } from '../actions';
+import Dialog from '../components/ui/Dialog';
 
 class MovieDetail extends Component {
   constructor (props) {
@@ -17,6 +18,7 @@ class MovieDetail extends Component {
   render () {
     return (
       <div className="detail-container">
+        <Dialog></Dialog>
       </div>
     )
   }
