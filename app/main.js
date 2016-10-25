@@ -28,7 +28,7 @@ function createWindow () {
   BrowserWindow.addDevToolsExtension(path.resolve(__dirname, 'react-dev-tool'));
   Menu.setApplicationMenu(customMenu);
   // 不显示菜单栏
-  mainWindow.setMenu(null);
+  // mainWindow.setMenu(null);
   // and load the index.html of the app.
   mainWindow.loadURL(`file://${ __dirname }/client/index.html`);
   // for gulp reload
