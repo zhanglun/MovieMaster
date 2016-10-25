@@ -1,4 +1,4 @@
-import *  as CONST_IPC from './constant/ipc';
+import *  as CONST_IPC from './constants';
 import * as analyseFilesWorker from './analyseFiles.worker';
 import electron from 'electron';
 const Menu = electron.Menu;
