@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
-import { hashHistory } from 'react-router';
+import { hashHistory, Link } from 'react-router';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
-import MenuItem from 'material-ui/MenuItem';
-import { deepOrange500 } from 'material-ui/styles/colors';
 import IconMenu from 'material-ui/IconMenu';
 import IconButton from 'material-ui/IconButton';
-import FontIcon from 'material-ui/FontIcon';
-import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more';
-import DropDownMenu from 'material-ui/DropDownMenu';
+import MenuItem from 'material-ui/MenuItem';
 
 class MainTop extends Component {
   constructor (props) {
@@ -30,13 +26,8 @@ class MainTop extends Component {
   }
 
   render () {
-    const muiTheme = getMuiTheme({
-      palette: {
-        accent1Color: deepOrange500,
-      },
-    });
     return (
-      <MuiThemeProvider muiTheme={muiTheme}>
+      <MuiThemeProvider>
         <div className="main-topbar">
           <div className="appbar">
             <div className="appbar-drawerbtn">
@@ -51,16 +42,19 @@ class MainTop extends Component {
             <MenuItem onTouchTap={this.handleClose.bind(this)}>Menu Item</MenuItem>
             <MenuItem onTouchTap={this.handleClose.bind(this)}>Menu Item 2</MenuItem>
           </Drawer>
-          <div className="action-bar-box">
-            <div className="action-bar-box__item">
-              <span>Genres</span>
+          <div className="action-bar">
+            <div className="action-bar__item">
+              <span className="action-bar__link">Genres
+                {/*<span className='material-icons'>expand_more</span>*/}
+              </span>
             </div>
-            <div className="action-bar-spacer"></div>
-            <div className="action-bar-box__item">
-              <span>Home</span>
+            <div className="action-bar__spacer"></div>
+            <div className="action-bar__item">
+              <Link className="action-bar__link" activeClassName="action-bar__link--active"
+                    to={'/'}>Home</Link>
             </div>
-            <div className="action-bar-box__item">
-              <span>Recent</span>
+            <div className="action-bar__item">
+              <Link className="action-bar__link">Recent</Link>
             </div>
           </div>
         </div>

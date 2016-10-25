@@ -44,6 +44,7 @@ export const formatFileList = (data) => {
   console.log(data);
   return data.map((item) => {
     let filename = item.path.replace(/\\/ig, '/').split("/").pop();
+    console.log(item.duration);
     let duration = formatDuration(item.duration || 0);
     let size = formatFileSize(item.size || 0);
     return Object.assign(item, { filename: item.filename, duration: duration, size: size }, cleanTitle(filename));

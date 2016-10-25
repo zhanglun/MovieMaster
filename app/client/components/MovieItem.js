@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 
@@ -32,15 +33,17 @@ class MovieItem extends Component {
     const { movie } = this.props;
     return (
       <div className="movie-card">
-        <Card>
-          <div className="movie-card__poster">
-            <img className="movie-card__poster-images"
-                 src="http://fpoimg.com/180x245?text=No Images"/>
-          </div>
-          <div className="movie-card__info">
-            <div className="movie-card__title">{movie.title}</div>
-          </div>
-        </Card>
+        <Link to={`/detail/${movie._id}`} activeClassName="active">
+          <Card>
+            <div className="movie-card__poster">
+              <img className="movie-card__poster-images"
+                   src="http://fpoimg.com/180x245?text=No Images"/>
+            </div>
+            <div className="movie-card__info">
+              <div className="movie-card__title">{movie.title}</div>
+            </div>
+          </Card>
+        </Link>
       </div>
     )
   }
