@@ -41,7 +41,6 @@ export const formatFileSize = (bytes) => {
  * @returns {*}
  */
 export const formatFileList = (data) => {
-  console.log(data);
   return data.map((item) => {
     let filename = item.path.replace(/\\/ig, '/').split("/").pop();
     console.log(item.duration);

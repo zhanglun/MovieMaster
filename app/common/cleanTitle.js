@@ -45,7 +45,7 @@ let removeAudioTypesFromTitle = function (movieTitle) {
  */
 let removeMovieTypeFromTitle = function (movieTitle) {
   return movieTitle.replace(
-    /dvdrip|multi9|xxx|x264|x265|web|dl|hr|hdtv|rip|vhs|HC|embeded|embedded|ac3|dd5 1|m sub|x264|dvd5|dvd9|multi sub|non|h264|x264| sub|subs|ntsc|ingebakken|torrent|torrentz|bluray|brrip|sample|xvid|cam|camrip|wp|workprint|telecine|ppv|ppvrip|scr|screener|limited|dvdscr|bdscr|ddc|R5|telesync|pdvd|1080p|BDRIP|hq|sd|720p|hdrip|hd-|\d+版/gi,
+    /dvdrip|multi9|xxx|x264|x265|web|dl|hr|hdtv|rip|vhs|HC|embeded|embedded|ac3|dd5 1|m sub|x264|dvd5|dvd9|multi sub|non|h264|x264| sub|subs|ntsc|ingebakken|torrent|torrentz|bluray|brrip|sample|xvid|cam|camrip|wp|workprint|telecine|ppv|ppvrip|scr|screener|limited|dvdscr|bdscr|ddc|R5|telesync|pdvd|1080p|BDRIP|hq|sd|720p|hdrip|hd-|\d+版|中英字幕/gi,
     "");
 };
 

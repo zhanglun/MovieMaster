@@ -25,15 +25,12 @@ class MovieItem extends Component {
     }
   }
 
-  editThis () {
-    alert('edit this ');
-  }
-
   render () {
     const { movie } = this.props;
     return (
       <div className="movie-card">
-        <Link to={`/detail/${movie._id}`} activeClassName="active">
+        <Link to={{ pathname: `/detail/${movie._id}`, query: { 'keywords': movie.title } }}
+              activeClassName="active">
           <Card>
             <div className="movie-card__poster">
               <img className="movie-card__poster-images"

@@ -27,7 +27,8 @@ let monitorFiles = (store) => {
   ipcRenderer.send(IPCTYPE.INIT_APP, { data: 'test' });
 
   ipcRenderer.on('INIT_DATA', (e, data)=> {
-    let files = formatFileList(data.data);
+    // let files = formatFileList(data.data);
+    let files = data.data
     store.dispatch(receiveMoviesInfo(files));
   });
 

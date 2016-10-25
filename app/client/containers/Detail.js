@@ -1,9 +1,5 @@
-//noinspection JSUnresolvedVariable
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
-// import FlatButton from 'material-ui/FlatButton';
-import Paper from 'material-ui/Paper';
 import { requestSearchMovieInDouban } from '../actions';
 
 class MovieDetail extends Component {
@@ -12,20 +8,13 @@ class MovieDetail extends Component {
   }
 
   componentDidMount () {
-    let { dispatch, params, location } = this.props;
-    let keyword = params.id;
-    dispatch(requestSearchMovieInDouban(keyword));
+    let { dispatch, location } = this.props;
+    let keywords = location.query.keywords;
+    dispatch(requestSearchMovieInDouban(keywords));
   }
 
 
   render () {
-    const style = {
-      height: 100,
-      width: 100,
-      margin: 20,
-      textAlign: 'center',
-      display: 'inline-block',
-    };
     return (
       <div className="detail-container">
       </div>
