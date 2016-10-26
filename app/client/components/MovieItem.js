@@ -5,11 +5,11 @@ import FlatButton from 'material-ui/FlatButton';
 
 
 class MovieItem extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
   }
 
-  maybeRenderAlias () {
+  maybeRenderAlias() {
     let movie = this.props.movie;
     if (movie.alias) {
       return (
@@ -23,23 +23,46 @@ class MovieItem extends Component {
         </div>
       );
     }
+  };
+
+  createPost() {
+    let { movie } = this.props;
+    if (movie.detail) {
+      return (
+        <Card>
+          <div className="movie-card__poster">
+            <img src={movie.detail.images.large} alt="" className="movie-card__poster-images"/>
+          </div>
+          <div className="movie-card__info">
+            <div className="movie-card__title">{movie.detail.title}</div>
+          </div>
+        </Card>
+      )
+    } else {
+      return (
+        <Card>
+          <div className="movie-card__poster">
+            <img src="http://fpoimg.com/160x225?text=No Images" alt="" className="movie-card__poster-images"/>
+          </div>
+          <div className="movie-card__info">
+            <div className="movie-card__title">{movie.metadata.title}</div>
+          </div>
+        </Card>
+      )
+    }
   }
 
-  render () {
+
+  render() {
     const { movie } = this.props;
     return (
       <div className="movie-card">
-        <Link to={{ pathname: `/detail/${movie._id}`, query: { 'keywords': movie.metadata.title, 'synced': movie.metadata.synced } }}
+        <Link to={{
+          pathname: `/detail/${movie._id}`,
+          query: { 'keywords': movie.metadata.title, 'synced': movie.metadata.synced }
+        }}
               activeClassName="active">
-          <Card>
-            <div className="movie-card__poster">
-              <img className="movie-card__poster-images"
-                   src="http://fpoimg.com/160x225?text=No Images"/>
-            </div>
-            <div className="movie-card__info">
-              <div className="movie-card__title">{movie.metadata.title}</div>
-            </div>
-          </Card>
+          {this.createPost()}
         </Link>
       </div>
     )

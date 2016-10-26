@@ -4,7 +4,7 @@ export default function movie(state = {
   isFetching: false,
   items: [],
   searchResult: {
-    subjects:[{
+    subjects: [{
       "rating": {
         "max": 10,
         "average": 9.2,

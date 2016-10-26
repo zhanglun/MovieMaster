@@ -18,8 +18,7 @@ function initEventBus(mainwindow) {
   });
 
   ipcMain.on('update_movie_data', (event, movies) => {
-    console.log(movies);
-    db.update({ _id: movies._id }, { $set: { detail: movies.detail } }, function () {
+    db.update({ _id: movies._id }, { $set: { detail: movies.detail } }, {}, function () {
       console.log(arguments);
     });
   });
