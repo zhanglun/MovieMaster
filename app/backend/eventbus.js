@@ -1,32 +1,27 @@
 import { app, ipcMain } from 'electron';
-import * as IPCTYPE from './constant/ipcType';
-import {createEditWindow} from './windows';
+import * as Constants from './constants';
 import db from '../common/db';
 
-function initEventBus (mainwindow) {
+function initEventBus(mainwindow) {
   let mainWindow = mainwindow;
-  eventBus.on('loadLocalFiles', function (data) {
-    mainWindow.webContents.send(IPCTYPE.SEND_FILE_METADATA, data);
+  eventBus.on(Constants.LOAD_LOCAL_FILES, function (data) {
+    mainWindow.webContents.send(Constants.SEND_FILE_METADATA, data);
   });
 
   /**
    * app 初始化时加载数据
    */
-  ipcMain.on(IPCTYPE.INIT_APP, (event) => {
+  ipcMain.on(Constants.INIT_APP, (event) => {
     db.find({}, function (err, result) {
       event.sender.send('INIT_DATA', { data: result })
     });
-
   });
 
-  ipcMain.on('opensubwindow', (event, data) => {
-    switch(data.type) {
-      case 'edit':
-        createEditWindow(data);
-        break;
-      default:
-        break;
-    }
+  ipcMain.on('update_movie_data', (event, movies) => {
+    console.log(movies);
+    db.update({ _id: movies._id }, { $set: { detail: movies.detail } }, function () {
+      console.log(arguments);
+    });
   });
 
 }

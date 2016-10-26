@@ -5,3 +5,5 @@ export const OPEN_RECENT = 'OPEN_RECENT';
 
 export const INIT_APP = 'INIT_APP';
 export const SEND_FILE_METADATA = 'SEND_FILE_METADATA';
+export const LOAD_LOCAL_FILES = 'LOAD_LOCAL_FILES';
+

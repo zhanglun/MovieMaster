@@ -6,7 +6,6 @@ import { menu as customMenu } from './backend/menu';
 import { EventEmitter }from 'events';
 import './backend/analyseFiles';
 import { initEventBus } from './backend/eventbus';
-import { INIT_APP } from './backend/constants'
 
 const Menu = electron.Menu;
 const app = electron.app;
@@ -20,16 +19,18 @@ let mainWindow;
 function createWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 1000,
-    height: 800,
+    width: 1300,
+    height: 900,
     // frame: false,
   });
+
   BrowserWindow.addDevToolsExtension(path.resolve(__dirname, 'react-dev-tool'));
   Menu.setApplicationMenu(customMenu);
   // 不显示菜单栏
   // mainWindow.setMenu(null);
   // and load the index.html of the app.
   mainWindow.loadURL(`file://${ __dirname }/client/index.html`);
+  // mainWindow.maximize();
   // for gulp reload
   devClient.create(mainWindow);
   mainWindow.webContents.openDevTools();

@@ -34,7 +34,7 @@ class MovieItem extends Component {
           <Card>
             <div className="movie-card__poster">
               <img className="movie-card__poster-images"
-                   src="http://fpoimg.com/180x245?text=No Images"/>
+                   src="http://fpoimg.com/160x225?text=No Images"/>
             </div>
             <div className="movie-card__info">
               <div className="movie-card__title">{movie.metadata.title}</div>

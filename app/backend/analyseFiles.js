@@ -4,7 +4,9 @@ import ffmpeg from 'fluent-ffmpeg';
 import { dialog } from 'electron';
 
 import db from '../common/db';
+import * as Constants from './constants';
 import { formatFileList, getFileName } from '../common/metadataHandler';
+
 const mediaFilterExt = ['rmvb', 'mp4', 'mkv', 'avi', 'mp3'];
 
 let readdir = promisify(fs.readdir);
@@ -13,7 +15,7 @@ let stat = promisify(fs.stat);
 /**
  * 简单实现一个promisify
  */
-function promisify (fn) {
+function promisify(fn) {
   return function () {
     var args = arguments;
     return new Promise(function (resolve, reject) {
@@ -33,7 +35,6 @@ function promisify (fn) {
  * 遍历文件夹
  * @param conf
  * @param callback
- * @returns {Promise.<TResult>}
  * 优化参考 这个 https://cnodejs.org/topic/567650c3c096b56a0c1b4352
  */
 const readDirRecur = (conf, callback) => {
@@ -68,7 +69,7 @@ const openDirDialog = (options, callback) => {
   });
 };
 
-export function analyse () {
+export function analyse() {
   openDirDialog({ title: '打开文件夹' }, (dir) => {
     readDirRecur({
       root: dir,
@@ -89,11 +90,12 @@ export function analyse () {
         if (path) {
           return new Promise(function (reslove, reject) {
             db.find({
-              path: path
+              'metadata.path': path
             }, function (err, result) {
+              console.log('--->',result);
               // result 是一个数组
               if (result.length) {
-                eventBus.emit('loadLocalFiles', { metadata: result });
+                // eventBus.emit(Constants.LOAD_LOCAL_FILES, { metadata: result });
                 reslove(result);
               } else {
                 ffmpeg.ffprobe(path, function (err, metadata) {
@@ -109,9 +111,13 @@ export function analyse () {
                     formatedMeta.path = formatedMeta.filename;
                     formatedMeta.filename = getFileName(formatedMeta.path);
                     formatedMeta = formatFileList([formatedMeta]);
-                    db.insert(formatedMeta, function (err, result) {
-                      reslove(result[0]);
-                      eventBus.emit('loadLocalFiles', { metadata: formatedMeta });
+
+                    let obj = { metadata: formatedMeta[0] };
+
+                    obj.metadata.synced = false;
+                    db.insert(obj, function (err, result) {
+                      reslove(result);
+                      eventBus.emit(Constants.LOAD_LOCAL_FILES, { metadata: [result] });
                     });
                   } else {
                     reject(err)

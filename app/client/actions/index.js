@@ -31,13 +31,13 @@ export function requestSearchInDoubanFailure(err) {
 
 export function searchMovieInDoubanAsync(keyword) {
   return (dispatch) => {
-    dispatch(requestSearchInDouban());
+    // dispatch(requestSearchInDouban());
     window.fetch('https://api.douban.com/v2/movie/search?q=' + keyword)
       .then((response) => {
         return response.json();
       })
       .then((data) => {
-        dispatch(receiveSearchInDouban(data.subjects));
+        dispatch(receiveSearchInDouban(data));
       })
       .catch((err) => {
         dispatch(requestSearchInDoubanFailure(err));
