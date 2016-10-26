@@ -1,7 +1,5 @@
 import * as IPCTYPE from '../constant/ipcType';
-import { cleanTitle } from '../../common/cleanTitle';
-import { formatDuration, formatFileSize, formatFileList } from '../../common/metadataHandler';
-import { fetchMoviesInfo, receiveMoviesInfo } from '../actions';
+import { loadLocalData } from '../actions';
 const electron = require('electron');
 const remote = electron.remote;
 const dialog = remote.dialog;
@@ -27,15 +25,15 @@ let monitorFiles = (store) => {
   ipcRenderer.send(IPCTYPE.INIT_APP, { data: 'test' });
 
   ipcRenderer.on('INIT_DATA', (e, data)=> {
-    // let files = formatFileList(data.data);
-    let files = data.data
-    store.dispatch(receiveMoviesInfo(files));
+    let files = data.data;
+    store.dispatch(loadLocalData(files));
   });
 
   ipcRenderer.on(IPCTYPE.SEND_FILE_METADATA, (e, data)=> {
     let metadata = data.metadata;
-    let files = formatFileList(metadata);
-    store.dispatch(receiveMoviesInfo(files));
+    // let files = formatFileList(metadata);
+    let files = metadata;
+    store.dispatch(loadLocalData(files));
   });
 
 

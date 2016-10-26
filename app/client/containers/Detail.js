@@ -1,30 +1,42 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { requestSearchMovieInDouban } from '../actions';
+import { searchMovieInDoubanAsync } from '../actions';
 import Dialog from '../components/ui/Dialog';
 
 class MovieDetail extends Component {
-  constructor (props) {
-    super(props)
+  constructor(props) {
+    super(props);
+    this.state = {
+      openDialog: false,
+    };
   }
 
-  componentDidMount () {
+  componentWillMount() {
     let { dispatch, location } = this.props;
     let keywords = location.query.keywords;
-    dispatch(requestSearchMovieInDouban(keywords));
+    let synced = location.query.synced;
+    if (synced) {
+      this.setState({ openDialog: false });
+      // 从本地拿数据
+    } else {
+      // 请求douban API 显示弹窗
+      this.setState({ openDialog: true });
+      dispatch(searchMovieInDoubanAsync(keywords));
+    }
   }
 
 
-  render () {
+  render() {
+    let state = this.state;
     return (
       <div className="detail-container">
-        <Dialog></Dialog>
+        <Dialog open={state.openDialog}/>
       </div>
     )
   }
 }
 
-function mapStateToProps (state) {
+function mapStateToProps(state) {
   return {
     detail: state.movies.detail
   }

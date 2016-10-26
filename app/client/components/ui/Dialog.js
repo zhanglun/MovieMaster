@@ -14,22 +14,21 @@ const styles = {
  * Dialog content can be scrollable.
  */
 export default class ScrollableDialog extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
-    this.state = {
-      open: false,
-    };
   }
 
-  handleOpen () {
+  handleOpen() {
     this.setState({ open: true });
   };
 
-  handleClose () {
+  handleClose() {
     this.setState({ open: false });
   };
 
-  render () {
+  render() {
+    const props = this.props;
+    console.log(this.props);
     const actions = [
       <FlatButton
         label="Cancel"
@@ -58,12 +57,11 @@ export default class ScrollableDialog extends React.Component {
 
     return (
       <div>
-        <RaisedButton label="Scrollable Dialog" onTouchTap={this.handleOpen.bind(this)}/>
         <Dialog
           title="Scrollable Dialog"
           actions={actions}
           modal={false}
-          open={this.state.open}
+          open={props.open}
           onRequestClose={this.handleClose.bind(this)}
           autoScrollBodyContent={true}
         >

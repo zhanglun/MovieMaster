@@ -11,7 +11,8 @@ class MovieList extends Component {
     return (
       <div className="movie-list">
         {movies.map((movie) => {
-          return <MovieItem key={movie.path} movie={movie}></MovieItem>
+          let metadata = movie.metadata;
+          return <MovieItem key={metadata.path} movie={movie}></MovieItem>
         })}
       </div>
     )

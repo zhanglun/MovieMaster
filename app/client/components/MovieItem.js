@@ -29,7 +29,7 @@ class MovieItem extends Component {
     const { movie } = this.props;
     return (
       <div className="movie-card">
-        <Link to={{ pathname: `/detail/${movie._id}`, query: { 'keywords': movie.title } }}
+        <Link to={{ pathname: `/detail/${movie._id}`, query: { 'keywords': movie.metadata.title, 'synced': movie.metadata.synced } }}
               activeClassName="active">
           <Card>
             <div className="movie-card__poster">
@@ -37,7 +37,7 @@ class MovieItem extends Component {
                    src="http://fpoimg.com/180x245?text=No Images"/>
             </div>
             <div className="movie-card__info">
-              <div className="movie-card__title">{movie.title}</div>
+              <div className="movie-card__title">{movie.metadata.title}</div>
             </div>
           </Card>
         </Link>
