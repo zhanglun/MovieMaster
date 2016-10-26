@@ -1,5 +1,5 @@
 import *  as CONST_IPC from './constants';
-import * as analyseFilesWorker from './analyseFiles.worker';
+import * as analyseFiles from './analyseFiles';
 import electron from 'electron';
 const Menu = electron.Menu;
 const remote = electron.remote;
@@ -15,7 +15,7 @@ const template = [
         label: 'Open Directory',
         accelerator: process.platform === 'darwin' ? 'Alt+Shift+O' : 'Ctrl+Shift+O',
         click(menuItem, browserWindow) {
-          analyseFilesWorker.analyse();
+          analyseFiles.analyse();
         }
       }, {
         type: 'separator'

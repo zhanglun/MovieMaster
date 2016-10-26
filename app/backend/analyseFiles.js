@@ -85,9 +85,7 @@ export function analyse () {
         let filename = getFileName(path);
         return filename.indexOf('RARBG.com.avi') <= -1;
       });
-      console.log(data);
       let metadataPromiseList = data.map((path) => {
-
         if (path) {
           return new Promise(function (reslove, reject) {
             db.find({

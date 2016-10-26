@@ -4,9 +4,9 @@ import electron from 'electron';
 import { client as devClient } from 'electron-connect';
 import { menu as customMenu } from './backend/menu';
 import { EventEmitter }from 'events';
-import './backend/analyseFiles.worker';
-import { initEventBus } from './backend/eventbus.worker';
-import { INIT_APP } from './backend/constant/ipcType'
+import './backend/analyseFiles';
+import { initEventBus } from './backend/eventbus';
+import { INIT_APP } from './backend/constants'
 
 const Menu = electron.Menu;
 const app = electron.app;
@@ -17,14 +17,13 @@ global.eventBus = new EventEmitter();
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 
-function createWindow () {
+function createWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 1000,
     height: 800,
     // frame: false,
   });
-  console.log(path.resolve(__dirname, 'react-dev-tool'));
   BrowserWindow.addDevToolsExtension(path.resolve(__dirname, 'react-dev-tool'));
   Menu.setApplicationMenu(customMenu);
   // 不显示菜单栏
@@ -67,7 +66,7 @@ app.on('window-all-closed', () => {
   // On OS X it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
   // if (process.platform !== 'darwin') {
-    app.quit();
+  app.quit();
   // }
 });
 
