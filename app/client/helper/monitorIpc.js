@@ -1,5 +1,5 @@
 import * as IPCTYPE from '../constant/ipcType';
-import { loadLocalData } from '../actions';
+import { loadLocalData, loadMovieInfoFromLocal } from '../actions';
 const electron = require('electron');
 const remote = electron.remote;
 const dialog = remote.dialog;
@@ -20,8 +20,6 @@ const openDir = (options, callback) => {
 
 let monitorFiles = (store) => {
 
-  // init
-
   ipcRenderer.send(IPCTYPE.INIT_APP, { data: 'test' });
 
   ipcRenderer.on('INIT_DATA', (e, data)=> {
@@ -30,10 +28,11 @@ let monitorFiles = (store) => {
   });
 
   ipcRenderer.on(IPCTYPE.SEND_FILE_METADATA, (e, data)=> {
-    let metadata = data.metadata;
-    // let files = formatFileList(metadata);
-    let files = metadata;
+    let files = data.metadata;
     store.dispatch(loadLocalData(files));
+  });
+  ipcRenderer.on('fetch_movie_data_success', (e, data) => {
+    store.dispatch(loadMovieInfoFromLocal(data.result));
   });
 
 
@@ -43,6 +42,3 @@ export const monitorIpc = (store)=> {
   monitorFiles(store);
 };
 
-export const createWindow = (data) => {
-  ipcRenderer.send('opensubwindow', data);
-};

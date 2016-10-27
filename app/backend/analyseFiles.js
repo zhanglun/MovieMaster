@@ -114,7 +114,7 @@ export function analyse() {
 
                     let obj = { metadata: formatedMeta[0] };
 
-                    obj.metadata.synced = false;
+                    obj.synced = false;
                     db.insert(obj, function (err, result) {
                       reslove(result);
                       eventBus.emit(Constants.LOAD_LOCAL_FILES, { metadata: [result] });

@@ -27,11 +27,16 @@ export function requestSearchInDoubanFailure(err) {
 }
 
 // async actions
-
+export function loadMovieInfoFromLocal(detail){
+  return {
+    type: type.LOAD_MOVIE_INFO_FROM_LOCAL,
+    detail: detail,
+  }
+}
 
 export function searchMovieInDoubanAsync(keyword) {
   return (dispatch) => {
-    // dispatch(requestSearchInDouban());
+    dispatch(requestSearchInDouban());
     window.fetch('https://api.douban.com/v2/movie/search?q=' + keyword)
       .then((response) => {
         return response.json();

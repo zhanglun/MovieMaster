@@ -27,14 +27,14 @@ class MovieItem extends Component {
 
   createPost() {
     let { movie } = this.props;
-    if (movie.detail) {
+    if (movie.synced) {
       return (
         <Card>
           <div className="movie-card__poster">
-            <img src={movie.detail.images.large} alt="" className="movie-card__poster-images"/>
+            <img src={movie.images.large} alt="" className="movie-card__poster-images"/>
           </div>
           <div className="movie-card__info">
-            <div className="movie-card__title">{movie.detail.title}</div>
+            <div className="movie-card__title">{movie.title}</div>
           </div>
         </Card>
       )
@@ -59,7 +59,7 @@ class MovieItem extends Component {
       <div className="movie-card">
         <Link to={{
           pathname: `/detail/${movie._id}`,
-          query: { 'keywords': movie.metadata.title, 'synced': movie.metadata.synced }
+          query: { 'keywords': movie.metadata.title, 'synced': movie.synced }
         }}
               activeClassName="active">
           {this.createPost()}

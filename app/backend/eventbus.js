@@ -18,8 +18,19 @@ function initEventBus(mainwindow) {
   });
 
   ipcMain.on('update_movie_data', (event, movies) => {
-    db.update({ _id: movies._id }, { $set: { detail: movies.detail } }, {}, function () {
+    movies.detail.synced = true;
+    db.update({ _id: movies._id }, { $set: movies.detail }, {}, function () {
       console.log(arguments);
+    });
+  });
+
+  ipcMain.on('fetch_movie_data', (event, movies) => {
+    db.find({ _id: movies._id }, function (err, result) {
+      if (err) {
+        event.sender.send('fetch_movie_data_failure', { err: err });
+      } else {
+        event.sender.send('fetch_movie_data_success', { result: result[0] });
+      }
     });
   });
 
