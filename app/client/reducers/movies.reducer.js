@@ -74,12 +74,61 @@ export default function movie(state = {
       "id": "1291561"
     }],
   },
-  detail: {},
+  detail: {
+    "rating": {
+      "max": 10,
+      "average": 9.2,
+      "stars": "50",
+      "min": 0
+    },
+    "genres": [],
+    "title": "",
+    "casts": [
+      {
+        "alt": "",
+        "avatars": {
+          "small": "",
+          "large": "",
+          "medium": ""
+        },
+        "name": "",
+        "id": ""
+      }
+    ],
+    "collect_count": 0,
+    "original_title": "",
+    "subtype": "",
+    "directors": [
+      {
+        "alt": "",
+        "avatars": {
+          "small": "",
+          "large": "",
+          "medium": ""
+        },
+        "name": "",
+        "id": ""
+      }
+    ],
+    "year": "",
+    "images": {
+      "small": "",
+      "large": "",
+      "medium": ""
+    },
+    "alt": "",
+    "id": "",
+  }
 }, action) {
   switch (action.type) {
     case type.LOAD_LOCAL_DATA:
       return Object.assign({}, state, {
         items: state.items.concat(action.data),
+      });
+    case type.LOAD_MOVIE_INFO_FROM_LOCAL:
+      return Object.assign({}, state, {
+        isFetching: false,
+        detail: action.detail,
       });
     case type.SEARCH_MOVIES_REQUEST:
       return Object.assign({}, state, {
