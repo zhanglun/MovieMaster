@@ -1,6 +1,6 @@
 import * as type from '../constant/actionType';
 
-export default function movie(state = {
+export default function movie (state = {
   isFetching: false,
   items: [],
   searchResult: {
@@ -128,7 +128,7 @@ export default function movie(state = {
     case type.LOAD_MOVIE_INFO_FROM_LOCAL:
       return Object.assign({}, state, {
         isFetching: false,
-        detail: action.detail,
+        detail: action.detail || state.detail,
       });
     case type.SEARCH_MOVIES_REQUEST:
       return Object.assign({}, state, {

@@ -26,7 +26,6 @@ export function requestSearchInDoubanFailure(err) {
   }
 }
 
-// async actions
 export function loadMovieInfoFromLocal(detail){
   return {
     type: type.LOAD_MOVIE_INFO_FROM_LOCAL,
@@ -34,7 +33,8 @@ export function loadMovieInfoFromLocal(detail){
   }
 }
 
-export function searchMovieInDoubanAsync(keyword) {
+// async actions
+export function searchMovieInDoubanAsync(keyword, callback) {
   return (dispatch) => {
     dispatch(requestSearchInDouban());
     window.fetch('https://api.douban.com/v2/movie/search?q=' + keyword)
@@ -42,9 +42,11 @@ export function searchMovieInDoubanAsync(keyword) {
         return response.json();
       })
       .then((data) => {
+        callback();
         dispatch(receiveSearchInDouban(data));
       })
       .catch((err) => {
+        callback();
         dispatch(requestSearchInDoubanFailure(err));
       })
   }

@@ -32,6 +32,7 @@ let monitorFiles = (store) => {
     store.dispatch(loadLocalData(files));
   });
   ipcRenderer.on('fetch_movie_data_success', (e, data) => {
+    // store.dispatch(loadMovieInfoFromLocal());
     store.dispatch(loadMovieInfoFromLocal(data.result));
   });
 

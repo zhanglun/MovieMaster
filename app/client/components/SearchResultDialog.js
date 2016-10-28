@@ -1,7 +1,18 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Dialog from 'material-ui/Dialog';
+import LinearProgress from 'material-ui/LinearProgress';
 import FlatButton from 'material-ui/FlatButton';
-import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
+import {
+  Table,
+  TableBody,
+  TableHeader,
+  TableHeaderColumn,
+  TableRow,
+  TableRowColumn
+} from 'material-ui/Table';
+
+import { searchMovieInDoubanAsync } from '../actions';
 
 const electron = require('electron');
 const ipcRenderer = electron.ipcRenderer;
@@ -16,78 +27,101 @@ const styles = {
     padding: '16px 20px',
     marginBottom: '2px',
   },
-  table: {},
+  table: {
+    padding: 0,
+  },
   tr: {
-    height: 10,
-    boxSizing: 'border-box',
+    height: '30px',
   },
   td: {
-    height: 26,
-    boxSizing: 'border-box',
+    height: 'initial',
+    padding: '10px',
   }
 };
 
 /**
  * Dialog content can be scrollable.
  */
-export default class ScrollableDialog extends React.Component {
-  constructor(props) {
+class ScrollableDialog extends React.Component {
+  constructor (props) {
     super(props);
     this.state = {
       open: props.open,
+      selectedRows: [],
     };
   }
 
-  handleClose() {
+  handleClose () {
     this.setState({ open: false });
     // TODO: 更新数据库
-    ipcRenderer.send('update_movie_data', { _id: this.props.movieid, detail: this.state.selectDetail });
+    ipcRenderer.send('update_movie_data', {
+      _id: this.props.movieid,
+      detail: this.state.selectDetail
+    });
   }
 
-  selectData(selects) {
+  handleCancel () {
+    this.setState({ open: false });
+  }
+
+  selectData (selects) {
     let detail = this.props.data.subjects[selects[0]];
     this.setState({ selectDetail: detail });
+    this.setState({ selectedRows: selects });
   }
 
-  createTable(subjects) {
+  createTable (subjects) {
     let rows = [];
     if (subjects) {
-      rows = subjects.map((movie) => {
+      rows = subjects.map((movie, i) => {
         return (
-          <TableRow key={movie.id} style={styles.tr}>
+          <TableRow
+            key={movie.id}
+            style={styles.tr}
+            selected={this.state.selectedRows.indexOf(i) !== -1}
+          >
             <TableRowColumn style={styles.td}>{movie.id}</TableRowColumn>
             <TableRowColumn style={styles.td}>{movie.title}({movie.original_title})</TableRowColumn>
-            {/*<TableRowColumn style={styles.td}>{movie.directors[0].name}</TableRowColumn>*/}
             <TableRowColumn style={styles.td}>{movie.year}</TableRowColumn>
           </TableRow>
         )
       });
     }
     return (
-      <Table onRowSelection={this.selectData.bind(this)}>
+      <Table
+        onRowSelection={this.selectData.bind(this)}
+        wrapperStyle={styles.table}
+        style={styles.table}
+      >
         <TableHeader>
           <TableRow>
             <TableHeaderColumn>豆瓣ID</TableHeaderColumn>
             <TableHeaderColumn>名称</TableHeaderColumn>
-            <TableHeaderColumn>导演</TableHeaderColumn>
             <TableHeaderColumn>年份</TableHeaderColumn>
           </TableRow>
         </TableHeader>
-        <TableBody>
+        <TableBody showRowHover={true}>
           {rows}
         </TableBody>
       </Table>
     )
   }
 
-  render() {
+  componentWillMount () {
+    const { dispatch, keywords } = this.props;
+    dispatch(searchMovieInDoubanAsync(keywords, () => {
+      this.setState({ isLoading: false });
+    }));
+  }
+
+  render () {
     const props = this.props;
-    const resData = props.data;
+    const resData = props.searchResult;
     const actions = [
       <FlatButton
         label="Cancel"
         primary={true}
-        onTouchTap={this.handleClose.bind(this)}
+        onTouchTap={this.handleCancel.bind(this)}
       />,
       <FlatButton
         label="Confirm"
@@ -96,10 +130,16 @@ export default class ScrollableDialog extends React.Component {
         onTouchTap={this.handleClose.bind(this)}
       />,
     ];
+    const dialogTitle = [
+      <div style={styles.processBar}>
+        <LinearProgress mode="indeterminate" color=""/>
+        <div>{resData.title}</div>
+      </div>
+    ];
 
     return (
       <Dialog
-        title={resData.title}
+        title={dialogTitle}
         actions={actions}
         modal={false}
         open={this.state.open}
@@ -114,3 +154,11 @@ export default class ScrollableDialog extends React.Component {
     );
   }
 }
+
+function mapStateToProps (state) {
+  return {
+    searchResult: state.movies.searchResult
+  }
+}
+
+export default connect(mapStateToProps)(ScrollableDialog);
