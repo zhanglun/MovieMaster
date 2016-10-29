@@ -43,8 +43,10 @@ class MovieDetail extends Component {
         this.setState({ isLoading: false });
       }, 100);
     } else if (synced == 'false') {
-      // 请求douban API 显示弹窗
+      // 请求douban API 详情
       this.setState({ openDialog: true });
+      // https://api.douban.com/v2/movie/subject/
+      // TODO: 根据豆瓣 id 获取详情
     }
   }
 
@@ -84,8 +86,12 @@ class MovieDetail extends Component {
     let { detail } = this.props;
     return (
       <div>
-        <h2>{detail.title}</h2>
-        <img src={detail.images.large} alt=""/>
+        {/*<h2>{detail.title}</h2>*/}
+        {/*<img src={detail.images.small} alt=""/>*/}
+        {/*<div>{detail.title}</div>*/}
+        {/*<div>{detail.original_title}</div>*/}
+        {/*<div>{detail.year}</div>*/}
+        {JSON.stringify(detail)}
       </div>
     )
   }

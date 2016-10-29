@@ -75,7 +75,7 @@ class ScrollableDialog extends React.Component {
       rows = subjects.map((movie, i) => {
         return (
           <TableRow
-            key={movie.id}
+            key={i}
             style={styles.tr}
             selected={this.state.selectedRows.indexOf(i) !== -1}
           >
@@ -140,7 +140,7 @@ class ScrollableDialog extends React.Component {
     ];
     const dialogTitle = [
       <div style={styles.processBar}>
-        <LinearProgress mode="indeterminate" color=''/>
+        {/*<LinearProgress mode="indeterminate" color=''/>*/}
         <div style={styles.title}>{resData.title}</div>
       </div>
     ];
