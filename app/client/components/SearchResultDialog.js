@@ -12,7 +12,6 @@ import {
   TableRowColumn
 } from 'material-ui/Table';
 
-import { searchMovieInDoubanAsync } from '../actions';
 
 const electron = require('electron');
 const ipcRenderer = electron.ipcRenderer;
@@ -25,7 +24,7 @@ const styles = {
   title: {
     fontSize: '20px',
     padding: '16px 20px',
-    marginBottom: '2px',
+    marginBottom: '4px',
   },
   table: {
     padding: 0,
@@ -48,12 +47,12 @@ class ScrollableDialog extends React.Component {
     this.state = {
       open: props.open,
       selectedRows: [],
+      searchResult: {},
     };
   }
 
-  handleClose () {
+  handleConfirm () {
     this.setState({ open: false });
-    // TODO: 更新数据库
     ipcRenderer.send('update_movie_data', {
       _id: this.props.movieid,
       detail: this.state.selectDetail
@@ -65,7 +64,7 @@ class ScrollableDialog extends React.Component {
   }
 
   selectData (selects) {
-    let detail = this.props.data.subjects[selects[0]];
+    let detail = this.state.searchResult.subjects[selects[0]];
     this.setState({ selectDetail: detail });
     this.setState({ selectedRows: selects });
   }
@@ -108,15 +107,24 @@ class ScrollableDialog extends React.Component {
   }
 
   componentWillMount () {
-    const { dispatch, keywords } = this.props;
-    dispatch(searchMovieInDoubanAsync(keywords, () => {
-      this.setState({ isLoading: false });
-    }));
+    const { keywords } = this.props;
+    window.fetch('https://api.douban.com/v2/movie/search?q=' + keywords)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        this.setState({ searchResult: data });
+      })
+      .catch((err) => {
+      })
+  }
+
+  componentWillUnmount () {
+    // dispatch(cleanSearchResult);
   }
 
   render () {
-    const props = this.props;
-    const resData = props.searchResult;
+    const resData = this.state.searchResult;
     const actions = [
       <FlatButton
         label="Cancel"
@@ -127,13 +135,13 @@ class ScrollableDialog extends React.Component {
         label="Confirm"
         primary={true}
         keyboardFocused={true}
-        onTouchTap={this.handleClose.bind(this)}
+        onTouchTap={this.handleConfirm.bind(this)}
       />,
     ];
     const dialogTitle = [
       <div style={styles.processBar}>
-        <LinearProgress mode="indeterminate" color=""/>
-        <div>{resData.title}</div>
+        <LinearProgress mode="indeterminate" color=''/>
+        <div style={styles.title}>{resData.title}</div>
       </div>
     ];
 
@@ -145,7 +153,7 @@ class ScrollableDialog extends React.Component {
         open={this.state.open}
         titleStyle={styles.title}
         contentStyle={styles.dialog}
-        onRequestClose={this.handleClose.bind(this)}
+        onRequestClose={this.handleCancel.bind(this)}
         autoScrollBodyContent={true}
 
       >
