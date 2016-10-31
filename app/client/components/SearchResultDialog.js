@@ -53,10 +53,11 @@ class ScrollableDialog extends React.Component {
 
   handleConfirm () {
     this.setState({ open: false });
-    ipcRenderer.send('update_movie_data', {
-      _id: this.props.movieid,
-      detail: this.state.selectDetail
-    });
+    // ipcRenderer.send('update_movie_data', {
+    //   _id: this.props.movieid,
+    //   detail: this.state.selectDetail
+    // });
+    // dispatch  更新detail
   }
 
   handleCancel () {
@@ -139,8 +140,9 @@ class ScrollableDialog extends React.Component {
       />,
     ];
     const dialogTitle = [
-      <div style={styles.processBar}>
-        {/*<LinearProgress mode="indeterminate" color=''/>*/}
+      <LinearProgress mode="indeterminate" color='' key='1'/>,
+      <div style={styles.processBar} key='2'>
+        
         <div style={styles.title}>{resData.title}</div>
       </div>
     ];
