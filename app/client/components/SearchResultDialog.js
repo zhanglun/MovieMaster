@@ -57,6 +57,7 @@ class ScrollableDialog extends React.Component {
     //   _id: this.props.movieid,
     //   detail: this.state.selectDetail
     // });
+    // TODO: 请求详情借口
     // dispatch  更新detail
   }
 
@@ -124,7 +125,7 @@ class ScrollableDialog extends React.Component {
     // dispatch(cleanSearchResult);
   }
 
-  render () {
+  render () { 
     const resData = this.state.searchResult;
     const actions = [
       <FlatButton

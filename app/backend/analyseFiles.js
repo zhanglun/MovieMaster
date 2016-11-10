@@ -9,8 +9,8 @@ import { formatFileList, getFileName } from '../common/metadataHandler';
 
 const mediaFilterExt = ['rmvb', 'mp4', 'mkv', 'avi', 'mp3'];
 
-let readdir = promisify(fs.readdir);
-let stat = promisify(fs.stat);
+let readdirAsync = promisify(fs.readdir);
+let statAsync = promisify(fs.stat);
 
 /**
  * 简单实现一个promisify
@@ -38,25 +38,26 @@ function promisify(fn) {
  * 优化参考 这个 https://cnodejs.org/topic/567650c3c096b56a0c1b4352
  */
 const readDirRecur = (conf, callback) => {
-  return readdir(conf.root).then(function (files) {
-    files = files.map(function (filename) {
-      return stat(path.join(conf.root, filename)).then(function (stats) {
-        if (stats.isDirectory()) {
-          return readDirRecur({
-            root: path.join(conf.root, filename),
-            extfilters: conf.extfilters,
-          }, callback);
-        }
-        if (stats.isFile() && conf.extfilters.indexOf(filename.split('.').pop()) >= 0) {
-          return path.join(conf.root, filename);
-        }
-      })
+  return readdirAsync(conf.root)
+    .then(function (files) {
+      files = files.map(function (filename) {
+        return statAsync(path.join(conf.root, filename))
+          .then(function (stats) {
+            if (stats.isDirectory()) {
+              return readDirRecur({
+                root: path.join(conf.root, filename),
+                extfilters: conf.extfilters,
+              }, callback);
+            }
+            if (stats.isFile() && conf.extfilters.indexOf(filename.split('.').pop()) >= 0) {
+              return path.join(conf.root, filename);
+            }
+          })
 
+      });
+      return Promise.all(files);
     });
-    return Promise.all(files);
-  });
 };
-
 
 const openDirDialog = (options, callback) => {
   options = Object.assign({
@@ -66,6 +67,45 @@ const openDirDialog = (options, callback) => {
     if (path) {
       callback(path[0]);
     }
+  });
+};
+
+const saveMetadata = (path) => {
+  return new Promise(function (reslove, reject) {
+    db.find({
+      'metadata.path': path
+    }, function (err, result) {
+      // result 是一个数组
+      if (result.length) {
+        // eventBus.emit(Constants.LOAD_LOCAL_FILES, { metadata: result });
+        reslove(result);
+      } else {
+        ffmpeg.ffprobe(path, function (err, metadata) {
+          if (!err) {
+            let formatedMeta = metadata.format;
+
+            delete formatedMeta.nb_streams;
+            delete formatedMeta.nb_programs;
+            delete formatedMeta.probe_score;
+            delete formatedMeta.format_name;
+            delete formatedMeta.format_long_name;
+
+            formatedMeta.path = formatedMeta.filename;
+            formatedMeta.filename = getFileName(formatedMeta.path);
+            formatedMeta = formatFileList([formatedMeta]);
+
+            let obj = { metadata: formatedMeta[0] };
+            obj.synced = false;
+            db.insert(obj, function (err, result) {
+              reslove(result);
+              eventBus.emit(Constants.LOAD_LOCAL_FILES, { metadata: [result] });
+            });
+          } else {
+            reject(err)
+          }
+        });
+      }
+    });
   });
 };
 
@@ -88,49 +128,14 @@ export function analyse() {
       });
       let metadataPromiseList = data.map((path) => {
         if (path) {
-          return new Promise(function (reslove, reject) {
-            db.find({
-              'metadata.path': path
-            }, function (err, result) {
-              console.log('--->',result);
-              // result 是一个数组
-              if (result.length) {
-                // eventBus.emit(Constants.LOAD_LOCAL_FILES, { metadata: result });
-                reslove(result);
-              } else {
-                ffmpeg.ffprobe(path, function (err, metadata) {
-                  if (!err) {
-                    let formatedMeta = metadata.format;
-
-                    delete formatedMeta.nb_streams;
-                    delete formatedMeta.nb_programs;
-                    delete formatedMeta.probe_score;
-                    delete formatedMeta.format_name;
-                    delete formatedMeta.format_long_name;
-
-                    formatedMeta.path = formatedMeta.filename;
-                    formatedMeta.filename = getFileName(formatedMeta.path);
-                    formatedMeta = formatFileList([formatedMeta]);
-
-                    let obj = { metadata: formatedMeta[0] };
-
-                    obj.synced = false;
-                    db.insert(obj, function (err, result) {
-                      reslove(result);
-                      eventBus.emit(Constants.LOAD_LOCAL_FILES, { metadata: [result] });
-                    });
-                  } else {
-                    reject(err)
-                  }
-                });
-              }
-            });
-          });
+          saveMetadata(path);
         }
       });
       return Promise.race(metadataPromiseList);
     }).then((metadata) => {
       return metadata;
+    }).catch((err) => {
+      console.log(err);
     });
   });
 }
