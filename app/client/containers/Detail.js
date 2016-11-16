@@ -18,7 +18,7 @@ const styles = {
 };
 
 class MovieDetail extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.state = {
       openDialog: false,
@@ -30,8 +30,7 @@ class MovieDetail extends Component {
     };
   }
 
-  componentWillMount () {
-    console.log('willMount');
+  componentWillMount() {
     let { location } = this.props;
     let synced = location.query.synced;
     this.state.isLoading = true;
@@ -45,20 +44,18 @@ class MovieDetail extends Component {
     } else if (synced == 'false') {
       // 请求douban API 详情
       this.setState({ openDialog: true });
-      // https://api.douban.com/v2/movie/subject/
-      // TODO: 根据豆瓣 id 获取详情
     }
   }
 
-  componentWillUpdate () {
+  componentWillUpdate() {
     console.log('willUpdate');
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     console.log('willUnmount');
   }
 
-  showLoading () {
+  showLoading() {
     if (this.state.isLoading) {
       return (
         <div style={styles.processBar}>
@@ -68,21 +65,21 @@ class MovieDetail extends Component {
     }
   }
 
-  showSearchResult () {
+  showSearchResult() {
     let { location } = this.props;
     let keywords = location.query.keywords;
     if (this.state.openDialog) {
       return (
         <SearchResultDialog
           open={this.state.openDialog}
-          movieid={this.props.params.id}
+          movieId={this.props.params.id}
           keywords={keywords}
         />
       );
     }
   }
 
-  showDetail () {
+  showDetail() {
     let { detail } = this.props;
     return (
       <div>
@@ -96,7 +93,7 @@ class MovieDetail extends Component {
     )
   }
 
-  render () {
+  render() {
     return (
       <div className="detail-container">
         {this.showSearchResult()}
@@ -107,7 +104,7 @@ class MovieDetail extends Component {
   }
 }
 
-function mapStateToProps (state) {
+function mapStateToProps(state) {
   return {
     detail: state.movies.detail,
     isFetching: state.movies.isFetching,

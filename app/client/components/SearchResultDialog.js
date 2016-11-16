@@ -42,36 +42,45 @@ const styles = {
  * Dialog content can be scrollable.
  */
 class ScrollableDialog extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.state = {
       open: props.open,
+      loading: true,
       selectedRows: [],
       searchResult: {},
     };
   }
 
-  handleConfirm () {
-    this.setState({ open: false });
-    // ipcRenderer.send('update_movie_data', {
-    //   _id: this.props.movieid,
-    //   detail: this.state.selectDetail
-    // });
-    // TODO: 请求详情借口
-    // dispatch  更新detail
+  handleConfirm() {
+    let { selectDetail } = this.state;
+    this.setState({ loading: true });
+    window.fetch('https://api.douban.com/v2/movie/subject/' + selectDetail.id)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        this.setState({ selectDetail: data });
+        this.setState({ open: false });
+        this.setState({ loading: false });
+        ipcRenderer.send('update_movie_data', {
+          _id: this.props.movieId,
+          detail: this.state.selectDetail
+        });
+      });
   }
 
-  handleCancel () {
+  handleCancel() {
     this.setState({ open: false });
   }
 
-  selectData (selects) {
+  selectData(selects) {
     let detail = this.state.searchResult.subjects[selects[0]];
     this.setState({ selectDetail: detail });
     this.setState({ selectedRows: selects });
   }
 
-  createTable (subjects) {
+  createTable(subjects) {
     let rows = [];
     if (subjects) {
       rows = subjects.map((movie, i) => {
@@ -108,7 +117,7 @@ class ScrollableDialog extends React.Component {
     )
   }
 
-  componentWillMount () {
+  componentWillMount() {
     const { keywords } = this.props;
     window.fetch('https://api.douban.com/v2/movie/search?q=' + keywords)
       .then((response) => {
@@ -116,16 +125,16 @@ class ScrollableDialog extends React.Component {
       })
       .then((data) => {
         this.setState({ searchResult: data });
+        this.setState({ loading: false });
       })
       .catch((err) => {
       })
   }
 
-  componentWillUnmount () {
-    // dispatch(cleanSearchResult);
+  componentWillUnmount() {
   }
 
-  render () { 
+  render() {
     const resData = this.state.searchResult;
     const actions = [
       <FlatButton
@@ -143,11 +152,12 @@ class ScrollableDialog extends React.Component {
     const dialogTitle = [
       <LinearProgress mode="indeterminate" color='' key='1'/>,
       <div style={styles.processBar} key='2'>
-        
         <div style={styles.title}>{resData.title}</div>
       </div>
     ];
-
+    if (!this.state.loading) {
+      dialogTitle.shift();
+    }
     return (
       <Dialog
         title={dialogTitle}
@@ -166,7 +176,7 @@ class ScrollableDialog extends React.Component {
   }
 }
 
-function mapStateToProps (state) {
+function mapStateToProps(state) {
   return {
     searchResult: state.movies.searchResult
   }
