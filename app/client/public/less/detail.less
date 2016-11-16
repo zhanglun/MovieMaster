@@ -3,7 +3,36 @@
   padding: 14px;
   background: #fff;
   border-radius: 2px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
   word-break: break-all;
+}
+
+.detail-header {
+  overflow: hidden;
+}
+
+.detail-poster {
+  float: left;
+  width: 200px;
+  margin-right: 14px;
+}
+
+.detail-cast {
+  &-list {
+    display: flex;
+  }
+  &-item {
+    display: flex;
+    width: 120px;
+    height: 220px;
+    margin: 0 10px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+  &-avatar {
+    width: 120px;
+    box-shadow: 0 0 9px 2px rgba(0, 0, 0, 0.15);
+  }
 }

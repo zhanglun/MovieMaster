@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import LinearProgress from 'material-ui/LinearProgress';
+import RaisedButton from 'material-ui/RaisedButton';
 import SearchResultDialog from '../components/SearchResultDialog';
 
 const electron = require('electron');
@@ -15,6 +16,9 @@ const styles = {
     right: 0,
     top: 0,
   },
+  button: {
+    margin: 12,
+  }
 };
 
 class MovieDetail extends Component {
@@ -79,26 +83,42 @@ class MovieDetail extends Component {
     }
   }
 
-  showDetail() {
-    let { detail } = this.props;
-    return (
-      <div>
-        {/*<h2>{detail.title}</h2>*/}
-        {/*<img src={detail.images.small} alt=""/>*/}
-        {/*<div>{detail.title}</div>*/}
-        {/*<div>{detail.original_title}</div>*/}
-        {/*<div>{detail.year}</div>*/}
-        {JSON.stringify(detail)}
-      </div>
-    )
+  showDialog() {
+    this.setState({ openDialog: true });
   }
 
   render() {
+    let { detail } = this.props;
+    console.log(detail);
+    let countries = [].concat(detail.countries).join('/');
+    let genres = [].concat(detail.genres).join('/');
+    let metadata = Object.assign({}, detail.metadata);
+    console.log('aaaa', metadata.duration);
     return (
       <div className="detail-container">
         {this.showSearchResult()}
         {this.showLoading()}
-        {this.showDetail()}
+        <div className="detail-header">
+          <img src={detail.images.large} alt="" className="detail-poster"/>
+          <h2>{detail.title} {detail.original_title}</h2>
+          <div>{metadata.duration}</div>
+          <div>{detail.year} {countries}</div>
+          <div>{genres}</div>
+          <div>{detail.summary}</div>
+        </div>
+        <div className="detail-body">
+          <h3>The Casts</h3>
+          <div className="detail-cast-list">
+            {detail.casts.map((cast, i) => {
+              return (<div key={i} className="detail-cast-item">
+                <img src={cast.avatars.medium} alt="" className="detail-cast-avatar"/>
+                <span>{cast.name}</span>
+              </div>)
+            })}
+          </div>
+        </div>
+        <RaisedButton label="搜索" style={styles.button}
+                      onClick={this.showDialog.bind(this)}/>
       </div>
     )
   }
