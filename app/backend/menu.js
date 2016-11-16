@@ -29,6 +29,33 @@ const template = [
       }]
   },
   {
+    label: 'Edit',
+    submenu: [{
+      label: 'Undo',
+      role: 'undo',
+    }, {
+      role: 'redo'
+    }, {
+      type: 'separator'
+    }, {
+      role: 'cut'
+    }, {
+      label: 'Copy',
+      role: 'copy',
+      accelerator: 'CmdOrCtrl+C',
+    }, {
+      label: 'Paste',
+      role: 'paste',
+      accelerator: 'CmdOrCtrl+V',
+    }, {
+      role: 'pasteandmatchstyle'
+    }, {
+      role: 'delete'
+    }, {
+      role: 'selectall'
+    }]
+  },
+  {
     label: 'View',
     submenu: [{
       label: 'Reload',
