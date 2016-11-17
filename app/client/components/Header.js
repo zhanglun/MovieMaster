@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { hashHistory, Link } from 'react-router';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import IconMenu from 'material-ui/IconMenu';
 import IconButton from 'material-ui/IconButton';

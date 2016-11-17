@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import LinearProgress from 'material-ui/LinearProgress';
+import IconButton from 'material-ui/IconButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import SearchResultDialog from '../components/SearchResultDialog';
 
@@ -88,23 +89,35 @@ class MovieDetail extends Component {
   }
 
   render() {
+    let style = {
+      fontSize: 22,
+      fontStyle: 'italic',
+      color: '#FFAC2D',
+    };
     let { detail } = this.props;
     console.log(detail);
     let countries = [].concat(detail.countries).join('/');
     let genres = [].concat(detail.genres).join('/');
     let metadata = Object.assign({}, detail.metadata);
-    console.log('aaaa', metadata.duration);
     return (
       <div className="detail-container">
         {this.showSearchResult()}
         {this.showLoading()}
         <div className="detail-header">
           <img src={detail.images.large} alt="" className="detail-poster"/>
-          <h2>{detail.title} {detail.original_title}</h2>
-          <div>{metadata.duration}</div>
-          <div>{detail.year} {countries}</div>
-          <div>{genres}</div>
-          <div>{detail.summary}</div>
+          <h2
+            className="detail-header-title">{detail.title} {detail.original_title} {detail.year}</h2>
+          <div className="detail-metadata">
+            <span className="detail-metadata-item">豆瓣评分: <b
+              style={style}> {detail.rating.average}</b></span>
+            <span className="detail-metadata-item">{countries}</span>
+            |<span className="detail-metadata-item">{genres}</span>
+            |<span className="detail-metadata-item">{metadata.duration}</span>
+          </div>
+          <div className="detail-summary">{detail.summary}</div>
+          <div className="detail-toolbar">
+            <IconButton iconClassName="material-icons">settings</IconButton>
+          </div>
         </div>
         <div className="detail-body">
           <h3>The Casts</h3>

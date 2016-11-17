@@ -1,6 +1,5 @@
 .detail-container {
   width: 100%;
-  padding: 14px;
   background: #fff;
   border-radius: 2px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -10,6 +9,32 @@
 
 .detail-header {
   overflow: hidden;
+  padding-right: 14px;
+  border-bottom: 1px solid #dbdbdb;
+  position: relative;
+  &-title {
+    font-size: 28px;
+    margin-top: 14px;
+    margin-bottom: 0;
+  }
+}
+
+.detail-summary {
+  font-size: 13px;
+  line-height: 1.8;
+  margin-top: 16px;
+}
+
+.detail-metadata {
+  font-size: 12px;
+  color: #333;
+  &-item {
+    margin-right: 10px;
+  }
+  &-item + &-item {
+    margin-left: 10px;
+  }
+
 }
 
 .detail-poster {
@@ -19,6 +44,7 @@
 }
 
 .detail-cast {
+  padding: 14px;
   &-list {
     display: flex;
   }
@@ -35,4 +61,12 @@
     width: 120px;
     box-shadow: 0 0 9px 2px rgba(0, 0, 0, 0.15);
   }
+}
+.detail-body {
+  padding: 14px;
+}
+.detail-toolbar {
+  position: absolute;
+  right: 14px;
+  top: 14px;
 }
