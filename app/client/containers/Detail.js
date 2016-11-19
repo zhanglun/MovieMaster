@@ -28,10 +28,7 @@ class MovieDetail extends Component {
     this.state = {
       openDialog: false,
       isLoading: true,
-      info: {
-        detail: { title: '' },
-        metadata: {}
-      }
+      detail: {},
     };
   }
 
@@ -39,25 +36,24 @@ class MovieDetail extends Component {
     let { location } = this.props;
     let synced = location.query.synced;
     this.state.isLoading = true;
+    this.state.detail = this.props.detail;
+    console.log(this.props.detail);
     if (synced == 'true') {
       this.setState({ openDialog: false });
       // 从本地拿数据
       ipcRenderer.send('fetch_movie_data', { _id: this.props.params.id });
       setTimeout(() => {
         this.setState({ isLoading: false });
-      }, 100);
+      }, 5000);
     } else if (synced == 'false') {
-      // 请求douban API 详情
-      this.setState({ openDialog: true });
+      // 没有数据
     }
   }
 
   componentWillUpdate() {
-    console.log('willUpdate');
   }
 
   componentWillUnmount() {
-    console.log('willUnmount');
   }
 
   showLoading() {
@@ -70,6 +66,11 @@ class MovieDetail extends Component {
     }
   }
 
+  onSelectData(data) {
+    let metadata = this.state.detail.metadata;
+    this.setState({ detail: Object.assign({}, metadata, data) });
+  }
+
   showSearchResult() {
     let { location } = this.props;
     let keywords = location.query.keywords;
@@ -79,6 +80,7 @@ class MovieDetail extends Component {
           open={this.state.openDialog}
           movieId={this.props.params.id}
           keywords={keywords}
+          onSelectData={this.onSelectData.bind(this)}
         />
       );
     }
@@ -94,7 +96,7 @@ class MovieDetail extends Component {
       fontStyle: 'italic',
       color: '#FFAC2D',
     };
-    let { detail } = this.props;
+    let { detail } = this.state;
     console.log(detail);
     let countries = [].concat(detail.countries).join('/');
     let genres = [].concat(detail.genres).join('/');
@@ -116,18 +118,19 @@ class MovieDetail extends Component {
           </div>
           <div className="detail-summary">{detail.summary}</div>
           <div className="detail-toolbar">
-            <IconButton iconClassName="material-icons">settings</IconButton>
+            <IconButton iconClassName="material-icons"
+                        onClick={this.showDialog.bind(this)}>settings</IconButton>
           </div>
         </div>
         <div className="detail-body">
           <h3>The Casts</h3>
           <div className="detail-cast-list">
-            {detail.casts.map((cast, i) => {
-              return (<div key={i} className="detail-cast-item">
-                <img src={cast.avatars.medium} alt="" className="detail-cast-avatar"/>
-                <span>{cast.name}</span>
-              </div>)
-            })}
+            {/*{detail.casts.map((cast, i) => {*/}
+            {/*return (<div key={i} className="detail-cast-item">*/}
+            {/*<img src={cast.avatars.medium} alt="" className="detail-cast-avatar"/>*/}
+            {/*<span>{cast.name}</span>*/}
+            {/*</div>)*/}
+            {/*})}*/}
           </div>
         </div>
         <RaisedButton label="搜索" style={styles.button}

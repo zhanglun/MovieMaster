@@ -15,7 +15,6 @@ import {
 
 const electron = require('electron');
 const ipcRenderer = electron.ipcRenderer;
-
 const styles = {
   dialog: {
     maxWidth: '1200px',
@@ -54,6 +53,7 @@ class ScrollableDialog extends React.Component {
 
   handleConfirm() {
     let { selectDetail } = this.state;
+    let { onSelectData } = this.props;
     this.setState({ loading: true });
     window.fetch('https://api.douban.com/v2/movie/subject/' + selectDetail.id)
       .then((response) => {
@@ -67,6 +67,7 @@ class ScrollableDialog extends React.Component {
           _id: this.props.movieId,
           detail: this.state.selectDetail
         });
+        onSelectData(selectDetail);
       });
   }
 
