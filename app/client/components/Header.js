@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
 import { hashHistory, Link } from 'react-router';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Drawer from 'material-ui/Drawer';
-import IconMenu from 'material-ui/IconMenu';
-import IconButton from 'material-ui/IconButton';
-import MenuItem from 'material-ui/MenuItem';
 
 class MainTop extends Component {
   constructor (props) {
@@ -25,21 +20,14 @@ class MainTop extends Component {
 
   render () {
     return (
-      <MuiThemeProvider>
         <div className="main-topbar">
           <div className="appbar">
             <div className="appbar-drawerbtn">
-              <IconButton iconClassName="material-icons" onClick={this.toggleLeftDrawer.bind(this)}>menu</IconButton>
             </div>
             <div className="search-box">
               <input type="text" className="search-box__input" placeholder="Search"/>
             </div>
           </div>
-          <Drawer open={this.state.openLeftDrawer} docked={false}
-                  onRequestChange={this.handleClose.bind(this)}>
-            <MenuItem onTouchTap={this.handleClose.bind(this)}>Menu Item</MenuItem>
-            <MenuItem onTouchTap={this.handleClose.bind(this)}>Menu Item 2</MenuItem>
-          </Drawer>
           <div className="action-bar">
             <div className="action-bar__item">
               <span className="action-bar__link">Genres
@@ -56,7 +44,6 @@ class MainTop extends Component {
             </div>
           </div>
         </div>
-      </MuiThemeProvider>
     )
   }
 }

@@ -1,17 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Dialog from 'material-ui/Dialog';
-import LinearProgress from 'material-ui/LinearProgress';
-import FlatButton from 'material-ui/FlatButton';
-import {
-  Table,
-  TableBody,
-  TableHeader,
-  TableHeaderColumn,
-  TableRow,
-  TableRowColumn
-} from 'material-ui/Table';
-
 
 const electron = require('electron');
 const ipcRenderer = electron.ipcRenderer;
@@ -86,15 +74,15 @@ class ScrollableDialog extends React.Component {
     if (subjects) {
       rows = subjects.map((movie, i) => {
         return (
-          <TableRow
+          <tr>
             key={i}
             style={styles.tr}
             selected={this.state.selectedRows.indexOf(i) !== -1}
-          >
-            <TableRowColumn style={styles.td}>{movie.id}</TableRowColumn>
-            <TableRowColumn style={styles.td}>{movie.title}({movie.original_title})</TableRowColumn>
-            <TableRowColumn style={styles.td}>{movie.year}</TableRowColumn>
-          </TableRow>
+            >
+            <td style={styles.td}>{movie.id}</td>
+            <td style={styles.td}>{movie.title}({movie.original_title})</td>
+            <td style={styles.td}>{movie.year}</td>
+          </tr>
         )
       });
     }
@@ -104,16 +92,16 @@ class ScrollableDialog extends React.Component {
         wrapperStyle={styles.table}
         style={styles.table}
       >
-        <TableHeader>
-          <TableRow>
-            <TableHeaderColumn>豆瓣ID</TableHeaderColumn>
-            <TableHeaderColumn>名称</TableHeaderColumn>
-            <TableHeaderColumn>年份</TableHeaderColumn>
-          </TableRow>
-        </TableHeader>
-        <TableBody showRowHover={true}>
-          {rows}
-        </TableBody>
+        <thead>
+        <tr>
+          <th>豆瓣ID</th>
+          <th>名称</th>
+          <th>年份</th>
+        </tr>
+        </thead>
+        <tbody>
+        {rows}
+        </tbody>
       </Table>
     )
   }
@@ -137,42 +125,11 @@ class ScrollableDialog extends React.Component {
 
   render() {
     const resData = this.state.searchResult;
-    const actions = [
-      <FlatButton
-        label="Cancel"
-        primary={true}
-        onTouchTap={this.handleCancel.bind(this)}
-      />,
-      <FlatButton
-        label="Confirm"
-        primary={true}
-        keyboardFocused={true}
-        onTouchTap={this.handleConfirm.bind(this)}
-      />,
-    ];
-    const dialogTitle = [
-      <LinearProgress mode="indeterminate" color='' key='1'/>,
-      <div style={styles.processBar} key='2'>
-        <div style={styles.title}>{resData.title}</div>
-      </div>
-    ];
-    if (!this.state.loading) {
-      dialogTitle.shift();
-    }
-    return (
-      <Dialog
-        title={dialogTitle}
-        actions={actions}
-        modal={false}
-        open={this.state.open}
-        titleStyle={styles.title}
-        contentStyle={styles.dialog}
-        onRequestClose={this.handleCancel.bind(this)}
-        autoScrollBodyContent={true}
 
-      >
+    return (
+      <div>
         {this.createTable(resData.subjects)}
-      </Dialog>
+      </div>
     );
   }
 }

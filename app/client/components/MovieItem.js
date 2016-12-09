@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
 
 
 class MovieItem extends Component {
@@ -29,25 +27,25 @@ class MovieItem extends Component {
     let { movie } = this.props;
     if (movie.synced) {
       return (
-        <Card>
+        <div>
           <div className="movie-card__poster">
             <img src={movie.images.large} alt="" className="movie-card__poster-images"/>
           </div>
           <div className="movie-card__info">
             <div className="movie-card__title">{movie.title}</div>
           </div>
-        </Card>
+        </div>
       )
     } else {
       return (
-        <Card>
+        <div>
           <div className="movie-card__poster">
             <img src="http://fpoimg.com/160x225?text=No Images" alt="" className="movie-card__poster-images"/>
           </div>
           <div className="movie-card__info">
             <div className="movie-card__title">{movie.metadata.title}</div>
           </div>
-        </Card>
+        </div>
       )
     }
   }

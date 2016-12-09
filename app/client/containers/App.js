@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import HeadComponent from '../components/Header';
 
@@ -29,7 +28,6 @@ class App extends Component {
 
   render () {
     return (
-      <MuiThemeProvider>
         <div className="app">
           <div className="main">
             <HeadComponent />
@@ -38,7 +36,6 @@ class App extends Component {
             </div>
           </div>
         </div>
-      </MuiThemeProvider>
     );
   }
 }

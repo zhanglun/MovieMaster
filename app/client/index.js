@@ -3,7 +3,6 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
-import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import App from './containers/App';
 import MovieContainer from './containers/Movies';
@@ -13,7 +12,6 @@ import { monitorIpc } from './helper/monitoripc';
 
 import configureStore from './store/configureStore'
 
-injectTapEventPlugin();
 
 const store = configureStore();
 

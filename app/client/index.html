@@ -11,4 +11,16 @@
 <script>
   require('electron-connect').client.create();
 </script>
+<script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCSCN_fEp4_7xrFDDFJeq7F8A2TMC0TOlc",
+    authDomain: "scorching-heat-5565.firebaseapp.com",
+    databaseURL: "https://scorching-heat-5565.firebaseio.com",
+    storageBucket: "scorching-heat-5565.appspot.com",
+    messagingSenderId: "352659147102"
+  };
+  firebase.initializeApp(config);
+</script>
 </html>

@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import LinearProgress from 'material-ui/LinearProgress';
-import IconButton from 'material-ui/IconButton';
-import RaisedButton from 'material-ui/RaisedButton';
-import SearchResultDialog from '../components/SearchResultDialog';
 
 const electron = require('electron');
 const ipcRenderer = electron.ipcRenderer;
@@ -57,10 +53,15 @@ class MovieDetail extends Component {
   }
 
   showLoading() {
-    if (this.state.isLoading) {
+    if (!this.state.isLoading) {
       return (
         <div style={styles.processBar}>
-          <LinearProgress mode="indeterminate" color=""/>
+          <div className="progress">
+            <div className="progress-bar progress-bar-striped active" role="progressbar"
+                 aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style={{width: '100%'}}>
+              <span className="sr-only">45% Complete</span>
+            </div>
+          </div>
         </div>
       );
     }
@@ -118,8 +119,8 @@ class MovieDetail extends Component {
           </div>
           <div className="detail-summary">{detail.summary}</div>
           <div className="detail-toolbar">
-            <IconButton iconClassName="material-icons"
-                        onClick={this.showDialog.bind(this)}>settings</IconButton>
+            <span className="material-icons"
+                  onClick={this.showDialog.bind(this)}>settings</span>
           </div>
         </div>
         <div className="detail-body">
@@ -133,8 +134,8 @@ class MovieDetail extends Component {
             {/*})}*/}
           </div>
         </div>
-        <RaisedButton label="搜索" style={styles.button}
-                      onClick={this.showDialog.bind(this)}/>
+        <span style={styles.button}
+              onClick={this.showDialog.bind(this)}/>
       </div>
     )
   }

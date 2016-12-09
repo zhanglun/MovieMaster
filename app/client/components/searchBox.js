@@ -5,30 +5,32 @@ import { hashHistory } from 'react-router'
 import { requestSearchMovie, requestSearchMovieInDouban } from '../actions';
 
 class SearchBox extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.state = {
       value: 'hello!'
     };
   }
+
   componentDidMount() {
     var value = this.refs.input.value;
-    if(value == ''){
+    if (value == '') {
       hashHistory.push('/movie');
     }
   }
-  search (event) {
+
+  search(event) {
     let { dispatch } = this.props;
     if (event.keyCode == 13) {
       let keyword = encodeURIComponent(event.target.value);
       dispatch(requestSearchMovieInDouban(keyword));
       hashHistory.push('/search?q=' + keyword);
-    }else if(event.target.value == ''){
+    } else if (event.target.value == '') {
       hashHistory.push('/movie');
     }
   }
 
-  render () {
+  render() {
     return (
       <div className="searchbox">
         <input ref='input' type="text" placeholder="电影名称搜索" className="searchbox-input"
@@ -38,7 +40,7 @@ class SearchBox extends Component {
   }
 }
 
-function mapStateToProps (state) {
+function mapStateToProps(state) {
   return {
     movies: state.movies
   }
