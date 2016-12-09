@@ -1,7 +1,7 @@
 @bsPath: "../../../../../node_modules/bootstrap/less";
 @themePath: "../../../../../node_modules/bootswatch";
 
-@import "@{bsPath}/variables.less";
+//@import "@{bsPath}/variables.less";
 
 // Utilities
 @import "@{bsPath}/mixins/hide-text.less";
@@ -42,11 +42,29 @@
 @import "@{bsPath}/mixins/grid.less";
 
 
+// Reset and dependencies
+@import "@{bsPath}/normalize.less";
+@import "@{bsPath}/print.less";
+@import "@{bsPath}/glyphicons.less";
 
-
+// Core CSS
+@import "@{bsPath}/scaffolding.less";
+@import "@{bsPath}/type.less";
+@import "@{bsPath}/code.less";
+@import "@{bsPath}/grid.less";
+@import "@{bsPath}/tables.less";
+@import "@{bsPath}/forms.less";
+@import "@{bsPath}/forms";
 @import "@{bsPath}/buttons";
+
+// Components
+@import "@{bsPath}/navs";
+@import "@{bsPath}/navbar";
+@import "@{bsPath}/dropdowns";
 @import "@{bsPath}/progress-bars";
 
+// Utility classes
+@import "@{bsPath}/utilities.less";
 
 
 
@@ -56,3 +74,4 @@
  */
 @import "@{themePath}/journal/variables";
 @import "@{themePath}/journal/bootswatch";
+@import "./fonts/fonts";
