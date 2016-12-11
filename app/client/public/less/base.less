@@ -22,10 +22,6 @@ body {
   width: 100%;
 }
 
-.app {
-  display: flex;
-}
-
 .main {
   height: 100%;
   min-height: 100%;
@@ -56,4 +52,31 @@ body {
 
 .btn {
   outline: none;
+}
+.navbar {
+  min-height: 56px;
+}
+.navbar-btn.btn-sm {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.sidebar {
+  background-color: #fff;
+}
+.sidebar-menu {
+  padding: 10px 0;
+  &-item {
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    .material-icons {
+      margin-right: 10px;
+    }
+    &:hover {
+      color: #000;
+      background-color: #f5f5f5;
+    }
+  }
 }

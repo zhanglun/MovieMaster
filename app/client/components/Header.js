@@ -20,7 +20,7 @@ class MainTop extends Component {
 
   renderHeaderNavBar() {
     return (
-      <nav className="navbar navbar-default navbar-inverse">
+      <nav className="navbar navbar-default navbar-inverse navbar-fixed-top">
         <div className="container-fluid">
           <div className="navbar-header">
             <div className="btn-toolbar" role="toolbar">
