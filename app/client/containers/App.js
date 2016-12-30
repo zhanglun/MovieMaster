@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import ScrollArea from 'react-scrollbar';
 import HeadComponent from '../components/Header';
 
 
@@ -32,34 +33,45 @@ class App extends Component {
       <div className="app container-full">
         <div className="main">
           <HeadComponent />
-          <div className="main-body container-full">
-            <div className="row">
-              <div className="col-md-2">
-                <div className="sidebar">
-                  <div className="sidebar-menu">
-                    <div className="sidebar-menu-item">
-                      <span className="material-icons">query_builder</span>
-                      最近添加
+
+          <div className="main-body">
+            <ScrollArea
+              speed={0.8}
+              className=""
+              contentClassName="content"
+              horizontal={false}
+            >
+              <div className="container-full">
+
+                <div className="row">
+                  <div className="col-md-2">
+                    <div className="sidebar">
+                      <div className="sidebar-menu">
+                        <div className="sidebar-menu-item">
+                          <span className="material-icons">query_builder</span>
+                          最近添加
+                        </div>
+                        <div className="sidebar-menu-item">
+                          <span className="material-icons">movie</span>
+                          影片
+                        </div>
+                        <div className="sidebar-menu-item">
+                          <span className="material-icons">subscriptions</span>
+                          剧集
+                        </div>
+                        <div className="sidebar-menu-item">
+                          <span className="material-icons">web_asset</span>
+                          未分类
+                        </div>
+                      </div>
                     </div>
-                    <div className="sidebar-menu-item">
-                      <span className="material-icons">movie</span>
-                      影片
-                    </div>
-                    <div className="sidebar-menu-item">
-                      <span className="material-icons">subscriptions</span>
-                      剧集
-                    </div>
-                    <div className="sidebar-menu-item">
-                      <span className="material-icons">web_asset</span>
-                      未分类
-                    </div>
+                  </div>
+                  <div className="col-md-10">
+                    {this.props.children}
                   </div>
                 </div>
               </div>
-              <div className="col-md-10">
-                {this.props.children}
-              </div>
-            </div>
+            </ScrollArea>
           </div>
         </div>
       </div>

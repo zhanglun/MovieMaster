@@ -131,12 +131,12 @@ class MovieDetail extends Component {
         <div className="detail-body">
           <h3>The Casts</h3>
           <div className="detail-cast-list">
-            {/*{detail.casts.map((cast, i) => {*/}
-            {/*return (<div key={i} className="detail-cast-item">*/}
-            {/*<img src={cast.avatars.medium} alt="" className="detail-cast-avatar"/>*/}
-            {/*<span>{cast.name}</span>*/}
-            {/*</div>)*/}
-            {/*})}*/}
+            {detail.casts.map((cast, i) => {
+              return (<div key={i} className="detail-cast-item">
+                <img src={cast.avatars.medium} alt="" className="detail-cast-avatar"/>
+                <span>{cast.name}</span>
+              </div>)
+            })}
           </div>
         </div>
         <span style={styles.button}
