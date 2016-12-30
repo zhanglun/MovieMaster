@@ -33,16 +33,14 @@ class App extends Component {
       <div className="app container-full">
         <div className="main">
           <HeadComponent />
-
-          <div className="main-body">
-            <ScrollArea
-              speed={0.8}
-              className=""
-              contentClassName="content"
-              horizontal={false}
-            >
-              <div className="container-full">
-
+          <ScrollArea
+            speed={0.8}
+            className=""
+            contentClassName="content"
+            horizontal={false}
+          >
+            <div className="main-body">
+              <div className="container">
                 <div className="row">
                   <div className="col-md-2">
                     <div className="sidebar">
@@ -71,8 +69,8 @@ class App extends Component {
                   </div>
                 </div>
               </div>
-            </ScrollArea>
-          </div>
+            </div>
+          </ScrollArea>
         </div>
       </div>
     );
