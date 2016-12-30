@@ -29,7 +29,9 @@ export function requestSearchInDoubanFailure(err) {
 export function loadMovieInfoFromLocal(detail){
   return {
     type: type.LOAD_MOVIE_INFO_FROM_LOCAL,
-    detail: detail,
+    payload: {
+      detail: detail,
+    }
   }
 }
 

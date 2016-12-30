@@ -18,21 +18,16 @@ export default function movie(state = initState, action) {
         items: state.items.concat(action.data),
       });
     case type.LOAD_MOVIE_INFO_FROM_LOCAL:
-      return Object.assign({}, state, {
-        isFetching: false,
-        detail: action.detail || state.detail,
-      });
-
-    // var detail = action.detail;
-    // var result = Object.assign({}, state);
-    // result.detail[detail['_id']] = detail;
-    // result.isFetching = false;
-    // return result;
+      var { payload } = action;
+      var detail = payload.detail;
+      var result = Object.assign({}, state);
+      result.detail[detail['_id']] = detail;
+      result.isFetching = false;
+      return result;
     case type.SEARCH_MOVIES_REQUEST:
       return Object.assign({}, state, {
         isFetching: true,
       });
-      break;
     case type.SEARCH_MOVIES_SUCCESS:
       return Object.assign({}, state, {
         isFetching: false,

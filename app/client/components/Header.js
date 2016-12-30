@@ -38,13 +38,13 @@ class MainTop extends Component {
   renderCustomNavBar() {
     return (
       <div className="main-topbar">
-        <div className="appbar">
-          <div className="appbar-drawerbtn">
-          </div>
-          <div className="search-box">
-            <input type="text" className="search-box__input" placeholder="Search"/>
-          </div>
-        </div>
+        {/*<div className="appbar">*/}
+          {/*<div className="appbar-drawerbtn">*/}
+          {/*</div>*/}
+          {/*<div className="search-box">*/}
+            {/*<input type="text" className="search-box__input" placeholder="Search"/>*/}
+          {/*</div>*/}
+        {/*</div>*/}
         <div className="action-bar">
           <div className="action-bar__item">
             <span className="action-bar__link">Genres
@@ -66,7 +66,8 @@ class MainTop extends Component {
 
   render() {
     return (
-      this.renderHeaderNavBar()
+      // this.renderHeaderNavBar()
+      this.renderCustomNavBar()
     )
   }
 }

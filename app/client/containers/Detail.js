@@ -28,41 +28,42 @@ class MovieDetail extends Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     let { location } = this.props;
     let synced = location.query.synced;
     this.state.isLoading = true;
-    this.state.detail = this.props.detail;
-    console.log(this.props.detail);
     if (synced == 'true') {
-      this.setState({ openDialog: false });
       // 从本地拿数据
       ipcRenderer.send('fetch_movie_data', { _id: this.props.params.id });
-      setTimeout(() => {
-        this.setState({ isLoading: false });
-      }, 5000);
+      ipcRenderer.once('fetch_movie_data_success', (event, data) => {
+        this.setState({
+          isLoading: false,
+          detail: data.result,
+        });
+      });
     } else if (synced == 'false') {
       // 没有数据
     }
   }
 
-  componentWillUpdate() {
-  }
-
   componentWillUnmount() {
   }
 
-  comonentWiiReceiveProps(newprops) {
-    consolle.log(newprops);
+  componentWillReceiveProps(newprops) {
+    this.setState({
+      isLoading: false,
+      detail: newprops.detail
+    });
   }
 
   showLoading() {
-    if (!this.state.isLoading) {
+    if (this.state.isLoading) {
       return (
         <div style={styles.processBar}>
           <div className="progress">
-            <div className="progress-bar progress-bar-striped active" role="progressbar"
-                 aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style={{width: '100%'}}>
+            <div
+              className="progress-bar progress-bar-striped active"
+              style={{ width: '100%' }}>
               <span className="sr-only">45% Complete</span>
             </div>
           </div>
@@ -102,14 +103,14 @@ class MovieDetail extends Component {
       color: '#FFAC2D',
     };
     let { detail } = this.state;
-    console.log(detail);
+    if (this.state.isLoading) {
+      return this.showLoading();
+    }
     let countries = [].concat(detail.countries).join('/');
     let genres = [].concat(detail.genres).join('/');
     let metadata = Object.assign({}, detail.metadata);
     return (
       <div className="detail-container">
-        {this.showSearchResult()}
-        {this.showLoading()}
         <div className="detail-header">
           <img src={detail.images.large} alt="" className="detail-poster"/>
           <h2
