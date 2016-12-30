@@ -52,6 +52,10 @@ class MovieDetail extends Component {
   componentWillUnmount() {
   }
 
+  comonentWiiReceiveProps(newprops) {
+    consolle.log(newprops);
+  }
+
   showLoading() {
     if (!this.state.isLoading) {
       return (

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { hashHistory, Link } from 'react-router';
+import { Link } from 'react-router';
 
 class MainTop extends Component {
   constructor(props) {
@@ -10,12 +10,8 @@ class MainTop extends Component {
     };
   }
 
-  toggleLeftDrawer() {
-    this.setState({ openLeftDrawer: !this.state.openLeftDrawer });
-  }
-
-  handleClose() {
-    this.setState({ openLeftDrawer: false });
+  historyBack() {
+    window.history.back();
   }
 
   renderHeaderNavBar() {
@@ -25,7 +21,8 @@ class MainTop extends Component {
           <div className="navbar-header">
             <div className="btn-toolbar" role="toolbar">
               <div className="btn-group" role="group">
-                <span type="button" className="btn btn-sm btn-primary navbar-btn material-icons">
+                <span type="button" className="btn btn-sm btn-primary navbar-btn material-icons"
+                      onClick={this.historyBack.bind(this)}>
                   chevron_left</span>
                 <span type="button" className="btn btn-sm btn-primary navbar-btn material-icons">
                   chevron_right
@@ -33,30 +30,6 @@ class MainTop extends Component {
               </div>
             </div>
           </div>
-
-          {/*<div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">*/}
-            {/*<ul className="nav navbar-nav">*/}
-              {/*<li className="active"><a href="#">Link <span className="sr-only">(current)</span></a>*/}
-              {/*</li>*/}
-              {/*<li><a href="#">Link</a></li>*/}
-              {/*<li className="dropdown">*/}
-                {/*<a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button"*/}
-                   {/*aria-expanded="false">Dropdown <span className="caret"></span></a>*/}
-                {/*<ul className="dropdown-menu" role="menu">*/}
-                  {/*<li><a href="#">Action</a></li>*/}
-                  {/*<li><a href="#">Another action</a></li>*/}
-                  {/*<li><a href="#">Something else here</a></li>*/}
-                  {/*<li className="divider"></li>*/}
-                  {/*<li><a href="#">Separated link</a></li>*/}
-                  {/*<li className="divider"></li>*/}
-                  {/*<li><a href="#">One more separated link</a></li>*/}
-                {/*</ul>*/}
-              {/*</li>*/}
-            {/*</ul>*/}
-            {/*<ul className="nav navbar-nav navbar-right">*/}
-              {/*<li><a href="#">Link</a></li>*/}
-            {/*</ul>*/}
-          {/*</div>*/}
         </div>
       </nav>
     )

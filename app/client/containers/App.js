@@ -15,6 +15,7 @@ class App extends Component {
   }
 
   componentWillMount() {
+    window.scrollTo(0, 0);
   }
 
   componentDidMount() {
@@ -33,12 +34,26 @@ class App extends Component {
           <HeadComponent />
           <div className="main-body container-full">
             <div className="row">
-              <div className="col-md-2 sidebar no-padding">
-                <div className="sidebar-menu">
-                  <div className="sidebar-menu-item"><span className="material-icons">query_builder</span>最近添加</div>
-                  <div className="sidebar-menu-item"><span className="material-icons">movie</span>影片</div>
-                  <div className="sidebar-menu-item"><span className="material-icons">subscriptions</span>剧集</div>
-                  <div className="sidebar-menu-item"><span className="material-icons">web_asset</span>未分类</div>
+              <div className="col-md-2">
+                <div className="sidebar">
+                  <div className="sidebar-menu">
+                    <div className="sidebar-menu-item">
+                      <span className="material-icons">query_builder</span>
+                      最近添加
+                    </div>
+                    <div className="sidebar-menu-item">
+                      <span className="material-icons">movie</span>
+                      影片
+                    </div>
+                    <div className="sidebar-menu-item">
+                      <span className="material-icons">subscriptions</span>
+                      剧集
+                    </div>
+                    <div className="sidebar-menu-item">
+                      <span className="material-icons">web_asset</span>
+                      未分类
+                    </div>
+                  </div>
                 </div>
               </div>
               <div className="col-md-10">

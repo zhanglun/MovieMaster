@@ -1,27 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 
-
 class MovieItem extends Component {
   constructor(props) {
     super(props)
   }
-
-  maybeRenderAlias() {
-    let movie = this.props.movie;
-    if (movie.alias) {
-      return (
-        <div className="movie-card__info-item">
-          <span className="movie-card__info-head">
-          别名:
-          </span>
-          <span className="movie-card__info-content">
-            {movie.alias}
-          </span>
-        </div>
-      );
-    }
-  };
 
   createPost() {
     let { movie } = this.props;
@@ -56,10 +39,11 @@ class MovieItem extends Component {
     return (
       <div className="movie-card">
         <Link to={{
-          pathname: `/detail/${movie._id}`,
+          pathname: `/movies/${movie._id}`,
           query: { 'keywords': movie.metadata.title, 'synced': movie.synced }
         }}
-              activeClassName="active">
+              activeClassName="active"
+        >
           {this.createPost()}
         </Link>
       </div>

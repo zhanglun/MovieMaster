@@ -26,8 +26,8 @@ render(
     <Router history={hashHistory}>
       <Route path="/" component={App}>
         <IndexRoute component={MovieContainer}/>
-        <Route path="movie" component={MovieContainer}/>
-        <Route path="detail/:id" component={Detail}/>
+        <Route path="movies" component={MovieContainer}/>
+        <Route path="movies/:id" component={Detail}/>
       </Route>
     </Router>
   </Provider>,
