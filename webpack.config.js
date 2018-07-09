@@ -3,7 +3,6 @@ var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 // var CopyWebpackPlugin = require('copy-webpack-plugin');
-var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 
 // 定义了一些文件夹的路径
 var ROOT_PATH = path.resolve(__dirname);
@@ -23,15 +22,14 @@ module.exports = {
   },
 
   resolve: {
-    root: path.resolve(__dirname),
     alias: {
       sweetalert: 'node_modules/sweetalert/lib/sweetalert.js',
       sweetalertcss: 'node_modules/sweetalert/dist/sweetalert.css',
     },
-    extensions: ['', '.js', '.jsx', '.css']
+    extensions: ['.ts', '.js', '.jsx', '.css']
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js|jsx$/,
         exclude: [
@@ -39,7 +37,7 @@ module.exports = {
         ],
         loader: "babel-loader",
         query: {
-          presets: ['es2015', 'react'],
+          presets: ['env', 'react'],
           plugins: ['transform-runtime'],
         },
         include: [APP_PATH],
@@ -81,11 +79,17 @@ module.exports = {
     'system': '{}',
     'file': '{}'
   },
+  optimization: {
+    splitChunks: {
+      chunks: 'async',
+      minChunks: Infinity,
+      name: 'react',
+
+    },
+  },
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: '"development"',
-      }
+    new webpack.LoaderOptionsPlugin({
+      debug: true,
     }),
     // new ExtractTextPlugin('style.bundle.css'),
     new HtmlWebpackPlugin({
@@ -96,11 +100,6 @@ module.exports = {
     //   from: SRC_PATH + '/vendor',
     //   to: BUILD_PATH + '/vendor',
     // }]),
-    new CommonsChunkPlugin({
-      name: ['react'],
-      // filename: 'react.bundle.js',
-      minChunks: Infinity
-    }),
     new webpack.ProvidePlugin({
       jQuery: 'jquery',
       $: 'jquery',

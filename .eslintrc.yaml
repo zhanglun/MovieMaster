@@ -1,0 +1,22 @@
+env:
+  browser: true
+  node: true
+  commonjs: true
+  es6: true
+
+exnteds:
+  - eslint:recommended
+
+parserOptions:
+  sourceType: module
+  ecmaFeatures:
+    jsx: true
+
+plugins:
+  - html
+  - react
+  - babel
+  - typescript
+
+rules:
+  eqeqeq: off

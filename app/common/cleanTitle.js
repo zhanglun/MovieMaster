@@ -1,5 +1,5 @@
 /* Constants */
-var YEAR_REGEX = /(19|20)\d{2}/g;
+const YEAR_REGEX = /(19|20)\d{2}/g;
 
 let stripIllegalCharacters = function (movieTitle, replacementString) {
   return movieTitle.replace(/,|\[|\]|【|】|\.|_|\/|\+|\-|(\d+x\d+)|\bend|@/gi, replacementString);

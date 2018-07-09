@@ -2,10 +2,10 @@ import fs from 'fs';
 import path from 'path';
 import electron from 'electron';
 import { client as devClient } from 'electron-connect';
-import { menu as customMenu } from './backend/menu';
+import { menu as customMenu } from './lib/menu';
 import { EventEmitter }from 'events';
-import './backend/analyseFiles';
-import { initEventBus } from './backend/eventbus';
+import './lib/analyseFiles';
+import { initEventBus } from './lib/eventbus';
 
 const Menu = electron.Menu;
 const app = electron.app;
