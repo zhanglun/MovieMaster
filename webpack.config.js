@@ -2,7 +2,6 @@ var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-// var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 // 定义了一些文件夹的路径
 var ROOT_PATH = path.resolve(__dirname);
@@ -29,31 +28,33 @@ module.exports = {
     extensions: ['.ts', '.js', '.jsx', '.css']
   },
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.js|jsx$/,
         exclude: [
-          path.resolve(__dirname, "node_modules"),
+          path.resolve(__dirname, 'node_modules'),
         ],
-        loader: "babel-loader",
-        query: {
-          presets: ['env', 'react'],
-          plugins: ['transform-runtime'],
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['env', 'react'],
+            plugins: ['transform-runtime']
+          },
         },
-        include: [APP_PATH],
       },
       {
         test: /\.less$/,
-        loader: 'style!css!less',
+        loaders: ['style-loader', 'css-loader', 'less-loader'],
         include: [SRC_PATH],
       },
       {
         test: /\.css$/,
-        loader: 'style!css',
-      },  {
+        loaders: ['style-loader', 'css-loader'],
+      },
+      {
         test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
         loader: 'file-loader?name=fonts/[hash].[ext]',
-      }, {
+      },
+      {
         test: /\.(jpe?g|png|gif|svg)$/i,
         loaders: [
           'url?limit=10000&&hash=sha512&digest=hex&name=images/[hash].[ext]'
@@ -104,5 +105,6 @@ module.exports = {
       jQuery: 'jquery',
       $: 'jquery',
       jquery: 'jquery'
-    })],
+    })
+  ],
 };

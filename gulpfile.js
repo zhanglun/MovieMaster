@@ -1,24 +1,25 @@
-var path = require('path');
-var gulp = require('gulp');
-var babel = require("gulp-babel");
-var gutil = require('gulp-util');
-var webpack = require('webpack');
-var webpackConfig = require('./webpack.config.js');
-var electron = require('electron-connect').server.create();
+const path = require('path');
+const gulp = require('gulp');
+const babel = require("gulp-babel");
+const gutil = require('gulp-util');
+const webpack = require('webpack');
+const webpackConfig = require('./webpack.config.js');
+const electron = require('electron-connect').server.create();
 
-var ROOT_PATH = path.resolve(__dirname);
-var APP_PATH = path.resolve(ROOT_PATH, 'app');
-var LIB_PATH = path.resolve(APP_PATH, 'lib');
-var CLIENT_PATH = path.resolve(APP_PATH, 'client');
-
+const ROOT_PATH = path.resolve(__dirname);
+const APP_PATH = path.resolve(ROOT_PATH, 'app');
+const LIB_PATH = path.resolve(APP_PATH, 'lib');
+const CLIENT_PATH = path.resolve(APP_PATH, 'client');
 
 // 开发
-var webpackConfigDev = Object.create(webpackConfig);
-webpackConfigDev.mode = 'development';
-var devCompiler = webpack(webpackConfigDev);
+
 
 // renderer process 的 webpack 编译
 gulp.task('webpack:build-dev', function () {
+  webpackConfig.mode = 'development';
+
+  const devCompiler = webpack(webpackConfig);
+
   devCompiler.run(function (err, status) {
     if (err) {
       throw new gutil.PluginError('webpack:build-dev', err);
@@ -31,7 +32,11 @@ gulp.task('webpack:build-dev', function () {
 
 // main process 的编译
 gulp.task('babel:electron-main', function () {
-  return gulp.src([APP_PATH + '/main.js', APP_PATH + '/config.js', LIB_PATH + '/**/*.{json,js}', APP_PATH + '/common/**/*.js'], { base: APP_PATH })
+  let src = [APP_PATH + '/main.js', APP_PATH + '/config.js', LIB_PATH + '/**/*.{json,js}', APP_PATH + '/common/**/*.js'];
+
+  console.log(src);
+
+  return gulp.src(src, { base: APP_PATH })
     .pipe(babel())
     .pipe(gulp.dest('dist'));
 });
