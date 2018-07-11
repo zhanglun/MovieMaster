@@ -34,10 +34,12 @@ gulp.task('webpack:build-dev', function () {
 gulp.task('babel:electron-main', function () {
   let src = [APP_PATH + '/main.js', APP_PATH + '/config.js', LIB_PATH + '/**/*.{json,js}', APP_PATH + '/common/**/*.js'];
 
-  console.log(src);
-
-  return gulp.src(src, { base: APP_PATH })
-    .pipe(babel())
+  return gulp.src(src, {
+      base: APP_PATH
+    })
+    .pipe(babel({
+      presets: ['env'],
+    }))
     .pipe(gulp.dest('dist'));
 });
 
@@ -49,7 +51,7 @@ gulp.task('watch', ['babel:electron-main', 'webpack:build-dev'], function () {
   gulp.watch(['./dist/client/*.{html,js,less,css}', './dist/client/**/*.{html,js,less,css}'], electron.reload);
 });
 
-gulp.task('watch:build', function(){
+gulp.task('watch:build', function () {
   gulp.watch([CLIENT_PATH + '/**/*.{html,js,less,css}'], ['webpack:build-dev']);
   gulp.watch([APP_PATH + '/main.js', LIB_PATH + '/**/*.js'], ['babel:electron-main']);
 });
