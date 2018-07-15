@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import ScrollArea from 'react-scrollbar';
-import HeadComponent from '../components/Header';
-
 
 class App extends Component {
   constructor(props) {
@@ -32,7 +29,6 @@ class App extends Component {
     return (
       <div className="app container-full">
         <div className="main">
-          <HeadComponent />
           <ScrollArea
             speed={0.8}
             className=""

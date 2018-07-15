@@ -42,6 +42,7 @@
     "babel-preset-react": "^6.24.1",
     "css-loader": "^1.0.0",
     "electron-connect": "^0.4.8",
+    "electron-devtools-installer": "^2.2.4",
     "eslint": "^5.1.0",
     "eslint-plugin-html": "^1.5.1",
     "eslint-plugin-react": "^6.0.0",

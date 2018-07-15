@@ -6,8 +6,6 @@ import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 
 import App from './containers/App';
-import MovieContainer from './containers/Movies';
-import Detail from './containers/Detail';
 
 import { monitorIpc } from './helper/monitoripc';
 
@@ -22,13 +20,6 @@ monitorIpc(store);
 let rootElement = document.getElementById('app');
 render(
   <Provider store={store}>
-    <Router history={hashHistory}>
-      <Route path="/" component={App}>
-        <IndexRoute component={MovieContainer}/>
-        <Route path="movies" component={MovieContainer}/>
-        <Route path="movies/:id" component={Detail}/>
-      </Route>
-    </Router>
+    <App />
   </Provider>,
   rootElement);
-

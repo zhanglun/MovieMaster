@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import electron from 'electron';
+import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
 import { client as devClient } from 'electron-connect';
 import { menu as customMenu } from './lib/menu';
 import { EventEmitter }from 'events';
@@ -24,7 +25,11 @@ function createWindow() {
     // frame: false,
   });
 
-  BrowserWindow.addDevToolsExtension(path.resolve(__dirname, 'react-dev-tool'));
+  // BrowserWindow.addDevToolsExtension(path.resolve(__dirname, 'react-dev-tool'));
+  installExtension(REACT_DEVELOPER_TOOLS)
+    .then((name) => console.log(`Added Extension:  ${name}`))
+    .catch((err) => console.log('An error occurred: ', err));
+
   Menu.setApplicationMenu(customMenu);
   // 不显示菜单栏
   // mainWindow.setMenu(null);
