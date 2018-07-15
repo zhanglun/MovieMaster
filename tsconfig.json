@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "module": "es6", // 使用 ES2015 模块
+    "target": "es5",
+    "jsx": "react"
+  },
+  "include": [
+    "./app/*/*"
+  ]
+}

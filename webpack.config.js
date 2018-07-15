@@ -13,7 +13,7 @@ var RENDERER_PATH = path.resolve(BUILD_PATH, 'client');
 
 module.exports = {
   entry: {
-    'app': SRC_PATH + '/index.js',
+    'app': SRC_PATH + '/index.ts',
   },
   output: {
     path: RENDERER_PATH,
@@ -28,7 +28,8 @@ module.exports = {
     extensions: ['.ts', '.js', '.jsx', '.css']
   },
   module: {
-    rules: [{
+    rules: [
+      {
         test: /\.js|jsx$/,
         exclude: [
           path.resolve(__dirname, 'node_modules'),
@@ -39,6 +40,26 @@ module.exports = {
             presets: ['env', 'react'],
             plugins: ['transform-runtime']
           },
+        },
+      },
+      {
+        test: /\.ts|.tsx$/,
+        exclude: [
+          path.resolve(__dirname, 'node_modules'),
+        ],
+        use: () => {
+          return [
+            {
+              loader: ['ts-loader'],
+            },
+            {
+              loader: 'babel-loader',
+              options: {
+                presets: ['env', 'react'],
+                plugins: ['transform-runtime']
+              },
+            }
+          ];
         },
       },
       {

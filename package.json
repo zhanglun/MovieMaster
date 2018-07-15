@@ -21,6 +21,8 @@
   },
   "homepage": "https://github.com/zhanglun/MovieMaster#readme",
   "dependencies": {
+    "@types/react": "^16.4.6",
+    "@types/react-dom": "^16.0.6",
     "electron": "latest",
     "fluent-ffmpeg": "^2.1.0",
     "jquery": "^3.1.1",
@@ -56,7 +58,10 @@
     "nodemon": "^1.9.2",
     "react-logger": "^1.1.0",
     "redux-logger": "^2.7.0",
+    "source-map-loader": "^0.2.3",
     "style-loader": "^0.13.1",
+    "ts-loader": "^4.4.2",
+    "typescript": "^2.9.2",
     "url-loader": "^0.5.7",
     "webpack": "^4.15.1",
     "webpack-dev-server": "^3.1.4"
