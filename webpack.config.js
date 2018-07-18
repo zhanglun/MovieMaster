@@ -13,7 +13,7 @@ var RENDERER_PATH = path.resolve(BUILD_PATH, 'client');
 
 module.exports = {
   entry: {
-    'app': SRC_PATH + '/index.ts',
+    'app': SRC_PATH + '/index.tsx',
   },
   output: {
     path: RENDERER_PATH,
@@ -25,7 +25,7 @@ module.exports = {
       sweetalert: 'node_modules/sweetalert/lib/sweetalert.js',
       sweetalertcss: 'node_modules/sweetalert/dist/sweetalert.css',
     },
-    extensions: ['.ts', '.js', '.jsx', '.css']
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.css']
   },
   module: {
     rules: [
@@ -52,13 +52,13 @@ module.exports = {
             {
               loader: ['ts-loader'],
             },
-            {
-              loader: 'babel-loader',
-              options: {
-                presets: ['env', 'react'],
-                plugins: ['transform-runtime']
-              },
-            }
+            // {
+            //   loader: 'babel-loader',
+            //   options: {
+            //     presets: ['env', 'react'],
+            //     plugins: ['transform-runtime']
+            //   },
+            // }
           ];
         },
       },
@@ -81,8 +81,10 @@ module.exports = {
           'url?limit=10000&&hash=sha512&digest=hex&name=images/[hash].[ext]'
         ],
       },
+      { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
     ],
   },
+  devtool: "source-map",
   devServer: {
     historyApiFallback: true,
     hot: true,

@@ -2,8 +2,10 @@
   "compilerOptions": {
     "sourceMap": true,
     "noImplicitAny": true,
-    "module": "es6", // 使用 ES2015 模块
-    "target": "es5",
+    "allowUnreachableCode": false,
+    "noImplicitReturns": true,
+    "module": "commonjs", // 使用 ES2015 模块
+    "target": "es6",
     "jsx": "react"
   },
   "include": [

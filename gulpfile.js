@@ -17,6 +17,7 @@ const CLIENT_PATH = path.resolve(APP_PATH, 'client');
 // renderer process 的 webpack 编译
 gulp.task('webpack:build-dev', function () {
   webpackConfig.mode = 'development';
+  webpackConfig.devtool = "source-map";
 
   const devCompiler = webpack(webpackConfig);
 
@@ -32,7 +33,7 @@ gulp.task('webpack:build-dev', function () {
 
 // main process 的编译
 gulp.task('babel:electron-main', function () {
-  let src = [APP_PATH + '/main.{ts,js}', APP_PATH + '/config.{ts,js}', LIB_PATH + '/**/*.{json,ts,js}', APP_PATH + '/common/**/*.{ts,js}'];
+  let src = [APP_PATH + '/main.{ts,tsx,js}', APP_PATH + '/config.{ts,tsx,js}', LIB_PATH + '/**/*.{json,ts,tsx,js}', APP_PATH + '/common/**/*.{ts,tsx,js}'];
 
   return gulp.src(src, {
       base: APP_PATH
@@ -52,8 +53,8 @@ gulp.task('watch', ['babel:electron-main', 'webpack:build-dev'], function () {
 });
 
 gulp.task('watch:build', function () {
-  gulp.watch([CLIENT_PATH + '/**/*.{html,ts,js,less,css}'], ['webpack:build-dev']);
-  gulp.watch([APP_PATH + '/main.{ts,js}', LIB_PATH + '/**/*.{ts,js}'], ['babel:electron-main']);
+  gulp.watch([CLIENT_PATH + '/**/*.{html,ts,tsx,js,less,css}'], ['webpack:build-dev']);
+  gulp.watch([APP_PATH + '/main.{ts,tsx,js}', LIB_PATH + '/**/*.{ts,tsx,js}'], ['babel:electron-main']);
 });
 
 
