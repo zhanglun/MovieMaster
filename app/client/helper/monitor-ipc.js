@@ -1,5 +1,6 @@
-import * as IPCTYPE from '../constant/ipcType';
+import * as IPCTYPE from '../constant/ipc-type';
 import { loadLocalData, loadMovieInfoFromLocal } from '../actions';
+
 const electron = require('electron');
 const remote = electron.remote;
 const dialog = remote.dialog;
