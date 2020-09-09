@@ -8,6 +8,8 @@
   "main": "./dist/main.js",
   "scripts": {
     "start": "electron ./dist/main.js --debug",
+    "dev": "npx gulp",
+    "watch": "npx gulp watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -63,7 +65,8 @@
     "ts-loader": "^4.4.2",
     "typescript": "^2.9.2",
     "url-loader": "^0.5.7",
-    "webpack": "^4.15.1",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.1.4"
   }
 }
